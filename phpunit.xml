@@ -3,11 +3,11 @@
          bootstrap="test/bootstrap.php"
          verbose="true">
     <testsuite name="Clear Books Labs">
-        <directory suffix="Test.php">../tests</directory>
+        <directory suffix="Test.php">test</directory>
     </testsuite>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../src</directory>
+            <directory suffix=".php">src</directory>
         </whitelist>
     </filter>
 </phpunit>
