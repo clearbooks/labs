@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit backupGlobals="false"
-         bootstrap="test/bootstrap.php"
+         bootstrap="vendor/autoload.php"
          verbose="true">
     <testsuite name="Clear Books Labs">
         <directory suffix="Test.php">test</directory>
