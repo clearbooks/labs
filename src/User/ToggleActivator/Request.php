@@ -1,7 +1,7 @@
 <?php
-namespace User\ToggleActivator;
+namespace Clearbooks\Labs\User\ToggleActivator;
 
-class Request implements \User\UseCase\ToggleActivator\Request
+class Request implements \Clearbooks\Labs\User\UseCase\ToggleActivator\Request
 {
     /**
      * @var string

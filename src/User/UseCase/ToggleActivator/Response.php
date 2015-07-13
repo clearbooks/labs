@@ -1,5 +1,5 @@
 <?php
-namespace User\UseCase\ToggleActivator;
+namespace Clearbooks\Labs\User\UseCase\ToggleActivator;
 
 interface Response
 {

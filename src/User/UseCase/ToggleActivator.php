@@ -1,7 +1,7 @@
 <?php
-namespace User\UseCase;
+namespace Clearbooks\Labs\User\UseCase;
 
-use User\UseCase\ToggleActivator\Request;
+use Clearbooks\Labs\User\UseCase\ToggleActivator\Request;
 
 interface ToggleActivator
 {

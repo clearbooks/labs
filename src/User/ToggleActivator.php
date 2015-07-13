@@ -1,8 +1,8 @@
 <?php
-namespace User;
+namespace Clearbooks\Labs\User;
 
-use User\UseCase\ToggleActivator\Request;
-use User\UseCase\ToggleActivatorResponseHandler;
+use Clearbooks\Labs\User\UseCase\ToggleActivator\Request;
+use Clearbooks\Labs\User\UseCase\ToggleActivatorResponseHandler;
 
 class ToggleActivator implements UseCase\ToggleActivator
 {

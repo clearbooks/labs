@@ -1,7 +1,7 @@
 <?php
-namespace User\ToggleActivator;
+namespace Clearbooks\Labs\User\ToggleActivator;
 
-class Response implements \User\UseCase\ToggleActivator\Response
+class Response implements \Clearbooks\Labs\User\UseCase\ToggleActivator\Response
 {
     /**
      * @var string
