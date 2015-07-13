@@ -1,3 +1,13 @@
 # Labs 2.0
 
-chablis 4 days
+## Composer
+
+```php
+php composer.phar install
+```
+
+## PHPUnit
+
+```php
+vendor/phpunit/phpunit/phpunit -c phpunit.xml
+```
