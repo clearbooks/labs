@@ -1,0 +1,12 @@
+{
+    "name": "clearbooks/labs",
+    "description": "Sensible releases",
+    "license": "GPL v2",
+    "authors": [
+        {
+            "name": "Clear Books Engineering Team",
+            "email": "developers@clearbooks.co.uk"
+        }
+    ],
+    "require": {}
+}
