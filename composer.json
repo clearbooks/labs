@@ -11,6 +11,9 @@
     "autoload": {
         "psr-4": {"Clearbooks\\Labs\\": "src/"}
     },
+    "autoload-dev": {
+        "psr-4": {"Clearbooks\\Labs\\": "test/"}
+    },
     "require": {},
     "require-dev": { 
         "phpunit/phpunit":"4.7.*"
