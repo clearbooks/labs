@@ -1,10 +1,10 @@
 <?php
 namespace User\UseCase;
 
-use User\Object\ToggleActivatorResponse;
+use User\UseCase\ToggleActivator\Response;
 
 interface ToggleActivatorResponseHandler
 {
-    public function handleResponse( ToggleActivatorResponse $response );
+    public function handleResponse( Response $response );
 }
 //EOF ToggleActivatorResponseHandler.php

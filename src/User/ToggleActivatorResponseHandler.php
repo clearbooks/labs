@@ -1,11 +1,11 @@
 <?php
 namespace User;
 
-use User\Object\ToggleActivatorResponse;
+use User\UseCase\ToggleActivator\Response;
 
 class ToggleActivatorResponseHandler implements UseCase\ToggleActivatorResponseHandler
 {
-    public function handleResponse( ToggleActivatorResponse $response )
+    public function handleResponse( Response $response )
     {
         // TODO: Implement handleResponse() method.
     }

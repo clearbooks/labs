@@ -1,7 +1,7 @@
 <?php
-namespace User\Object;
+namespace User\ToggleActivator;
 
-class ToggleActivatorRequest
+class Request implements \User\UseCase\ToggleActivator\Request
 {
     /**
      * @var string
@@ -24,4 +24,4 @@ class ToggleActivatorRequest
         $this->toggleIdentifier = $toggleIdentifier;
     }
 }
-//EOF ToggleActivatorRequest.php
+//EOF Request.php

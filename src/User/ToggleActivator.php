@@ -1,12 +1,12 @@
 <?php
 namespace User;
 
-use User\Object\ToggleActivatorRequest;
+use User\UseCase\ToggleActivator\Request;
 use User\UseCase\ToggleActivatorResponseHandler;
 
 class ToggleActivator implements UseCase\ToggleActivator
 {
-    public function execute( ToggleActivatorRequest $request, ToggleActivatorResponseHandler $responseHandler )
+    public function execute( Request $request, ToggleActivatorResponseHandler $responseHandler )
     {
         // TODO: Implement execute() method.
     }
