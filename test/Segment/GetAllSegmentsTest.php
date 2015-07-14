@@ -1,6 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Segment;
 
+use Clearbooks\Labs\Segment\Gateway\EmptySegmentProviderDummy;
 use Clearbooks\Labs\Segment\Gateway\SegmentProvider;
 use Clearbooks\Labs\Segment\Gateway\OneSegmentSegmentProviderStub;
 
@@ -20,7 +21,7 @@ class GetAllSegmentsTest extends \PHPUnit_Framework_TestCase
      * @test
      */
     public function GivenNoSegments_ThenReturnNoSegments() {
-        $this->assertEquals( [], $this->getSegments( new OneSegmentSegmentProviderStub ));
+        $this->assertEquals( [], $this->getSegments( new EmptySegmentProviderDummy ));
     }
 
     /**
