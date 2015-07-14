@@ -6,6 +6,10 @@ php:
   - 7.0
   - hhvm
   - nightly
+  
+addons:
+  code_climate:
+    repo_token: 4cd6b7b0fec770fb70f66fa386eacf0cc0399acf2d9e44088a0ac5174d2442e1
 
 install: composer install --dev
 script: vendor/phpunit/phpunit/phpunit -c phpunit.xml
