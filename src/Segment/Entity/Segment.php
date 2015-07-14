@@ -1,12 +1,8 @@
 <?php
+namespace Clearbooks\Labs\Segment\Entity;
 
-
-namespace Clearbooks\Labs\Segment\UseCase\GetAllSegments;
-
-
-interface ResponseSegment
+interface Segment
 {
-
     /** @return string */
     public function getName();
 
