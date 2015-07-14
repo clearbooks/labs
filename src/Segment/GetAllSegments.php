@@ -2,6 +2,7 @@
 namespace Clearbooks\Labs\Segment;
 
 use Clearbooks\Labs\Segment\Gateway\SegmentProvider;
+use Clearbooks\Labs\Segment\GetAllSegments\ResponseSegment;
 use Clearbooks\Labs\Segment\UseCase\GetAllSegments\Response;
 
 class GetAllSegments implements Response
@@ -33,7 +34,7 @@ class GetAllSegments implements Response
         $segments = $this->segmentProvider->getSegments();
 
         foreach( $segments as $segment ) {
-            $return[] = null;
+            $return[] = new ResponseSegment( $segment->getName() );
         }
 
         return $return;
