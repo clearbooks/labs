@@ -26,7 +26,7 @@ class CreateRelease
 
     /**
      * @param Request $request
-     * @return Release|bool
+     * @return int|bool
      */
     public function execute( Request $request )
     {
