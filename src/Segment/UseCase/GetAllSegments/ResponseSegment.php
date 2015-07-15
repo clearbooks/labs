@@ -1,15 +1,8 @@
 <?php
-
-
 namespace Clearbooks\Labs\Segment\UseCase\GetAllSegments;
 
+use Clearbooks\Labs\Segment\UseCase\Shared\SegmentFieldSet;
 
-interface ResponseSegment
+interface ResponseSegment extends SegmentFieldSet
 {
-
-    /** @return string */
-    public function getName();
-
-    /** @return string */
-    public function getId();
 }
