@@ -12,13 +12,26 @@ class InMemoryReleaseGateway implements ReleaseGateway
 {
     private $releases = array();
 
+    /**
+     * @param $releaseName
+     * @param $url
+     * @return int
+     */
     public function addRelease( $releaseName, $url )
     {
-        $release = new Release( $releaseName, $url );
-        $this->releases[] = $release;
-        return $release;
+        new Release( $releaseName, $url );
+        $id = count( $this->releases )+1;
+        $this->releases[$id] = new Release( $releaseName, $url );
+        return $id;
     }
 
-
+    /**
+     * @param $releaseId
+     * @return Release
+     */
+    public function getRelease( $releaseId )
+    {
+        return $this->releases[ $releaseId ];
+    }
 }
 //EOF InMemoryReleaseGateway.php

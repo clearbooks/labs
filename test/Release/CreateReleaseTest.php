@@ -52,9 +52,10 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
     public function givenNameAndUrl_ReturnsTrueReleaseCreated()
     {
         $request = new StaticRequestStub();
-        $response = $this->createRelease->execute( $request );
-        $this->assertEquals( $request->getReleaseName(), $response->getReleaseName() );
-        $this->assertEquals( $request->getReleaseInfoUrl(), $response->getReleaseInfoUrl() );
+        $releaseId = $this->createRelease->execute( $request );
+        $release = $this->releaseGateway->getRelease( $releaseId );
+        $this->assertEquals( $request->getReleaseName(), $release->getReleaseName() );
+        $this->assertEquals( $request->getReleaseInfoUrl(), $release->getReleaseInfoUrl() );
     }
 }
 //EOF CreateReleaseTest.php
