@@ -9,9 +9,9 @@ namespace Clearbooks\Labs\Release;
 
 use Clearbooks\Labs\Release\Gateway\InMemoryReleaseGateway;
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
-use Clearbooks\Labs\Release\UseCase\CreateRelease\BlankRequestStub;
+use Clearbooks\Labs\Release\CreateRelease\BlankRequestStub;
+use Clearbooks\Labs\Release\CreateRelease\StaticRequestStub;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
-use Clearbooks\Labs\Release\UseCase\CreateRelease\StaticRequestStub;
 
 class CreateReleaseTest extends \PHPUnit_Framework_TestCase
 {

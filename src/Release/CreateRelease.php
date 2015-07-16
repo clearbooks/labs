@@ -4,7 +4,7 @@ namespace Clearbooks\Labs\Release;
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
-use Clearbooks\Labs\Release\UseCase\CreateRelease\ResponseModel;
+use Clearbooks\Labs\Release\CreateRelease\ResponseModel;
 
 /**
  * @author: Ryan Wood <ryanw@clearbooks.co.uk>

@@ -4,8 +4,10 @@
  * @created: 15/07/15
  */
 
-namespace Clearbooks\Labs\Release\UseCase\CreateRelease;
+namespace Clearbooks\Labs\Release\CreateRelease;
 
+
+use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
 
 class StaticRequestStub implements Request
 {

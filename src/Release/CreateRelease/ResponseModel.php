@@ -4,8 +4,10 @@
  * @created: 16/07/15
  */
 
-namespace Clearbooks\Labs\Release\UseCase\CreateRelease;
+namespace Clearbooks\Labs\Release\CreateRelease;
 
+
+use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
 
 class ResponseModel implements Response
 {
