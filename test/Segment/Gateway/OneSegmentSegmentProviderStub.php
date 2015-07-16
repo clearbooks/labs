@@ -13,7 +13,7 @@ class OneSegmentSegmentProviderStub implements SegmentProvider
 
     public function getSegments()
     {
-        return [ new Segment( $this->segmentName ) ];
+        return [ new Segment( 'seg-1', $this->segmentName ) ];
     }
 
     /**

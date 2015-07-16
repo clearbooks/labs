@@ -3,7 +3,7 @@
 
 namespace Clearbooks\Labs\Segment\Gateway;
 
-use Clearbooks\Labs\Segment\Segment;
+use Clearbooks\Labs\Segment\Entity\Segment;
 
 interface SegmentProvider
 {
