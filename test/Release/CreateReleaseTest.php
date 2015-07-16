@@ -43,25 +43,25 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function givenEmptyRequest_ReturnsNotSuccessfulAndInvalidArgumentsError()
+    public function givenEmptyRequest_ReturnsNotSuccessfulAndGetBothInvalidArgumentsError()
     {
-        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub() ) );
+        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub() ), array( Response::INVALID_NAME_ERROR, Response::INVALID_URL_ERROR ) );
     }
 
     /**
      * @test
      */
-    public function givenInvalidName_ReturnsNotSuccessfulAndInvalidArgsError()
+    public function givenInvalidName_ReturnsNotSuccessfulAndGetInvalidNameError()
     {
-        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( null, 'some url' ) ) );
+        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( null, 'some url' ) ), array( Response::INVALID_NAME_ERROR ) );
     }
 
     /**
      * @test
      */
-    public function givenInvalidUrl_ReturnsNotSuccessfulAndInvalidArgsError()
+    public function givenInvalidUrl_ReturnsNotSuccessfulAndGetInvalidUrlError()
     {
-        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( 'Release One', null ) ) );
+        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( 'Release One', null ) ), array( Response::INVALID_URL_ERROR ) );
     }
 
     /**
@@ -85,12 +85,13 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $response
+     * @param Response $response
+     * @param array $expectedErrors
      */
-    private function assertCreateReleaseWasUnsuccessful( Response $response)
+    private function assertCreateReleaseWasUnsuccessful( Response $response, $expectedErrors = array() )
     {
         $this->assertFalse( $response->isSuccessful() );
-        $this->assertEquals( Response::INVALID_ARG_ERROR, $response->getValidationErrors()[0] );
+        $this->assertEquals( $expectedErrors, $response->getValidationErrors() );
     }
 }
 //EOF CreateReleaseTest.php

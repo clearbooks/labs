@@ -32,15 +32,12 @@ class CreateRelease
      */
     public function execute( Request $request )
     {
-        $response = new ResponseModel();
+        $response = $this->getResponse( $request );
 
-        if( !$this->isValidReleaseRequest( $request ) ) {
-            $response->setSuccessful( false );
-            $response->setErrors( [ Response::INVALID_ARG_ERROR ] );
+        if( !$response->isSuccessful() ) {
             return $response;
         }
 
-        $response->setSuccessful( true );
         $response->setId( $this->releaseGateway->addRelease( $request->getReleaseName(), $request->getReleaseInfoUrl() ) );
 
         return $response;
@@ -48,14 +45,32 @@ class CreateRelease
 
     /**
      * @param Request $request
-     * @return bool
+     * @return ResponseModel $response
      */
-    private function isValidReleaseRequest( Request $request )
+    private function getResponse( Request $request )
     {
+        $response = new ResponseModel();
+
         $releaseName = $request->getReleaseName();
         $url = $request->getReleaseInfoUrl();
 
-        return !empty($releaseName) && !empty($url);
+        $errors= [];
+        $successful = true;
+
+        if( empty( $releaseName ) ){
+            $errors[] = Response::INVALID_NAME_ERROR;
+            $successful = false;
+        }
+
+        if( empty( $url ) ){
+            $errors[] = Response::INVALID_URL_ERROR;
+            $successful = false;
+        }
+
+        $response->setErrors( $errors );
+        $response->setSuccessful( $successful );
+
+        return $response;
     }
 }
 //EOF CreateRelease.php
