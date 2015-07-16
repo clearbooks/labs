@@ -37,9 +37,12 @@ class CreateRelease
         if( !$this->isValidReleaseRequest( $request ) ) {
             $response->setSuccessful( false );
             $response->setErrors( [ 'Invalid request, provide a request model with a release name and url' ] );
+            return $response;
         }
 
+        $response->setSuccessful( true );
         $response->setId( $this->releaseGateway->addRelease( $request->getReleaseName(), $request->getReleaseInfoUrl() ) );
+
         return $response;
     }
 
