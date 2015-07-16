@@ -3,6 +3,8 @@
 namespace Clearbooks\Labs\Release;
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\ResponseModel;
 
 /**
  * @author: Ryan Wood <ryanw@clearbooks.co.uk>
@@ -26,15 +28,19 @@ class CreateRelease
 
     /**
      * @param Request $request
-     * @return int|bool
+     * @return Response
      */
     public function execute( Request $request )
     {
+        $response = new ResponseModel();
+
         if( !$this->isValidReleaseRequest( $request ) ) {
-            return false;
+            $response->setSuccessful( false );
+            $response->setErrors( [ 'Invalid request, provide a request model with a release name and url' ] );
         }
 
-        return $this->releaseGateway->addRelease( $request->getReleaseName(), $request->getReleaseInfoUrl() );
+        $response->setId( $this->releaseGateway->addRelease( $request->getReleaseName(), $request->getReleaseInfoUrl() ) );
+        return $response;
     }
 
     /**
