@@ -36,7 +36,7 @@ class CreateRelease
 
         if( !$this->isValidReleaseRequest( $request ) ) {
             $response->setSuccessful( false );
-            $response->setErrors( [ 'Invalid request, provide a request model with a release name and url' ] );
+            $response->setErrors( [ Response::INVALID_ARG_ERROR ] );
             return $response;
         }
 

@@ -9,6 +9,8 @@ namespace Clearbooks\Labs\Release\UseCase\CreateRelease;
 
 interface Response
 {
+    const INVALID_ARG_ERROR = 'Invalid Arguments, release must have a non empty name and info url';
+
     /**
      * @return bool
      */

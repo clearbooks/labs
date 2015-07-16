@@ -7,11 +7,12 @@
 namespace Clearbooks\Labs\Release;
 
 
+use Clearbooks\Labs\Release\CreateRelease\ConfigurableRequestStub;
 use Clearbooks\Labs\Release\Gateway\InMemoryReleaseGateway;
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
-use Clearbooks\Labs\Release\CreateRelease\BlankRequestStub;
 use Clearbooks\Labs\Release\CreateRelease\StaticRequestStub;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
 
 class CreateReleaseTest extends \PHPUnit_Framework_TestCase
 {
@@ -42,17 +43,31 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function givenEmptyRequest_ReturnsFalse()
+    public function givenEmptyRequest_ReturnsNotSuccessfulAndInvalidArgumentsError()
     {
-        $response =  $this->createRelease( new BlankRequestStub() );
-        $this->assertFalse( $response->isSuccessful() );
-        $this->assertCount( 1, $response->getValidationErrors() );
+        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub() ) );
     }
 
     /**
      * @test
      */
-    public function givenNameAndUrl_ReturnsTrueReleaseCreated()
+    public function givenInvalidName_ReturnsNotSuccessfulAndInvalidArgsError()
+    {
+        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( null, 'some url' ) ) );
+    }
+
+    /**
+     * @test
+     */
+    public function givenInvalidUrl_ReturnsNotSuccessfulAndInvalidArgsError()
+    {
+        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( 'Release One', null ) ) );
+    }
+
+    /**
+     * @test
+     */
+    public function givenNameAndUrl_ReturnsSuccessfulAndReleaseCreatedAndNoErrors()
     {
         $request = new StaticRequestStub();
         $response = $this->createRelease( $request );
@@ -67,6 +82,15 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
     private function createRelease( Request $request )
     {
         return $this->createRelease->execute( $request );
+    }
+
+    /**
+     * @param $response
+     */
+    private function assertCreateReleaseWasUnsuccessful( Response $response)
+    {
+        $this->assertFalse( $response->isSuccessful() );
+        $this->assertEquals( Response::INVALID_ARG_ERROR, $response->getValidationErrors()[0] );
     }
 }
 //EOF CreateReleaseTest.php
