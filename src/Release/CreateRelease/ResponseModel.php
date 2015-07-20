@@ -60,7 +60,7 @@ class ResponseModel implements Response
     }
 
     /**
-     * @param \string[] $errors
+     * @param string[] $errors
      */
     public function setErrors( $errors )
     {
