@@ -27,6 +27,7 @@ class ActivatableToggleGatewayStub implements ActivatableToggleGateway
      */
     public function getActivatableToggleByName( $name )
     {
-        return new ActivatableToggleStub( $this->toggleAvailabilityToggles[$name] );
+        $available = isset ( $this->toggleAvailabilityToggles[$name] ) ? $this->toggleAvailabilityToggles[$name] : false;
+        return new ActivatableToggleStub( $available );
     }
 }
