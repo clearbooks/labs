@@ -8,8 +8,7 @@ namespace Clearbooks\Labs\Release;
 
 
 use Clearbooks\Labs\Release\CreateRelease\ConfigurableRequestStub;
-use Clearbooks\Labs\Release\Gateway\InMemoryReleaseGateway;
-use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
+use Clearbooks\Labs\Release\Gateway\SpyReleaseGateway;
 use Clearbooks\Labs\Release\CreateRelease\StaticRequestStub;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
@@ -18,7 +17,7 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var ReleaseGateway
+     * @var SpyReleaseGateway
      */
     private $releaseGateway;
 
@@ -35,7 +34,7 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->releaseGateway = new InMemoryReleaseGateway();
+        $this->releaseGateway = new SpyReleaseGateway();
         $this->createRelease = new CreateRelease( $this->releaseGateway );
     }
 
@@ -72,11 +71,12 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
         $request = new StaticRequestStub();
         $response = $this->createRelease( $request );
         $this->assertNotEmpty( $response->getReleaseId() );
-        $release = $this->releaseGateway->getRelease( $response->getReleaseId() );
         $this->assertTrue( $response->isSuccessful() );
         $this->assertEmpty( $response->getValidationErrors() );
-        $this->assertEquals( $request->getReleaseName(), $release->getReleaseName() );
-        $this->assertEquals( $request->getReleaseInfoUrl(), $release->getReleaseInfoUrl() );
+        $this->assertEquals( 1, $this->releaseGateway->getTimesAddReleaseCalled() );
+        $release = $this->releaseGateway->getAddReleaseParams()[0];
+        $this->assertEquals( $request->getReleaseName(), $release['releaseName'] );
+        $this->assertEquals( $request->getReleaseInfoUrl(), $release['url'] );
     }
 
     private function createRelease( Request $request )
