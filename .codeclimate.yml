@@ -6,7 +6,7 @@ engines:
     
 ratings:
   paths:
-    - src/**
-    - test/**
-    - "**.php"
-    - "**.phtml"
+  - src/**
+  - test/**
+  - "**.php"
+  - "**.phtml"
