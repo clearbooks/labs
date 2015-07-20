@@ -3,3 +3,10 @@ engines:
     enabled: true
   fixme:
     enabled: true
+    
+ratings:
+  paths:
+    - src/**
+    - test/**
+    - "**.php"
+    - "**.phtml"
