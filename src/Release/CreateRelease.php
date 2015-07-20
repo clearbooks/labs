@@ -32,7 +32,9 @@ class CreateRelease
      */
     public function execute( Request $request )
     {
-        $response = $this->getResponse( $request );
+        $errors = $this->validateRequest( $request );
+
+        $response = $this->getResponse( $errors );
 
         if( !$response->isSuccessful() ) {
             return $response;
@@ -44,33 +46,39 @@ class CreateRelease
     }
 
     /**
-     * @param Request $request
+     * @param array $errors
      * @return ResponseModel $response
      */
-    private function getResponse( Request $request )
+    private function getResponse( $errors )
     {
         $response = new ResponseModel();
+
+        $response->setSuccessful( empty( $errors ) );
+        $response->setErrors( $errors );
+
+        return $response;
+    }
+
+    /**
+     * @param Request $request
+     * @return array $errors
+     */
+    private function validateRequest( Request $request )
+    {
+        $errors = array();
 
         $releaseName = $request->getReleaseName();
         $url = $request->getReleaseInfoUrl();
 
-        $errors= [];
-        $successful = true;
-
         if( empty( $releaseName ) ){
             $errors[] = Response::INVALID_NAME_ERROR;
-            $successful = false;
         }
 
         if( empty( $url ) ){
             $errors[] = Response::INVALID_URL_ERROR;
-            $successful = false;
         }
 
-        $response->setErrors( $errors );
-        $response->setSuccessful( $successful );
-
-        return $response;
+        return $errors;
     }
 }
 //EOF CreateRelease.php
