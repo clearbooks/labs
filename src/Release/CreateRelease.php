@@ -20,7 +20,7 @@ class CreateRelease implements \Clearbooks\Labs\Release\UseCase\CreateRelease
     /**
      * @param ReleaseGateway $releaseGateway
      */
-    function __construct( ReleaseGateway $releaseGateway )
+    public function __construct( ReleaseGateway $releaseGateway )
     {
         $this->releaseGateway = $releaseGateway;
     }
