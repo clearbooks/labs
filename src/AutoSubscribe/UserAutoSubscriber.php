@@ -7,28 +7,34 @@
  */
 namespace Clearbooks\Labs\AutoSubscribe;
 
+use Clearbooks\Labs\AutoSubscribe\Entity\User;
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProvider;
 use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
+use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
+use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
 
-class UserAutoSubscriber implements AutoSubscriber
+class UserAutoSubscriber implements AutoSubscriber,ToggleShowSubscriber
 {
     /**
-     * @var int
+     * @var User
      */
-    private $userId;
+    private $user;
     /**
      * @var AutoSubscriptionProvider
      */
     private $autoSubscriptionProvider;
+    /** @var   */
+    private $userSubscription;
 
     /**
      * UserAutoSubscriber constructor.
-     * @param int $userId
+     * @param User $user
      * @param AutoSubscriptionProvider $autoSubscriptionProvider
      */
-    public function __construct($userId, AutoSubscriptionProvider $autoSubscriptionProvider)
+    public function __construct(User $user, AutoSubscriptionProvider $autoSubscriptionProvider)
     {
-        $this->userId = $userId;
+        $this->user = $user;
+        $this->userSubscription = $autoSubscriptionProvider->getSubscription($user);
         $this->autoSubscriptionProvider = $autoSubscriptionProvider;
     }
 
@@ -37,16 +43,37 @@ class UserAutoSubscriber implements AutoSubscriber
      */
     public function isUserAutoSubscribed()
     {
-        return $this->autoSubscriptionProvider->isSubscribed($this->userId);
+        return isset($this->userSubscription) ? $this->userSubscription->IsSubscribed(): false;
     }
 
-    public function userAutoSubscribe()
+    public function subscribe()
     {
-        $this->autoSubscriptionProvider->subscribe($this->userId);
+        if ( isset( $this->userSubscription ) ) {
+            if ( !$this->userSubscription->IsSubscribed() ) {
+                $this->userSubscription = $this->autoSubscriptionProvider->updateSubscription($this->user,true);
+            }
+        } else {
+            $this->userSubscription = $this->autoSubscriptionProvider->addSubscription($this->user,true);
+        }
     }
 
-    public function userUnSubscribe()
+    public function unSubscribe()
     {
-        $this->autoSubscriptionProvider->unsubscribe($this->userId);
+        if ( isset( $this->userSubscription ) ) {
+            if ( $this->userSubscription->IsSubscribed() ) {
+                $this->userSubscription = $this->autoSubscriptionProvider->updateSubscription($this->user,false);
+            }
+        } else {
+            $this->userSubscription = $this->autoSubscriptionProvider->addSubscription($this->user,false);
+        }
+    }
+
+    /**
+     * @param ToggleShowEvent $event
+     * @return boolean event handled
+     */
+    public function handleToggleShow($event)
+    {
+        return true;
     }
 }

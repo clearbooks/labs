@@ -16,7 +16,7 @@ interface AutoSubscriber
      */
     public function isUserAutoSubscribed();
 
-    public function userAutoSubscribe();
+    public function subscribe();
 
-    public function userUnSubscribe();
+    public function unSubscribe();
 }

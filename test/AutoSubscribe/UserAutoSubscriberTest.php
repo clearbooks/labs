@@ -8,8 +8,9 @@
 
 namespace Clearbooks\Labs\AutoSubscribe;
 
-use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderStub;
-use Clearbooks\Labs\AutoSubscribe\Gateway\EmptyAutoSubscriptionProvider;
+use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderMock;
+use Clearbooks\Labs\AutoSubscribe\Object\MutableSubscription;
+use Clearbooks\Labs\AutoSubscribe\Object\UserStub;
 use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
 
 class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
@@ -30,10 +31,15 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $userId = 1;
-        $autoSubscriptionProvider = new AutoSubscriptionProviderStub([2 => true]);
-        $this->unSubscribedUser = new UserAutoSubscriber($userId, $autoSubscriptionProvider);
-        $this->subscribedUser = new UserAutoSubscriber(2, $autoSubscriptionProvider);
+        $user1 = new UserStub(1);
+        $user2 = new UserStub(2);
+        $user3 = new UserStub(3);
+        $autoSubscriptionProvider = new AutoSubscriptionProviderMock([
+            new MutableSubscription($user2,true),
+            new MutableSubscription($user3,false),
+        ]);
+        $this->unSubscribedUser = new UserAutoSubscriber($user1, $autoSubscriptionProvider);
+        $this->subscribedUser = new UserAutoSubscriber($user2, $autoSubscriptionProvider);
     }
 
     /**
@@ -58,7 +64,7 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
     public function GivenANewUser_WhenUserAutoSubscribe_ThenAutoSubscriptionShouldBeSet()
     {
         $before = $this->unSubscribedUser->isUserAutoSubscribed();
-        $this->unSubscribedUser->userAutoSubscribe();
+        $this->unSubscribedUser->subscribe();
         $this->assertFalse($before);
         $this->assertTrue($this->unSubscribedUser->isUserAutoSubscribed());
     }
@@ -69,9 +75,8 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
     public function GivenASubscribedUser_WhenUnSubscribe_ThenAutoSubscriptionShouldBeUnSet()
     {
         $before = $this->subscribedUser->isUserAutoSubscribed();
-        $this->subscribedUser->userUnSubscribe();
+        $this->subscribedUser->unSubscribe();
         $this->assertTrue($before);
         $this->assertFalse($this->subscribedUser->isUserAutoSubscribed());
     }
-
 }

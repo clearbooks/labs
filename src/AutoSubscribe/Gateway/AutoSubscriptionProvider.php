@@ -9,23 +9,33 @@
 namespace Clearbooks\Labs\AutoSubscribe\Gateway;
 
 
+use Clearbooks\Labs\AutoSubscribe\Entity\Subscription;
+use Clearbooks\Labs\AutoSubscribe\Entity\User;
+
 interface AutoSubscriptionProvider
 {
     /**
-     * @param int $userId
-     * @return boolean
+     * @return Subscription[]
      */
-    public function isSubscribed($userId);
+    public function getSubscriptions();
 
     /**
-     * @param int $userId
-     * @return void
+     * @param User $user
+     * @return Subscription
      */
-    public function subscribe($userId);
+    public function getSubscription(User $user);
 
     /**
-     * @param int $userId
-     * @return void
+     * @param User $user
+     * @param bool $subscribe
+     * @return Subscription|null new subscription entity
      */
-    public function unSubscribe($userId);
+    public function updateSubscription(User $user, $subscribe);
+
+    /**
+     * @param User $user
+     * @param bool $subscribe
+     * @return Subscription|null new subscription entity
+     */
+    public function addSubscription(User $user, $subscribe);
 }
