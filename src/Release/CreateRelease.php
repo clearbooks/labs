@@ -10,7 +10,7 @@ use Clearbooks\Labs\Release\CreateRelease\ResponseModel;
  * @author: Ryan Wood <ryanw@clearbooks.co.uk>
  * @created: 15/07/15
  */
-class CreateRelease
+class CreateRelease implements \Clearbooks\Labs\Release\UseCase\CreateRelease
 {
     /**
      * @var ReleaseGateway
@@ -24,7 +24,6 @@ class CreateRelease
     {
         $this->releaseGateway = $releaseGateway;
     }
-
 
     /**
      * @param Request $request
