@@ -10,5 +10,5 @@ install: composer install --dev
 script: vendor/phpunit/phpunit/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
 after_success:
   - CODECLIMATE_REPO_TOKEN=4cd6b7b0fec770fb70f66fa386eacf0cc0399acf2d9e44088a0ac5174d2442e1 ./vendor/bin/test-reporter
-  - if [ "$TRAVIS_PHP_VERSION" != "nightly" && "$TRAVIS_PHP_VERSION" != "7.0" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-  - if [ "$TRAVIS_PHP_VERSION" != "nightly" && "$TRAVIS_PHP_VERSION" != "7.0" ]; then php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml; fi
+  - if [ "$TRAVIS_PHP_VERSION" != "nightly" ] && [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [ "$TRAVIS_PHP_VERSION" != "nightly" ] && [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml; fi
