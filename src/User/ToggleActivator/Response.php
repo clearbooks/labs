@@ -9,25 +9,9 @@ class Response implements \Clearbooks\Labs\User\UseCase\ToggleActivator\Response
     private $toggleIdentifier;
 
     /**
-     * @var int|null
+     * @var int[]
      */
-    private $error = null;
-
-    /**
-     * @return int|null
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * @param int|null $error
-     */
-    public function setError( $error )
-    {
-        $this->error = $error;
-    }
+    private $errors = [ ];
 
     /**
      * @return string
@@ -43,6 +27,22 @@ class Response implements \Clearbooks\Labs\User\UseCase\ToggleActivator\Response
     public function setToggleIdentifier( $toggleIdentifier )
     {
         $this->toggleIdentifier = $toggleIdentifier;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * @param int[] $errors
+     */
+    public function setErrors( array $errors )
+    {
+        $this->errors = $errors;
     }
 }
 //EOF Response.php

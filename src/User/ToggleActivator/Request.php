@@ -8,6 +8,11 @@ class Request implements \Clearbooks\Labs\User\UseCase\ToggleActivator\Request
      */
     private $toggleIdentifier;
 
+    public function __construct( $toggleIdentifier )
+    {
+        $this->setToggleIdentifier( $toggleIdentifier );
+    }
+
     /**
      * @return string
      */
