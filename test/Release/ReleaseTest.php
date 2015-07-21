@@ -35,7 +35,7 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function givenRelease_GetReleaseInforUrlReturnsUrl()
+    public function givenRelease_GetReleaseInfoUrlReturnsUrl()
     {
         $this->assertEquals( self::RELEASE_URL, $this->release->getReleaseInfoUrl() );
     }
