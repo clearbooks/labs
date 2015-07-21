@@ -16,26 +16,23 @@ class GetAllSegments implements Response, UseCase\GetAllSegments
     /**
      * @param SegmentProvider $segmentProvider
      */
-    public function __construct( SegmentProvider $segmentProvider )
-    {
+    public function __construct( SegmentProvider $segmentProvider ) {
         $this->segmentProvider = $segmentProvider;
     }
 
     /**
      * @return Response
      */
-    public function execute()
-    {
+    public function execute() {
         return $this;
     }
 
-    public function getSegments()
-    {
+    public function getSegments() {
         $segments = $this->segmentProvider->getSegments();
 
         $return = [];
-        foreach( $segments as $segment ) {
-            $return[] = new ResponseSegment( $segment->getId(), $this->getName($segment));
+        foreach ( $segments as $segment ) {
+            $return[] = new ResponseSegment( $segment->getId(), $this->getName( $segment ) );
         }
 
         return $return;
@@ -45,7 +42,7 @@ class GetAllSegments implements Response, UseCase\GetAllSegments
      * @param SegmentInterface $segment
      * @return string
      */
-    private function getName(SegmentInterface $segment)
+    private function getName( SegmentInterface $segment )
     {
         return $segment->getName() ?: '';
     }

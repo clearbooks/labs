@@ -1,8 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Segment\Entity;
 
-interface Segment
-{
+interface Segment {
     /** @return string */
     public function getName();
 

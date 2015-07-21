@@ -4,8 +4,7 @@
 namespace Clearbooks\Labs\Segment;
 
 
-class Segment implements \Clearbooks\Labs\Segment\Entity\Segment
-{
+class Segment implements \Clearbooks\Labs\Segment\Entity\Segment {
 
     private $segmentName;
     private $segmentId;
@@ -14,19 +13,16 @@ class Segment implements \Clearbooks\Labs\Segment\Entity\Segment
      * @param $segmentId
      * @param $segmentName
      */
-    public function __construct( $segmentId, $segmentName )
-    {
+    public function __construct( $segmentId, $segmentName ) {
         $this->segmentName = $segmentName;
         $this->segmentId = $segmentId;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->segmentName;
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->segmentId;
     }
 }

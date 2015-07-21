@@ -5,8 +5,7 @@ namespace Clearbooks\Labs\Segment\Gateway;
 
 use Clearbooks\Labs\Segment\Entity\Segment;
 
-interface SegmentProvider
-{
+interface SegmentProvider {
     /**
      * @return Segment[]
      */

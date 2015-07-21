@@ -3,8 +3,7 @@ namespace Clearbooks\Labs\Segment\UseCase;
 
 use Clearbooks\Labs\Segment\UseCase\GetAllSegments\Response;
 
-interface GetAllSegments
-{
+interface GetAllSegments {
     /**
      * @return Response
      */

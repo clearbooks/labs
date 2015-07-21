@@ -3,8 +3,7 @@ namespace Clearbooks\Labs\Segment\GetAllSegments;
 
 use Clearbooks\Labs\Segment\UseCase\GetAllSegments\ResponseSegment as IResponseSegment;
 
-class ResponseSegment implements IResponseSegment
-{
+class ResponseSegment implements IResponseSegment {
     /**
      * @var
      */
@@ -19,21 +18,18 @@ class ResponseSegment implements IResponseSegment
      * @param $segmentId
      * @param $segmentName
      */
-    public function __construct( $segmentId, $segmentName )
-    {
+    public function __construct( $segmentId, $segmentName ) {
         $this->segmentName = $segmentName;
         $this->segmentId = $segmentId;
     }
 
     /** @return string */
-    public function getName()
-    {
+    public function getName() {
         return $this->segmentName;
     }
 
     /** @return string */
-    public function getId()
-    {
+    public function getId() {
         return $this->segmentId;
     }
 }

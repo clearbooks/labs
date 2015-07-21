@@ -1,8 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Segment;
 
-class GetSegment implements \Clearbooks\Labs\Segment\UseCase\GetSegment
-{
+class GetSegment implements \Clearbooks\Labs\Segment\UseCase\GetSegment {
     /**
      * @var UseCase\GetAllSegments
      */
@@ -16,11 +15,11 @@ class GetSegment implements \Clearbooks\Labs\Segment\UseCase\GetSegment
         $this->getAllSegments = $getAllSegments;
     }
 
-    public function execute($segmentId)
+    public function execute( $segmentId )
     {
         $response = $this->getAllSegments->execute();
-        foreach( $response->getSegments() as $segment ) {
-            if( $segment->getId() == $segmentId ) {
+        foreach ( $response->getSegments() as $segment ) {
+            if ( $segment->getId() == $segmentId ) {
                 return $segment;
             }
         }
