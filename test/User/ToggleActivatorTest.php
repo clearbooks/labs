@@ -39,5 +39,14 @@ class ToggleActivatorTest extends \PHPUnit_Framework_TestCase
         $this->toggleActivator->execute( $request, new IDCheckingToggleActivatorResponseHandler( $this,
                                                                                                  $request->getToggleIdentifier() ) );
     }
+
+    /**
+     * @test
+     */
+    public function GivenToggleServiceIsNotAbleToActivateToggles_WhenExecutingValidToggleActivationRequest_ResultsInUnknownError() {
+        $request = new Request( "test_toggle" );
+        $failingToggleActivator = new ToggleActivator( new FailingToggleService() );
+        $failingToggleActivator->execute( $request, new UnknownErrorExpectingToggleActivatorResponseHandler( $this ) );
+    }
 }
 //EOF ToggleActivatorTest.php
