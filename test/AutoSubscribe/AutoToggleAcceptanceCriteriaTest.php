@@ -14,21 +14,19 @@ use Clearbooks\Labs\AutoSubscribe\Object\MutableSubscription;
 use Clearbooks\Labs\AutoSubscribe\Object\UserStub;
 use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
 use Clearbooks\Labs\Event\ToggleShowEventStub;
-use Clearbooks\Labs\Event\TriggerToggleShowBasic;
+use Clearbooks\Labs\Event\ToggleShowEventExecutor;
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
 use Clearbooks\Labs\Event\UseCase\TriggerToggleShow;
 
 class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var AutoSubscriber
-     */
-    private $unSubscribedUser;
-    /**
-     * @var AutoSubscriber
-     */
+    /** @var AutoSubscriber */
+    private $absentSubscriptionForUser;
+    /** @var AutoSubscriber */
     private $subscribedUser;
+    /** @var AutoSubscriber */
+    private $unSubscribedUser;
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -44,8 +42,9 @@ class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_Test
             new MutableSubscription($user2,true),
             new MutableSubscription($user3,false),
         ]);
-        $this->unSubscribedUser = new UserAutoSubscriber($user1, $autoSubscriptionProvider);
+        $this->absentSubscriptionForUser = new UserAutoSubscriber($user1, $autoSubscriptionProvider);
         $this->subscribedUser = new UserAutoSubscriber($user2, $autoSubscriptionProvider);
+        $this->unSubscribedUser = new UserAutoSubscriber($user3, $autoSubscriptionProvider);
     }
 
     /**
@@ -54,13 +53,16 @@ class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_Test
      */
     public function GivenASubscribedUser_WhenAToggleIsMadeVisible_ThenSystemAutoSetToggle()
     {
+        $subscribers = [$this->subscribedUser, $this->absentSubscriptionForUser, $this->unSubscribedUser];
+        $toggleName = 'Feature 1';
         /** @var ToggleShowEvent $event */
-        $event = new ToggleShowEventStub('Feature 1');
-        /** @var ToggleShowSubscriber $subscriber */
-        $subscriber = $this->subscribedUser;
+        $event = new ToggleShowEventStub($toggleName);
         /** @var TriggerToggleShow $trigger */
-        $trigger = new TriggerToggleShowBasic([$subscriber]);
+        $trigger = new ToggleShowEventExecutor($subscribers);
         $handled = $trigger->raise($event);
+
+        $this->assertTrue($handled);
+
 
         // see if a toggle is active
 
@@ -81,7 +83,7 @@ class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_Test
         /** @var ToggleShowSubscriber $subscriber */
         $subscriber = $this->subscribedUser;
         /** @var TriggerToggleShow $trigger */
-        $trigger = new TriggerToggleShowBasic([$subscriber]);
+        $trigger = new ToggleShowEventExecutor([$subscriber]);
         $handled = $trigger->raise($event);
 
         // see if a toggle is active
@@ -92,3 +94,4 @@ class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_Test
 //        $this->assertFalse($this->subscribedUser->isUserAutoSubscribed());
     }
 }
+//EOF AutoToggleActivationAcceptanceCriteriaTest.php

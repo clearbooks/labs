@@ -33,3 +33,4 @@ class ToggleShowEventStub implements ToggleShowEvent
         return $this->name;
     }
 }
+//EOF ToggleShowEventStub.php

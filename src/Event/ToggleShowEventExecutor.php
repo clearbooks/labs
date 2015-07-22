@@ -13,7 +13,7 @@ use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
 use Clearbooks\Labs\Event\UseCase\TriggerToggleShow;
 
-class TriggerToggleShowBasic implements TriggerToggleShow
+class ToggleShowEventExecutor implements TriggerToggleShow
 {
     /**
      * @var ToggleShowSubscriber[]
@@ -21,7 +21,7 @@ class TriggerToggleShowBasic implements TriggerToggleShow
     private $subscribers;
 
     /**
-     * TriggerToggleShowBasic constructor.
+     * ToggleShowEventExecutor constructor.
      * @param ToggleShowSubscriber[] $subscribers
      */
     public function __construct($subscribers)
@@ -33,7 +33,7 @@ class TriggerToggleShowBasic implements TriggerToggleShow
      * @param ToggleShowEvent $event
      * @return boolean event handled
      */
-    public function raise($event)
+    public function raise(ToggleShowEvent $event)
     {
         $handled = false;
         foreach ($this->subscribers as $s) {
@@ -42,3 +42,4 @@ class TriggerToggleShowBasic implements TriggerToggleShow
         return $handled;
     }
 }
+//EOF ToggleShowEventExecutor.php

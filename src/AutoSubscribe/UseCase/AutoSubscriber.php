@@ -20,3 +20,4 @@ interface AutoSubscriber
 
     public function unSubscribe();
 }
+//EOF AutoSubscriber.php

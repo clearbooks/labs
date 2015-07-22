@@ -30,8 +30,9 @@ class ToggleShowSubscriberStub implements ToggleShowSubscriber
      * @param ToggleShowEvent $event
      * @return bool event handled
      */
-    public function handleToggleShow($event)
+    public function handleToggleShow(ToggleShowEvent $event)
     {
         return $this->handle;
     }
 }
+//EOF ToggleShowSubscriberStub.php

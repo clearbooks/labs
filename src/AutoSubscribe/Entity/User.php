@@ -16,4 +16,4 @@ interface User
      */
     public function getId();
 
-}
+}//EOF User

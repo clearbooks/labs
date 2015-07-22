@@ -15,5 +15,6 @@ interface TriggerToggleShow
      * @param ToggleShowEvent $event
      * @return boolean event handled
      */
-    public function raise($event);
+    public function raise(ToggleShowEvent $event);
 }
+//EOF TriggerToggleShow.php

@@ -23,11 +23,11 @@ class AutoSubscriptionProviderMock implements AutoSubscriptionProvider
 
     /**
      * AutoSubscriptionProviderMock constructor.
-     * @param MutableSubscription[] $subscribedUsers
+     * @param MutableSubscription[] $subscriptions
      */
-    public function __construct($subscribedUsers)
+    public function __construct(array $subscriptions)
     {
-        $this->subscriptions = $subscribedUsers;
+        $this->subscriptions = $subscriptions;
     }
 
     /**
@@ -84,3 +84,4 @@ class AutoSubscriptionProviderMock implements AutoSubscriptionProvider
         return $subscription;
     }
 }
+//EOF AutoSubscriptionProviderMock.php

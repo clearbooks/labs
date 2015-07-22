@@ -43,7 +43,9 @@ class UserAutoSubscriber implements AutoSubscriber,ToggleShowSubscriber
      */
     public function isUserAutoSubscribed()
     {
-        return isset($this->userSubscription) ? $this->userSubscription->IsSubscribed(): false;
+        return isset($this->userSubscription) ?
+            $this->userSubscription->IsSubscribed():
+            false;
     }
 
     public function subscribe()
@@ -72,8 +74,9 @@ class UserAutoSubscriber implements AutoSubscriber,ToggleShowSubscriber
      * @param ToggleShowEvent $event
      * @return boolean event handled
      */
-    public function handleToggleShow($event)
+    public function handleToggleShow(ToggleShowEvent $event)
     {
         return true;
     }
 }
+//EOF UserAutoSubscriber.php

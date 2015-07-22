@@ -16,3 +16,4 @@ interface ToggleShowEvent
      */
     public function getToggleName();
 }
+//EOF ToggleShowEvent.php

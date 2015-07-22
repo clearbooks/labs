@@ -28,7 +28,7 @@ class ToggleShowEventTest extends \PHPUnit_Framework_TestCase
         /** @var ToggleShowEvent $event */
         $event = new ToggleShowEventStub('Feature 1');
         /** @var TriggerToggleShow $trigger */
-        $trigger = new TriggerToggleShowBasic([]);
+        $trigger = new ToggleShowEventExecutor([]);
         $handled = $trigger->raise($event);
         $this->assertFalse($handled);
     }
@@ -40,7 +40,7 @@ class ToggleShowEventTest extends \PHPUnit_Framework_TestCase
         /** @var ToggleShowSubscriber $subscriber */
         $subscriber = new ToggleShowSubscriberStub();
         /** @var TriggerToggleShow $trigger */
-        $trigger = new TriggerToggleShowBasic([$subscriber]);
+        $trigger = new ToggleShowEventExecutor([$subscriber]);
         $handled = $trigger->raise($event);
         $this->assertTrue($handled);
     }
@@ -52,9 +52,10 @@ class ToggleShowEventTest extends \PHPUnit_Framework_TestCase
         /** @var ToggleShowSubscriber $subscriber */
         $subscriber = new ToggleShowSubscriberStub(false);
         /** @var TriggerToggleShow $trigger */
-        $trigger = new TriggerToggleShowBasic([$subscriber]);
+        $trigger = new ToggleShowEventExecutor([$subscriber]);
         $handled = $trigger->raise($event);
         $this->assertFalse($handled);
     }
 
 }
+//EOF ToggleShowEventTest.php

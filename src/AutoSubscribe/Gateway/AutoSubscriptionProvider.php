@@ -39,3 +39,4 @@ interface AutoSubscriptionProvider
      */
     public function addSubscription(User $user, $subscribe);
 }
+//EOF AutoSubscriptionProvider.php

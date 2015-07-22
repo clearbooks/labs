@@ -15,14 +15,12 @@ use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
 
 class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var AutoSubscriber
-     */
-    private $unSubscribedUser;
-    /**
-     * @var AutoSubscriber
-     */
+    /** @var AutoSubscriber */
+    private $absentSubscriptionForUser;
+    /** @var AutoSubscriber */
     private $subscribedUser;
+    /** @var AutoSubscriber */
+    private $unSubscribedUser;
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -38,8 +36,9 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
             new MutableSubscription($user2,true),
             new MutableSubscription($user3,false),
         ]);
-        $this->unSubscribedUser = new UserAutoSubscriber($user1, $autoSubscriptionProvider);
+        $this->absentSubscriptionForUser = new UserAutoSubscriber($user1, $autoSubscriptionProvider);
         $this->subscribedUser = new UserAutoSubscriber($user2, $autoSubscriptionProvider);
+        $this->unSubscribedUser = new UserAutoSubscriber($user3, $autoSubscriptionProvider);
     }
 
     /**
@@ -47,6 +46,7 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function GivenANewUser_ThenAutoSubscriptionShouldBeUnSet()
     {
+        $this->assertFalse($this->absentSubscriptionForUser->isUserAutoSubscribed());
         $this->assertFalse($this->unSubscribedUser->isUserAutoSubscribed());
     }
 
@@ -63,9 +63,13 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function GivenANewUser_WhenUserAutoSubscribe_ThenAutoSubscriptionShouldBeSet()
     {
-        $before = $this->unSubscribedUser->isUserAutoSubscribed();
+        $before = $this->absentSubscriptionForUser->isUserAutoSubscribed();
+        $this->absentSubscriptionForUser->subscribe();
+        $this->subscribedUser->subscribe();
         $this->unSubscribedUser->subscribe();
         $this->assertFalse($before);
+        $this->assertTrue($this->absentSubscriptionForUser->isUserAutoSubscribed());
+        $this->assertTrue($this->subscribedUser->isUserAutoSubscribed());
         $this->assertTrue($this->unSubscribedUser->isUserAutoSubscribed());
     }
 
@@ -75,8 +79,13 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
     public function GivenASubscribedUser_WhenUnSubscribe_ThenAutoSubscriptionShouldBeUnSet()
     {
         $before = $this->subscribedUser->isUserAutoSubscribed();
+        $this->absentSubscriptionForUser->unSubscribe();
         $this->subscribedUser->unSubscribe();
+        $this->unSubscribedUser->unSubscribe();
         $this->assertTrue($before);
+        $this->assertFalse($this->absentSubscriptionForUser->isUserAutoSubscribed());
         $this->assertFalse($this->subscribedUser->isUserAutoSubscribed());
+        $this->assertFalse($this->unSubscribedUser->isUserAutoSubscribed());
     }
 }
+//EOF UserAutoSubscriberTest.php

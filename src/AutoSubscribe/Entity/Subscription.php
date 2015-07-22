@@ -21,3 +21,4 @@ interface Subscription
      */
     public function IsSubscribed();
 }
+//EOF Subscription.php

@@ -58,3 +58,4 @@ class MutableSubscription implements Subscription
         $this->subscription = $subscription;
     }
 }
+//EOF MutableSubscription.php

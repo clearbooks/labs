@@ -35,3 +35,4 @@ class UserStub implements User
         return $this->id;
     }
 }
+//EOF UserStub.php
