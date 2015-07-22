@@ -2,9 +2,8 @@
 namespace Clearbooks\Labs\User;
 
 use Clearbooks\Labs\User\UseCase\ToggleActivator\Response;
-use Clearbooks\Labs\User\UseCase\ToggleActivatorResponseHandler;
 
-class IDCheckingToggleActivatorResponseHandler implements ToggleActivatorResponseHandler
+class IDCheckingToggleActivatorResponseHandler implements UseCase\ToggleActivatorResponseHandler
 {
     /**
      * @var \PHPUnit_Framework_Assert

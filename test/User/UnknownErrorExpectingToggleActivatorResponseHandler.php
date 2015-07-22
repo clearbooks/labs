@@ -2,9 +2,8 @@
 namespace Clearbooks\Labs\User;
 
 use Clearbooks\Labs\User\UseCase\ToggleActivator\Response;
-use Clearbooks\Labs\User\UseCase\ToggleActivatorResponseHandler;
 
-class UnknownErrorExpectingToggleActivatorResponseHandler implements ToggleActivatorResponseHandler
+class UnknownErrorExpectingToggleActivatorResponseHandler implements UseCase\ToggleActivatorResponseHandler
 {
     /**
      * @var \PHPUnit_Framework_Assert

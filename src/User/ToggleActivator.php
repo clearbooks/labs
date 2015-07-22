@@ -3,7 +3,6 @@ namespace Clearbooks\Labs\User;
 
 use Clearbooks\Labs\User\ToggleActivator\Response;
 use Clearbooks\Labs\User\UseCase\ToggleActivator\Request;
-use Clearbooks\Labs\User\UseCase\ToggleActivatorResponseHandler;
 use Clearbooks\Labs\User\UseCase\ToggleService;
 
 class ToggleActivator implements UseCase\ToggleActivator
@@ -18,7 +17,7 @@ class ToggleActivator implements UseCase\ToggleActivator
         $this->toggleService = $toggleService;
     }
 
-    public function execute( Request $request, ToggleActivatorResponseHandler $responseHandler )
+    public function execute( Request $request, UseCase\ToggleActivatorResponseHandler $responseHandler )
     {
         $errors = [ ];
         if ( empty( $request->getToggleIdentifier() ) ) {
