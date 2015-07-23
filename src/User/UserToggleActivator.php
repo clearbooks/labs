@@ -59,11 +59,7 @@ class UserToggleActivator implements UseCase\UserToggleActivator
      */
     private function createResponse( Request $request, $errors )
     {
-        $response = new Response();
-        $response->setToggleIdentifier( $request->getToggleIdentifier() );
-        $response->setUserIdentifier( $request->getUserIdentifier() );
-        $response->setErrors( $errors );
-        return $response;
+        return new Response( $request->getToggleIdentifier(), $request->getUserIdentifier(), $errors );
     }
 }
 //EOF UserToggleActivator.php

@@ -18,6 +18,13 @@ class Response implements \Clearbooks\Labs\User\UseCase\UserToggleActivator\Resp
      */
     private $errors = [ ];
 
+    public function __construct( $toggleIdentifier, $userIdentifier, array $errors = [ ] )
+    {
+        $this->setToggleIdentifier( $toggleIdentifier );
+        $this->setUserIdentifier( $userIdentifier );
+        $this->setErrors( $errors );
+    }
+
     /**
      * @return string
      */
