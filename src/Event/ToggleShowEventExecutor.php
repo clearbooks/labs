@@ -35,11 +35,23 @@ class ToggleShowEventExecutor implements TriggerToggleShow
      */
     public function raise(ToggleShowEvent $event)
     {
+        if ($this->isToggleInvalid($event)) {
+            return false;
+        }
         $handled = false;
         foreach ($this->subscribers as $s) {
             $handled = $s->handleToggleShow($event) || $handled;
         }
         return $handled;
+    }
+
+    /**
+     * @param ToggleShowEvent $event
+     * @return bool
+     */
+    private function isToggleInvalid(ToggleShowEvent $event)
+    {
+        return empty($event->getToggleName());
     }
 }
 //EOF ToggleShowEventExecutor.php

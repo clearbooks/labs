@@ -15,7 +15,6 @@ use Clearbooks\Labs\AutoSubscribe\Gateway\SingleAutoSubscriptionProviderMock;
 use Clearbooks\Labs\AutoSubscribe\Object\FalseSubscription;
 use Clearbooks\Labs\AutoSubscribe\Object\SubscriptionSpy;
 use Clearbooks\Labs\AutoSubscribe\Object\TrueSubscription;
-use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
 use Clearbooks\Labs\Event\ToggleShowEventStub;
 use Clearbooks\Labs\Event\ToggleShowEventExecutor;
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
@@ -36,12 +35,6 @@ class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_Test
     private $subscribedProvider;
     /** @var AutoSubscriptionProviderUpdateMock */
     private $unSubscribedProvider;
-    /** @var AutoSubscriber */
-    private $absentSubscriptionForUser;
-    /** @var AutoSubscriber */
-    private $subscribedUser;
-    /** @var AutoSubscriber */
-    private $unSubscribedUser;
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -80,6 +73,27 @@ class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_Test
         $this->assertTrue($this->subscribedSubscription->isSubscribedCalled());
         $this->assertTrue($eventHandler->isHandleToggleShowCalledWith($toggleName));
         $this->assertTrue($this->toggleActivator->isExecuteCalledWithToggleName($toggleName));
+    }
+
+    /**
+     * @test
+     */
+    public function GivenASubscribedUser_WhenAToggleIsMadeVisibleOnAnInvalidToggle_ThenSystemIgnoresEvent()
+    {
+        $eventHandler = new AutoSubscriptionToggleShowEventHandlerSpy($this->subscribedProvider, $this->toggleActivator);
+
+        $subscribers = [$eventHandler];
+        $toggleName = '';
+        /** @var ToggleShowEvent $event */
+        $event = new ToggleShowEventStub($toggleName);
+        /** @var TriggerToggleShow $trigger */
+        $trigger = new ToggleShowEventExecutor($subscribers);
+        $handled = $trigger->raise($event);
+
+        $this->assertTrue($eventHandler->isHandleToggleShowCalledWith($toggleName));
+        $this->assertFalse($handled);
+        $this->assertFalse($this->subscribedSubscription->isSubscribedCalled());
+        $this->assertFalse($this->toggleActivator->isExecuteCalledWithToggleName($toggleName));
     }
 
     /**
