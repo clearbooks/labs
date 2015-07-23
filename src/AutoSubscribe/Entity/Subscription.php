@@ -12,13 +12,13 @@ namespace Clearbooks\Labs\AutoSubscribe\Entity;
 interface Subscription
 {
     /**
-     * @return User
-     */
-    public function getUser();
-
-    /**
      * @return bool
      */
     public function IsSubscribed();
+
+    /**
+     * @return int
+     */
+    public function getUserId();
 }
 //EOF Subscription.php

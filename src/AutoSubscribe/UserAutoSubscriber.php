@@ -13,7 +13,7 @@ use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
 
-class UserAutoSubscriber implements AutoSubscriber,ToggleShowSubscriber
+class UserAutoSubscriber implements AutoSubscriber
 {
     /**
      * @var User
@@ -55,7 +55,7 @@ class UserAutoSubscriber implements AutoSubscriber,ToggleShowSubscriber
                 $this->userSubscription = $this->autoSubscriptionProvider->updateSubscription($this->user,true);
             }
         } else {
-            $this->userSubscription = $this->autoSubscriptionProvider->addSubscription($this->user,true);
+            $this->userSubscription = $this->autoSubscriptionProvider->updateSubscription($this->user,true);
         }
     }
 
@@ -65,18 +65,7 @@ class UserAutoSubscriber implements AutoSubscriber,ToggleShowSubscriber
             if ( $this->userSubscription->IsSubscribed() ) {
                 $this->userSubscription = $this->autoSubscriptionProvider->updateSubscription($this->user,false);
             }
-        } else {
-            $this->userSubscription = $this->autoSubscriptionProvider->addSubscription($this->user,false);
         }
-    }
-
-    /**
-     * @param ToggleShowEvent $event
-     * @return boolean event handled
-     */
-    public function handleToggleShow(ToggleShowEvent $event)
-    {
-        return true;
     }
 }
 //EOF UserAutoSubscriber.php

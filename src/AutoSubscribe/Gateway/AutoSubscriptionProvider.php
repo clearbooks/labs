@@ -21,7 +21,7 @@ interface AutoSubscriptionProvider
 
     /**
      * @param User $user
-     * @return Subscription
+     * @return Subscription|null
      */
     public function getSubscription(User $user);
 
@@ -31,12 +31,5 @@ interface AutoSubscriptionProvider
      * @return Subscription|null new subscription entity
      */
     public function updateSubscription(User $user, $subscribe);
-
-    /**
-     * @param User $user
-     * @param bool $subscribe
-     * @return Subscription|null new subscription entity
-     */
-    public function addSubscription(User $user, $subscribe);
 }
 //EOF AutoSubscriptionProvider.php

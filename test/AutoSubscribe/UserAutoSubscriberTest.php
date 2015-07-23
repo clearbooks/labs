@@ -8,13 +8,27 @@
 
 namespace Clearbooks\Labs\AutoSubscribe;
 
-use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderMock;
-use Clearbooks\Labs\AutoSubscribe\Object\MutableSubscription;
+use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderDummyMock;
+use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderUpdateMock;
+use Clearbooks\Labs\AutoSubscribe\Gateway\SingleAutoSubscriptionProviderMock;
+use Clearbooks\Labs\AutoSubscribe\Object\FalseSubscription;
+use Clearbooks\Labs\AutoSubscribe\Object\SubscriptionSpy;
+use Clearbooks\Labs\AutoSubscribe\Object\TrueSubscription;
 use Clearbooks\Labs\AutoSubscribe\Object\UserStub;
 use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
 
 class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var SubscriptionSpy */
+    private $subscribedSubscription;
+    /** @var SubscriptionSpy */
+    private $unSubscribedSubscription;
+    /** @var AutoSubscriptionProviderUpdateMock */
+    private $absentSubscriptionProvider;
+    /** @var AutoSubscriptionProviderUpdateMock */
+    private $subscribedProvider;
+    /** @var AutoSubscriptionProviderUpdateMock */
+    private $unSubscribedProvider;
     /** @var AutoSubscriber */
     private $absentSubscriptionForUser;
     /** @var AutoSubscriber */
@@ -29,16 +43,14 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $user1 = new UserStub(1);
-        $user2 = new UserStub(2);
-        $user3 = new UserStub(3);
-        $autoSubscriptionProvider = new AutoSubscriptionProviderMock([
-            new MutableSubscription($user2,true),
-            new MutableSubscription($user3,false),
-        ]);
-        $this->absentSubscriptionForUser = new UserAutoSubscriber($user1, $autoSubscriptionProvider);
-        $this->subscribedUser = new UserAutoSubscriber($user2, $autoSubscriptionProvider);
-        $this->unSubscribedUser = new UserAutoSubscriber($user3, $autoSubscriptionProvider);
+        $this->absentSubscriptionProvider = new AutoSubscriptionProviderDummyMock();
+        $this->subscribedSubscription = new TrueSubscription();
+        $this->unSubscribedSubscription = new FalseSubscription();
+        $this->subscribedProvider = new SingleAutoSubscriptionProviderMock($this->subscribedSubscription);
+        $this->unSubscribedProvider = new SingleAutoSubscriptionProviderMock($this->unSubscribedSubscription);
+        $this->absentSubscriptionForUser = new UserAutoSubscriber(new UserStub(1), $this->absentSubscriptionProvider);
+        $this->subscribedUser = new UserAutoSubscriber(new UserStub(2), $this->subscribedProvider);
+        $this->unSubscribedUser = new UserAutoSubscriber(new UserStub(3), $this->unSubscribedProvider);
     }
 
     /**
@@ -61,31 +73,43 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function GivenANewUser_WhenUserAutoSubscribe_ThenAutoSubscriptionShouldBeSet()
+    public function GivenUserAutoSubscriptionWithExistingFalseOrAbsentSubscription_WhenUserAutoSubscribe_ThenAutoSubscriptionProviderUpdateCalledWithTrue()
     {
-        $before = $this->absentSubscriptionForUser->isUserAutoSubscribed();
         $this->absentSubscriptionForUser->subscribe();
-        $this->subscribedUser->subscribe();
         $this->unSubscribedUser->subscribe();
-        $this->assertFalse($before);
-        $this->assertTrue($this->absentSubscriptionForUser->isUserAutoSubscribed());
-        $this->assertTrue($this->subscribedUser->isUserAutoSubscribed());
-        $this->assertTrue($this->unSubscribedUser->isUserAutoSubscribed());
+        $this->assertTrue($this->absentSubscriptionProvider->isUpdateCalledWith(true));
+        $this->assertTrue($this->unSubscribedSubscription->isSubscribedCalled());
+        $this->assertTrue($this->unSubscribedProvider->isUpdateCalledWith(true));
+    }
+    /**
+     * @test
+     */
+    public function GivenUserAutoSubscriptionWithExistingTrueSubscription_WhenUserSubscribe_ThenAutoSubscriptionProviderUpdateShouldNotBeCalled()
+    {
+        $this->subscribedUser->subscribe();
+        $this->assertFalse($this->subscribedProvider->isUpdateCalledWith(true));
+        $this->assertTrue($this->subscribedSubscription->isSubscribedCalled());
     }
 
     /**
      * @test
      */
-    public function GivenASubscribedUser_WhenUnSubscribe_ThenAutoSubscriptionShouldBeUnSet()
+    public function GivenUserAutoSubscriptionWithExistingTrueSubscription_WhenUserUnSubscribe_ThenAutoSubscriptionProviderUpdateCalledWithFalse()
     {
-        $before = $this->subscribedUser->isUserAutoSubscribed();
-        $this->absentSubscriptionForUser->unSubscribe();
         $this->subscribedUser->unSubscribe();
+        $this->assertTrue($this->subscribedProvider->isUpdateCalledWith(false));
+    }
+
+    /**
+     * @test
+     */
+    public function GivenUserAutoSubscriptionWithExistingFalseOrAbsentSubscription_WhenUserUnSubscribe_ThenAutoSubscriptionProviderUpdateCalledWithFalseOrNotAtAllWithAbsentSubscription()
+    {
+        $this->absentSubscriptionForUser->unSubscribe();
         $this->unSubscribedUser->unSubscribe();
-        $this->assertTrue($before);
-        $this->assertFalse($this->absentSubscriptionForUser->isUserAutoSubscribed());
-        $this->assertFalse($this->subscribedUser->isUserAutoSubscribed());
-        $this->assertFalse($this->unSubscribedUser->isUserAutoSubscribed());
+        $this->assertFalse($this->absentSubscriptionProvider->isUpdateCalledWith(false));
+        $this->assertTrue($this->unSubscribedSubscription->isSubscribedCalled());
+        $this->assertFalse($this->unSubscribedProvider->isUpdateCalledWith(false));
     }
 }
 //EOF UserAutoSubscriberTest.php
