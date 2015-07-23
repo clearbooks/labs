@@ -63,12 +63,13 @@ class UserToggleActivatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function WhenExecutingValidUserToggleActivationRequest_ResponseContainsTheProperUserToggleID() {
+    public function WhenExecutingValidUserToggleActivationRequest_ResponseContainsTheProperUserToggleIDAndUserID() {
         $request = new Request( "test_toggle", 1 );
         $userToggleActivatorResponseHandlerSpy = new UserToggleActivatorResponseHandlerSpy();
         $this->userToggleActivator->execute( $request, $userToggleActivatorResponseHandlerSpy );
 
         $this->assertEquals( $request->getToggleIdentifier(), $userToggleActivatorResponseHandlerSpy->getLastHandledResponse()->getToggleIdentifier() );
+        $this->assertEquals( $request->getUserIdentifier(), $userToggleActivatorResponseHandlerSpy->getLastHandledResponse()->getUserIdentifier() );
     }
 
     /**
