@@ -19,14 +19,9 @@ class UserToggleActivator implements UseCase\UserToggleActivator
 
     public function execute( Request $request, UseCase\UserToggleActivatorResponseHandler $responseHandler )
     {
-        $errors = [ ];
-        if ( empty( $request->getToggleIdentifier() ) ) {
-            $errors[] = Response::ERROR_UNKNOWN_TOGGLE;
-        }
-        else if ( $request->getUserIdentifier() <= 0 ) {
-            $errors[] = Response::ERROR_UNKNOWN_USER;
-        }
-        else {
+        $errors = $this->validateRequest( $request );
+
+        if ( empty( $errors ) ) {
             $success = $this->toggleService->activateToggle( $request->getToggleIdentifier() );
 
             if ( !$success ) {
@@ -34,12 +29,41 @@ class UserToggleActivator implements UseCase\UserToggleActivator
             }
         }
 
+        $response = $this->createResponse( $request, $errors );
+        $responseHandler->handleResponse( $response );
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function validateRequest( Request $request )
+    {
+        $errors = [ ];
+
+        if ( empty( $request->getToggleIdentifier() ) ) {
+            $errors[] = Response::ERROR_UNKNOWN_TOGGLE;
+        }
+
+        if ( $request->getUserIdentifier() <= 0 ) {
+            $errors[] = Response::ERROR_UNKNOWN_USER;
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param Request $request
+     * @param         $errors
+     * @return Response
+     */
+    private function createResponse( Request $request, $errors )
+    {
         $response = new Response();
         $response->setToggleIdentifier( $request->getToggleIdentifier() );
         $response->setUserIdentifier( $request->getUserIdentifier() );
         $response->setErrors( $errors );
-
-        $responseHandler->handleResponse( $response );
+        return $response;
     }
 }
 //EOF UserToggleActivator.php
