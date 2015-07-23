@@ -1,12 +1,17 @@
 <?php
-namespace Clearbooks\Labs\User\ToggleActivator;
+namespace Clearbooks\Labs\User\UserToggleActivator;
 
-class Response implements \Clearbooks\Labs\User\UseCase\ToggleActivator\Response
+class Response implements \Clearbooks\Labs\User\UseCase\UserToggleActivator\Response
 {
     /**
      * @var string
      */
     private $toggleIdentifier;
+
+    /**
+     * @var int
+     */
+    private $userIdentifier;
 
     /**
      * @var int[]
@@ -27,6 +32,22 @@ class Response implements \Clearbooks\Labs\User\UseCase\ToggleActivator\Response
     public function setToggleIdentifier( $toggleIdentifier )
     {
         $this->toggleIdentifier = $toggleIdentifier;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserIdentifier()
+    {
+        return $this->userIdentifier;
+    }
+
+    /**
+     * @param int $userIdentifier
+     */
+    public function setUserIdentifier( $userIdentifier )
+    {
+        $this->userIdentifier = $userIdentifier;
     }
 
     /**

@@ -1,9 +1,9 @@
 <?php
 namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\UseCase\ToggleService;
+use Clearbooks\Labs\User\UseCase\UserToggleService;
 
-class FailingToggleService implements ToggleService
+class FailingUserToggleService implements UserToggleService
 {
     /**
      * @param string $toggleIdentifier
@@ -14,4 +14,4 @@ class FailingToggleService implements ToggleService
         return false;
     }
 }
-//EOF FailingToggleService.php
+//EOF FailingUserToggleService.php

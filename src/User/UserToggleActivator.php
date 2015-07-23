@@ -1,27 +1,30 @@
 <?php
 namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\ToggleActivator\Response;
-use Clearbooks\Labs\User\UseCase\ToggleActivator\Request;
-use Clearbooks\Labs\User\UseCase\ToggleService;
+use Clearbooks\Labs\User\UserToggleActivator\Response;
+use Clearbooks\Labs\User\UseCase\UserToggleActivator\Request;
+use Clearbooks\Labs\User\UseCase\UserToggleService;
 
-class ToggleActivator implements UseCase\ToggleActivator
+class UserToggleActivator implements UseCase\UserToggleActivator
 {
     /**
-     * @var ToggleService
+     * @var UserToggleService
      */
     private $toggleService;
 
-    public function __construct( ToggleService $toggleService )
+    public function __construct( UserToggleService $toggleService )
     {
         $this->toggleService = $toggleService;
     }
 
-    public function execute( Request $request, UseCase\ToggleActivatorResponseHandler $responseHandler )
+    public function execute( Request $request, UseCase\UserToggleActivatorResponseHandler $responseHandler )
     {
         $errors = [ ];
         if ( empty( $request->getToggleIdentifier() ) ) {
             $errors[] = Response::ERROR_UNKNOWN_TOGGLE;
+        }
+        else if ( $request->getUserIdentifier() <= 0 ) {
+            $errors[] = Response::ERROR_UNKNOWN_USER;
         }
         else {
             $success = $this->toggleService->activateToggle( $request->getToggleIdentifier() );
@@ -33,9 +36,10 @@ class ToggleActivator implements UseCase\ToggleActivator
 
         $response = new Response();
         $response->setToggleIdentifier( $request->getToggleIdentifier() );
+        $response->setUserIdentifier( $request->getUserIdentifier() );
         $response->setErrors( $errors );
 
         $responseHandler->handleResponse( $response );
     }
 }
-//EOF ToggleActivator.php
+//EOF UserToggleActivator.php
