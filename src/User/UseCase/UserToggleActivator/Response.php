@@ -1,11 +1,12 @@
 <?php
-namespace Clearbooks\Labs\User\UseCase\ToggleActivator;
+namespace Clearbooks\Labs\User\UseCase\UserToggleActivator;
 
 interface Response
 {
     const ERROR_UNKNOWN_ERROR = 0;
     const ERROR_UNKNOWN_TOGGLE = 1;
-    const ERROR_TOGGLE_ALREADY_ACTIVE = 2;
+    const ERROR_UNKNOWN_USER = 2;
+    const ERROR_TOGGLE_ALREADY_ACTIVE = 3;
 
     /**
      * @return string
@@ -16,6 +17,16 @@ interface Response
      * @param string $toggleIdentifier
      */
     public function setToggleIdentifier( $toggleIdentifier );
+
+    /**
+     * @return int
+     */
+    public function getUserIdentifier();
+
+    /**
+     * @param int $userIdentifier
+     */
+    public function setUserIdentifier( $userIdentifier );
 
     /**
      * @return int[]
