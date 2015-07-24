@@ -16,7 +16,7 @@ use Clearbooks\Labs\User\UseCase\UserToggleActivatorResponseHandler;
 
 class UserToggleActivatorSpy implements UserToggleActivator
 {
-    /** @var array */
+    /** @var int[][] */
     private $executePairs = [];
 
     public function execute(Request $request, UserToggleActivatorResponseHandler $responseHandler)
@@ -26,7 +26,7 @@ class UserToggleActivatorSpy implements UserToggleActivator
     }
 
     /**
-     * @return array
+     * @return int[][]
      */
     public function getExecutionArray()
     {
@@ -44,7 +44,7 @@ class UserToggleActivatorSpy implements UserToggleActivator
             $this->executePairs[$name] = [];
         }
         if (!isset($this->executePairs[$name][$id])) {
-            $this->executePairs[$name][$id] = [];
+            $this->executePairs[$name][$id] = 0;
         }
         $this->executePairs[$name][$id] = $this->executePairs[$name][$id] + 1;
     }
