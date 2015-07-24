@@ -9,31 +9,23 @@
 namespace Clearbooks\Labs\AutoSubscribe;
 
 
-use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderDummyMock;
-use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderUpdateMock;
-use Clearbooks\Labs\AutoSubscribe\Gateway\SingleAutoSubscriptionProviderMock;
-use Clearbooks\Labs\AutoSubscribe\Object\FalseSubscription;
-use Clearbooks\Labs\AutoSubscribe\Object\SubscriptionSpy;
-use Clearbooks\Labs\AutoSubscribe\Object\TrueSubscription;
+use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriberProvider;
+use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriberProviderStub;
+use Clearbooks\Labs\AutoSubscribe\Object\UserStub;
 use Clearbooks\Labs\Event\ToggleShowEventStub;
 use Clearbooks\Labs\Event\ToggleShowEventExecutor;
-use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
+use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
 use Clearbooks\Labs\Event\UseCase\TriggerToggleShow;
-use Clearbooks\Labs\User\ToggleActivator;
+use Clearbooks\Labs\User\UserToggleActivator;
 
 class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var ToggleActivatorMock */
+    const FEATURE_TOGGLE_NAME = 'Feature 1';
+    /** @var UserToggleActivatorSpy */
     private $toggleActivator;
-    /** @var SubscriptionSpy */
-    private $subscribedSubscription;
-    /** @var SubscriptionSpy */
-    private $unSubscribedSubscription;
-    /** @var AutoSubscriptionProviderUpdateMock */
-    private $absentSubscriptionProvider;
-    /** @var AutoSubscriptionProviderUpdateMock */
+    /** @var AutoSubscriberProvider */
     private $subscribedProvider;
-    /** @var AutoSubscriptionProviderUpdateMock */
+    /** @var AutoSubscriberProvider */
     private $unSubscribedProvider;
 
     /**
@@ -43,78 +35,71 @@ class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_Test
     protected function setUp()
     {
         parent::setUp();
-        $this->absentSubscriptionProvider = new AutoSubscriptionProviderDummyMock();
-        $this->subscribedSubscription = new TrueSubscription();
-        $this->unSubscribedSubscription = new FalseSubscription();
-        $this->subscribedProvider = new SingleAutoSubscriptionProviderMock($this->subscribedSubscription);
-        $this->unSubscribedProvider = new SingleAutoSubscriptionProviderMock($this->unSubscribedSubscription);
-        $this->toggleActivator = new ToggleActivatorMock();
+        $this->subscribedProvider = new AutoSubscriberProviderStub([new UserStub(1),new UserStub(2)]);
+        $this->unSubscribedProvider = new AutoSubscriberProviderStub([]);
+        $this->toggleActivator = new UserToggleActivatorSpy();
     }
 
-
-
     /**
-     * TODO ToggleActivator interface missing
      * @test
      */
     public function GivenASubscribedUser_WhenAToggleIsMadeVisible_ThenSystemAutoSetToggle()
     {
         $eventHandler = new AutoSubscriptionToggleShowEventHandlerSpy($this->subscribedProvider, $this->toggleActivator);
+        $toggleName = self::FEATURE_TOGGLE_NAME;
 
-        $subscribers = [$eventHandler];
-        $toggleName = 'Feature 1';
-        /** @var ToggleShowEvent $event */
-        $event = new ToggleShowEventStub($toggleName);
-        /** @var TriggerToggleShow $trigger */
-        $trigger = new ToggleShowEventExecutor($subscribers);
-        $handled = $trigger->raise($event);
+        $handled = $this->riseToggleShowEvent($toggleName, $eventHandler);
 
         $this->assertTrue($handled);
-        $this->assertTrue($this->subscribedSubscription->isSubscribedCalled());
         $this->assertTrue($eventHandler->isHandleToggleShowCalledWith($toggleName));
-        $this->assertTrue($this->toggleActivator->isExecuteCalledWithToggleName($toggleName));
+        $this->assertEquals([
+            $toggleName=>[
+                1=>1,
+                2=>1,
+            ],
+        ],$this->toggleActivator->getExecutionArray());
     }
 
     /**
      * @test
      */
-    public function GivenASubscribedUser_WhenAToggleIsMadeVisibleOnAnInvalidToggle_ThenSystemIgnoresEvent()
-    {
-        $eventHandler = new AutoSubscriptionToggleShowEventHandlerSpy($this->subscribedProvider, $this->toggleActivator);
-
-        $subscribers = [$eventHandler];
-        $toggleName = '';
-        /** @var ToggleShowEvent $event */
-        $event = new ToggleShowEventStub($toggleName);
-        /** @var TriggerToggleShow $trigger */
-        $trigger = new ToggleShowEventExecutor($subscribers);
-        $handled = $trigger->raise($event);
-
-        $this->assertTrue($eventHandler->isHandleToggleShowCalledWith($toggleName));
-        $this->assertFalse($handled);
-        $this->assertFalse($this->subscribedSubscription->isSubscribedCalled());
-        $this->assertFalse($this->toggleActivator->isExecuteCalledWithToggleName($toggleName));
-    }
-
-    /**
-     * TODO ToggleActivator interface missing
-     * @test
-     */
-    public function GivenANonSubscribedUser_WhenAToggleIsMadeVisible_ThenToggleStaysTheSame()
+    public function GivenANonSubscribedUser_WhenAToggleIsMadeVisible_ThenShouldNotSetAnything()
     {
         $eventHandler = new AutoSubscriptionToggleShowEventHandlerSpy($this->unSubscribedProvider, $this->toggleActivator);
+        $toggleName = self::FEATURE_TOGGLE_NAME;
 
-        $subscribers = [$eventHandler];
-        $toggleName = 'Feature 1';
-        /** @var ToggleShowEvent $event */
-        $event = new ToggleShowEventStub($toggleName);
-        /** @var TriggerToggleShow $trigger */
-        $trigger = new ToggleShowEventExecutor($subscribers);
-        $handled = $trigger->raise($event);
+        $handled = $this->riseToggleShowEvent($toggleName, $eventHandler);
 
         $this->assertFalse($handled);
-        $this->assertTrue($this->unSubscribedSubscription->isSubscribedCalled());
         $this->assertTrue($eventHandler->isHandleToggleShowCalledWith($toggleName));
-        $this->assertFalse($this->toggleActivator->isExecuteCalledWithToggleName($toggleName));    }
+        $this->assertEquals([],$this->toggleActivator->getExecutionArray());
+    }
+
+    /**
+     * @test
+     */
+    public function GivenASubscribedUser_WhenAToggleIsMadeVisibleAndToggleNameInvalid_ThenShouldNotSetAnything()
+    {
+        $eventHandler = new AutoSubscriptionToggleShowEventHandlerSpy($this->subscribedProvider, $this->toggleActivator);
+        $toggleName = '';
+
+        $handled = $this->riseToggleShowEvent($toggleName, $eventHandler);
+
+        $this->assertFalse($handled);
+        $this->assertTrue($eventHandler->isHandleToggleShowCalledWith($toggleName));
+        $this->assertEquals([],$this->toggleActivator->getExecutionArray());
+    }
+
+        /**
+     * @param string $toggleName
+     * @param ToggleShowSubscriber $eventHandler
+     * @return bool
+     */
+    private function riseToggleShowEvent($toggleName,ToggleShowSubscriber $eventHandler)
+    {
+        /** @var TriggerToggleShow $trigger */
+        $trigger = new ToggleShowEventExecutor([$eventHandler]);
+        return $trigger->raise(new ToggleShowEventStub($toggleName));
+    }
 }
 //EOF AutoToggleActivationAcceptanceCriteriaTest.php

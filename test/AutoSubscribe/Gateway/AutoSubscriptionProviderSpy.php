@@ -9,7 +9,6 @@
 namespace Clearbooks\Labs\AutoSubscribe\Gateway;
 
 
-use Clearbooks\Labs\AutoSubscribe\Entity\Subscription;
 use Clearbooks\Labs\AutoSubscribe\Entity\User;
 
 class AutoSubscriptionProviderSpy implements AutoSubscriptionProvider
@@ -22,41 +21,28 @@ class AutoSubscriptionProviderSpy implements AutoSubscriptionProvider
     protected $getSubscriptionsCalled;
     /** @var bool */
     protected $updateSubscriptionParamSubscribe;
+    /** @var bool */
+    private $subscription;
+    /** @var bool */
+    private $isSubscribedCalled;
 
     /**
-     * @return Subscription[]
+     * AutoSubscriptionProviderSpy constructor.
+     * @param bool $subscription
      */
-    public function getSubscriptions()
+    public function __construct($subscription)
     {
-        $this->getSubscriptionsCalled = true;
-    }
-
-    /**
-     * @param User $user
-     * @return Subscription|null
-     */
-    public function getSubscription(User $user)
-    {
-        $this->getSubscriptionCalled = true;
+        $this->subscription = $subscription;
     }
 
     /**
      * @param User $user
      * @param bool $subscribe
-     * @return Subscription|null new subscription entity
      */
     public function updateSubscription(User $user, $subscribe)
     {
         $this->updateSubscriptionParamSubscribe = $subscribe;
         $this->updateSubscriptionCalled = true;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isGetSubscriptionCalled()
-    {
-        return $this->getSubscriptionCalled;
     }
 
     /**
@@ -70,17 +56,27 @@ class AutoSubscriptionProviderSpy implements AutoSubscriptionProvider
     /**
      * @return boolean
      */
-    public function isGetSubscriptionsCalled()
+    public function isUpdateSubscriptionParamSubscribe()
     {
-        return $this->getSubscriptionsCalled;
+        return $this->updateSubscriptionParamSubscribe;
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function isSubscribed($user)
+    {
+        $this->isSubscribedCalled = true;
+        return $this->subscription;
     }
 
     /**
      * @return boolean
      */
-    public function isUpdateSubscriptionParamSubscribe()
+    public function isSubscribedCalled()
     {
-        return $this->updateSubscriptionParamSubscribe;
+        return $this->isSubscribedCalled;
     }
 }
 //EOF AutoSubscriptionProviderSpy.php

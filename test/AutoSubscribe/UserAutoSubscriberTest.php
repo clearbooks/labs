@@ -8,29 +8,16 @@
 
 namespace Clearbooks\Labs\AutoSubscribe;
 
-use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderDummyMock;
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderUpdateMock;
-use Clearbooks\Labs\AutoSubscribe\Gateway\SingleAutoSubscriptionProviderMock;
-use Clearbooks\Labs\AutoSubscribe\Object\FalseSubscription;
-use Clearbooks\Labs\AutoSubscribe\Object\SubscriptionSpy;
-use Clearbooks\Labs\AutoSubscribe\Object\TrueSubscription;
 use Clearbooks\Labs\AutoSubscribe\Object\UserStub;
 use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
 
 class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var SubscriptionSpy */
-    private $subscribedSubscription;
-    /** @var SubscriptionSpy */
-    private $unSubscribedSubscription;
-    /** @var AutoSubscriptionProviderUpdateMock */
-    private $absentSubscriptionProvider;
     /** @var AutoSubscriptionProviderUpdateMock */
     private $subscribedProvider;
     /** @var AutoSubscriptionProviderUpdateMock */
     private $unSubscribedProvider;
-    /** @var AutoSubscriber */
-    private $absentSubscriptionForUser;
     /** @var AutoSubscriber */
     private $subscribedUser;
     /** @var AutoSubscriber */
@@ -43,12 +30,8 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->absentSubscriptionProvider = new AutoSubscriptionProviderDummyMock();
-        $this->subscribedSubscription = new TrueSubscription();
-        $this->unSubscribedSubscription = new FalseSubscription();
-        $this->subscribedProvider = new SingleAutoSubscriptionProviderMock($this->subscribedSubscription);
-        $this->unSubscribedProvider = new SingleAutoSubscriptionProviderMock($this->unSubscribedSubscription);
-        $this->absentSubscriptionForUser = new UserAutoSubscriber(new UserStub(1), $this->absentSubscriptionProvider);
+        $this->subscribedProvider = new AutoSubscriptionProviderUpdateMock(true);
+        $this->unSubscribedProvider = new AutoSubscriptionProviderUpdateMock(false);
         $this->subscribedUser = new UserAutoSubscriber(new UserStub(2), $this->subscribedProvider);
         $this->unSubscribedUser = new UserAutoSubscriber(new UserStub(3), $this->unSubscribedProvider);
     }
@@ -58,7 +41,6 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function GivenANewUser_ThenAutoSubscriptionShouldBeUnSet()
     {
-        $this->assertFalse($this->absentSubscriptionForUser->isUserAutoSubscribed());
         $this->assertFalse($this->unSubscribedUser->isUserAutoSubscribed());
     }
 
@@ -75,10 +57,7 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function GivenUserAutoSubscriptionWithExistingFalseOrAbsentSubscription_WhenUserAutoSubscribe_ThenAutoSubscriptionProviderUpdateCalledWithTrue()
     {
-        $this->absentSubscriptionForUser->subscribe();
         $this->unSubscribedUser->subscribe();
-        $this->assertTrue($this->absentSubscriptionProvider->isUpdateCalledWith(true));
-        $this->assertTrue($this->unSubscribedSubscription->isSubscribedCalled());
         $this->assertTrue($this->unSubscribedProvider->isUpdateCalledWith(true));
     }
     /**
@@ -88,7 +67,6 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
     {
         $this->subscribedUser->subscribe();
         $this->assertFalse($this->subscribedProvider->isUpdateCalledWith(true));
-        $this->assertTrue($this->subscribedSubscription->isSubscribedCalled());
     }
 
     /**
@@ -105,10 +83,7 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function GivenUserAutoSubscriptionWithExistingFalseOrAbsentSubscription_WhenUserUnSubscribe_ThenAutoSubscriptionProviderUpdateCalledWithFalseOrNotAtAllWithAbsentSubscription()
     {
-        $this->absentSubscriptionForUser->unSubscribe();
         $this->unSubscribedUser->unSubscribe();
-        $this->assertFalse($this->absentSubscriptionProvider->isUpdateCalledWith(false));
-        $this->assertTrue($this->unSubscribedSubscription->isSubscribedCalled());
         $this->assertFalse($this->unSubscribedProvider->isUpdateCalledWith(false));
     }
 }

@@ -10,8 +10,6 @@ namespace Clearbooks\Labs\AutoSubscribe;
 use Clearbooks\Labs\AutoSubscribe\Entity\User;
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProvider;
 use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
-use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
-use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
 
 class UserAutoSubscriber implements AutoSubscriber
 {
@@ -34,7 +32,6 @@ class UserAutoSubscriber implements AutoSubscriber
     public function __construct(User $user, AutoSubscriptionProvider $autoSubscriptionProvider)
     {
         $this->user = $user;
-        $this->userSubscription = $autoSubscriptionProvider->getSubscription($user);
         $this->autoSubscriptionProvider = $autoSubscriptionProvider;
     }
 
@@ -43,28 +40,20 @@ class UserAutoSubscriber implements AutoSubscriber
      */
     public function isUserAutoSubscribed()
     {
-        return isset($this->userSubscription) ?
-            $this->userSubscription->IsSubscribed():
-            false;
+        return $this->autoSubscriptionProvider->isSubscribed($this->user);
     }
 
     public function subscribe()
     {
-        if ( isset( $this->userSubscription ) ) {
-            if ( !$this->userSubscription->IsSubscribed() ) {
-                $this->userSubscription = $this->autoSubscriptionProvider->updateSubscription($this->user,true);
-            }
-        } else {
+        if ( !$this->isUserAutoSubscribed() ) {
             $this->userSubscription = $this->autoSubscriptionProvider->updateSubscription($this->user,true);
         }
     }
 
     public function unSubscribe()
     {
-        if ( isset( $this->userSubscription ) ) {
-            if ( $this->userSubscription->IsSubscribed() ) {
-                $this->userSubscription = $this->autoSubscriptionProvider->updateSubscription($this->user,false);
-            }
+        if ( $this->isUserAutoSubscribed() ) {
+            $this->autoSubscriptionProvider->updateSubscription($this->user,false);
         }
     }
 }

@@ -9,36 +9,32 @@
 namespace Clearbooks\Labs\AutoSubscribe;
 
 
-use Clearbooks\Labs\AutoSubscribe\Entity\Subscription;
-use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProvider;
+use Clearbooks\Labs\AutoSubscribe\Entity\User;
+use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriberProvider;
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
-use Clearbooks\Labs\User\ToggleActivator\Request;
-use Clearbooks\Labs\User\UseCase\ToggleActivator;
-use Clearbooks\Labs\User\UseCase\ToggleActivator\Response;
-use Clearbooks\Labs\User\UseCase\ToggleActivatorResponseHandler;
+use Clearbooks\Labs\User\UserToggleActivator\Request;
+use Clearbooks\Labs\User\UseCase\UserToggleActivator;
+use Clearbooks\Labs\User\UseCase\UserToggleActivator\Response;
+use Clearbooks\Labs\User\UseCase\UserToggleActivatorResponseHandler;
 
-class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,ToggleActivatorResponseHandler
+class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,UserToggleActivatorResponseHandler
 {
-    /**
-     * @var AutoSubscriptionProvider
-     */
-    private $autoSubscriptionProvider;
-    /**
-     * @var ToggleActivator
-     */
+    /** @var AutoSubscriberProvider */
+    private $autoSubscriberProvider;
+    /** @var UserToggleActivator */
     private $toggleActivator;
     /** @var Response */
     private $activatorResponse;
 
     /**
      * AutoSubscriptionToggleShowEventHandler constructor.
-     * @param AutoSubscriptionProvider $autoSubscriptionProvider
-     * @param ToggleActivator $toggleActivator
+     * @param AutoSubscriberProvider $autoSubscriberProvider
+     * @param UserToggleActivator $toggleActivator
      */
-    public function __construct(AutoSubscriptionProvider $autoSubscriptionProvider,ToggleActivator $toggleActivator)
+    public function __construct(AutoSubscriberProvider $autoSubscriberProvider,UserToggleActivator $toggleActivator)
     {
-        $this->autoSubscriptionProvider = $autoSubscriptionProvider;
+        $this->autoSubscriberProvider = $autoSubscriberProvider;
         $this->toggleActivator = $toggleActivator;
     }
 
@@ -48,13 +44,12 @@ class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,Tog
      */
     public function handleToggleShow(ToggleShowEvent $event)
     {
-        $subscribedSubscriptions = array_filter($this->autoSubscriptionProvider->getSubscriptions(),function(Subscription $s) {return $s->IsSubscribed();});
+        $subscribers = $this->autoSubscriberProvider->getSubscribers();
 
         $result = false;
-        /** @var Subscription $subscription */
-        foreach ( $subscribedSubscriptions as $subscription ) {
-            // Request second parameter not exists
-            $request = new Request($event->getToggleName(),$subscription->getUserId());
+        /** @var User $user */
+        foreach ( $subscribers as $user ) {
+            $request = new Request($event->getToggleName(),$user->getId());
             $this->toggleActivator->execute($request, $this);
             $result = empty($this->activatorResponse->getErrors()) || $result;
         }
