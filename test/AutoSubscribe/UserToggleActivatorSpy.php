@@ -43,6 +43,9 @@ class UserToggleActivatorSpy implements UserToggleActivator
         if (!isset($this->executePairs[$name])) {
             $this->executePairs[$name] = [];
         }
+        if (!isset($this->executePairs[$name][$id])) {
+            $this->executePairs[$name][$id] = [];
+        }
         $this->executePairs[$name][$id] = $this->executePairs[$name][$id] + 1;
     }
 
