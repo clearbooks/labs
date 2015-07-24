@@ -21,9 +21,8 @@ class UserToggleActivatorSpy implements UserToggleActivator
 
     public function execute(Request $request, UserToggleActivatorResponseHandler $responseHandler)
     {
-        $response = new Response($request->getToggleIdentifier(),$request->getUserIdentifier(),[]);
-        ++$this->executePairs[$request->getToggleIdentifier()][$request->getUserIdentifier()];
-        $responseHandler->handleResponse($response);
+        $this->logAndIncrementToggleUserIdCall($request);
+        $this->makeASuccessfulResponse($request, $responseHandler);
     }
 
     /**
@@ -32,6 +31,29 @@ class UserToggleActivatorSpy implements UserToggleActivator
     public function getExecutionArray()
     {
         return $this->executePairs;
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function logAndIncrementToggleUserIdCall(Request $request)
+    {
+        $name = $request->getToggleIdentifier();
+        $id = $request->getUserIdentifier();
+        if (!isset($this->executePairs[$name])) {
+            $this->executePairs[$name] = [];
+        }
+        $this->executePairs[$name][$id] = $this->executePairs[$name][$id] + 1;
+    }
+
+    /**
+     * @param Request $request
+     * @param UserToggleActivatorResponseHandler $responseHandler
+     * @return mixed
+     */
+    private function makeASuccessfulResponse(Request $request, UserToggleActivatorResponseHandler $responseHandler)
+    {
+        return $responseHandler->handleResponse(new Response($request->getToggleIdentifier(), $request->getUserIdentifier(), []));
     }
 }
 //EOF UserToggleActivatorSpy.php
