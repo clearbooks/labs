@@ -1,11 +1,11 @@
 <?php
 namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\UserToggleActivator\Response;
-use Clearbooks\Labs\User\UseCase\UserToggleActivator\Request;
+use Clearbooks\Labs\User\UserToggleDeactivator\Response;
+use Clearbooks\Labs\User\UseCase\UserToggleDeactivator\Request;
 use Clearbooks\Labs\User\UseCase\UserToggleService;
 
-class UserToggleActivator implements UseCase\UserToggleActivator
+class UserToggleDeactivator implements UseCase\UserToggleDeactivator
 {
     /**
      * @var UserToggleService
@@ -17,12 +17,12 @@ class UserToggleActivator implements UseCase\UserToggleActivator
         $this->toggleService = $toggleService;
     }
 
-    public function execute( Request $request, UseCase\UserToggleActivatorResponseHandler $responseHandler )
+    public function execute( Request $request, UseCase\UserToggleDeactivatorResponseHandler $responseHandler )
     {
         $errors = $this->validateRequest( $request );
 
         if ( empty( $errors ) ) {
-            $success = $this->toggleService->activateToggle( $request->getToggleIdentifier(), $request->getUserIdentifier() );
+            $success = $this->toggleService->deActivateToggle( $request->getToggleIdentifier(), $request->getUserIdentifier() );
 
             if ( !$success ) {
                 $errors[] = Response::ERROR_UNKNOWN_ERROR;
@@ -62,4 +62,4 @@ class UserToggleActivator implements UseCase\UserToggleActivator
         return new Response( $request->getToggleIdentifier(), $request->getUserIdentifier(), $errors );
     }
 }
-//EOF UserToggleActivator.php
+//EOF UserToggleDeactivator.php
