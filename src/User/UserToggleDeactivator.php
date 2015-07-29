@@ -5,7 +5,7 @@ use Clearbooks\Labs\User\UserToggleDeactivator\Response;
 use Clearbooks\Labs\User\UseCase\UserToggleDeactivator\Request;
 use Clearbooks\Labs\User\UseCase\UserToggleService;
 
-class UserToggleDeactivator implements UseCase\UserToggleDeactivator
+class UserToggleDeactivator extends AbstractUserToggleInteractor implements UseCase\UserToggleDeactivator
 {
     /**
      * @var UserToggleService
@@ -31,25 +31,6 @@ class UserToggleDeactivator implements UseCase\UserToggleDeactivator
 
         $response = $this->createResponse( $request, $errors );
         $responseHandler->handleResponse( $response );
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    private function validateRequest( Request $request )
-    {
-        $errors = [ ];
-
-        if ( empty( $request->getToggleIdentifier() ) ) {
-            $errors[] = Response::ERROR_UNKNOWN_TOGGLE;
-        }
-
-        if ( $request->getUserIdentifier() <= 0 ) {
-            $errors[] = Response::ERROR_UNKNOWN_USER;
-        }
-
-        return $errors;
     }
 
     /**

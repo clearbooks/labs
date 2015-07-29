@@ -1,9 +1,9 @@
 <?php
-namespace Clearbooks\Labs\User\UserToggleDeactivator;
+namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\AbstractUserToggleResponse;
+use Clearbooks\Labs\User\UseCase\UserToggleRequest;
 
-class Response extends AbstractUserToggleResponse implements \Clearbooks\Labs\User\UseCase\UserToggleDeactivator\Response
+abstract class AbstractUserToggleRequest implements UserToggleRequest
 {
     /**
      * @var string
@@ -15,16 +15,10 @@ class Response extends AbstractUserToggleResponse implements \Clearbooks\Labs\Us
      */
     private $userIdentifier;
 
-    /**
-     * @var int[]
-     */
-    private $errors = [ ];
-
-    public function __construct( $toggleIdentifier, $userIdentifier, array $errors = [ ] )
+    public function __construct( $toggleIdentifier, $userIdentifier )
     {
         $this->setToggleIdentifier( $toggleIdentifier );
         $this->setUserIdentifier( $userIdentifier );
-        $this->setErrors( $errors );
     }
 
     /**
@@ -58,21 +52,5 @@ class Response extends AbstractUserToggleResponse implements \Clearbooks\Labs\Us
     {
         $this->userIdentifier = $userIdentifier;
     }
-
-    /**
-     * @return int[]
-     */
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    /**
-     * @param int[] $errors
-     */
-    public function setErrors( array $errors )
-    {
-        $this->errors = $errors;
-    }
 }
-//EOF Response.php
+//EOF AbstractUserToggleRequest.php

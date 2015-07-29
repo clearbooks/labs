@@ -1,9 +1,9 @@
 <?php
-namespace Clearbooks\Labs\User\UserToggleDeactivator;
+namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\AbstractUserToggleResponse;
+use Clearbooks\Labs\User\UseCase\UserToggleResponse;
 
-class Response extends AbstractUserToggleResponse implements \Clearbooks\Labs\User\UseCase\UserToggleDeactivator\Response
+abstract class AbstractUserToggleResponse implements UserToggleResponse
 {
     /**
      * @var string
@@ -75,4 +75,4 @@ class Response extends AbstractUserToggleResponse implements \Clearbooks\Labs\Us
         $this->errors = $errors;
     }
 }
-//EOF Response.php
+//EOF AbstractUserToggleResponse.php
