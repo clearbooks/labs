@@ -16,12 +16,13 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
 
     const RELEASE_NAME = 'name';
     const RELEASE_URL = 'url';
+    const RELEASE_IS_VISIBLE = true;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->release = new Release( self::RELEASE_NAME , self::RELEASE_URL );
+        $this->release = new Release( self::RELEASE_NAME, self::RELEASE_URL, self::RELEASE_IS_VISIBLE );
     }
 
     /**
@@ -38,6 +39,11 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
     public function givenRelease_GetReleaseInfoUrlReturnsUrl()
     {
         $this->assertEquals( self::RELEASE_URL, $this->release->getReleaseInfoUrl() );
+    }
+
+    public function givenRelease_GetReleaseIsVisibleReturnsUrl()
+    {
+        $this->assertEquals( self::RELEASE_IS_VISIBLE, $this->release->isIsVisible() );
     }
 }
 //EOF ReleaseTest.php
