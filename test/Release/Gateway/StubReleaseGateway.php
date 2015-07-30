@@ -39,4 +39,12 @@ class StubReleaseGateway implements ReleaseGateway
     {
         return null;
     }
+
+    /**
+     * @return Release[]
+     */
+    public function getAllReleases()
+    {
+        return [ ];
+    }
 }

@@ -45,4 +45,12 @@ class MockReleaseGateway implements ReleaseGateway
     {
         return $this->releases[ $releaseId ];
     }
+
+    /**
+     * @return mixed
+     */
+    public function  getAllReleases()
+    {
+        return $this->releases;
+    }
 }

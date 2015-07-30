@@ -29,6 +29,10 @@ class GetRelease
         $this->gateway = $gateway;
     }
 
+    /**
+     * @param $id
+     * @return Release|int
+     */
     public function execute( $id )
     {
         if ( empty( $id ) ) {

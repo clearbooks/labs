@@ -16,10 +16,6 @@ use Clearbooks\Labs\Release\Gateway\StubReleaseGateway;
 
 class GetReleaseTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var GetRelease
-     */
-    private $getRelease;
 
     public function setUp()
     {
@@ -50,11 +46,16 @@ class GetReleaseTest extends \PHPUnit_Framework_TestCase
     public function givenValidID_withRelease_getReleaseReturnsRelease()
     {
         $expectedRelease = new Release( "TestRelease", "ClearBooks" );
-        $response = $this->getRelease( 3, new MockReleaseGateway( [ 2 => $expectedRelease ] ) );
+        $response = $this->getRelease( 2, new MockReleaseGateway( [ 2 => $expectedRelease ] ) );
         $this->assertEquals( $expectedRelease, $response );
 
     }
 
+    /**
+     * @param $id
+     * @param ReleaseGateway $gateway
+     * @return Release|int
+     */
     private function getRelease( $id, ReleaseGateway $gateway )
     {
         return ( new GetRelease( $gateway ) )->execute( $id );

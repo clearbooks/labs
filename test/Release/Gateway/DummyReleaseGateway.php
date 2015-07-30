@@ -39,4 +39,12 @@ class DummyReleaseGateway implements ReleaseGateway
     {
         // TODO: Implement getRelease() method.
     }
+
+    /**
+     * @return Release[]
+     */
+    public function getAllReleases()
+    {
+        // TODO: Implement getAllReleases() method.
+    }
 }
