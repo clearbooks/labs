@@ -31,7 +31,7 @@ class SpyReleaseGateway implements ReleaseGateway
     public function addRelease( $releaseName, $url )
     {
         $this->addReleaseCalled++;
-        $this->addReleaseParams[] = [ 'releaseName' => $releaseName , 'url' => $url ];
+        $this->addReleaseParams[] = [ 'releaseName' => $releaseName, 'url' => $url ];
 
         return 1;
     }
@@ -59,6 +59,14 @@ class SpyReleaseGateway implements ReleaseGateway
     public function getAddReleaseParams()
     {
         return $this->addReleaseParams;
+    }
+
+    /**
+     * @return Release[]
+     */
+    public function getAllReleases()
+    {
+        // TODO: Implement getAllReleases() method.
     }
 }
 //EOF SpyReleaseGateway.php

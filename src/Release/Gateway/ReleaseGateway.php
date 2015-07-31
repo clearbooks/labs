@@ -22,6 +22,11 @@ interface ReleaseGateway
      * @param $releaseId
      * @return Release
      */
-    public function getRelease($releaseId);
+    public function getRelease( $releaseId );
+
+    /**
+     * @return Release[]
+     */
+    public function getAllReleases();
 }
 //EOF ReleaseGateway.php
