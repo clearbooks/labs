@@ -7,24 +7,29 @@
 namespace Clearbooks\Labs\Release;
 
 
+use DateTime;
+
 class Release
 {
     private $releaseName;
     private $releaseInfoUrl;
     private $isVisible;
+    private $releaseDate;
 
     /**
      * Construct this Release.
      * @author Ryan Wood <ryanw@clearbooks.co.uk>
      * @param $releaseName
      * @param $releaseInfoUrl
+     * @param $releaseDate
      * @param bool $isVisible
      */
-    public function __construct( $releaseName, $releaseInfoUrl, $isVisible = false )
+    public function __construct( $releaseName, $releaseInfoUrl, DateTime $releaseDate, $isVisible = false )
     {
         $this->releaseName = $releaseName;
         $this->releaseInfoUrl = $releaseInfoUrl;
         $this->isVisible = $isVisible;
+        $this->releaseDate = $releaseDate;
     }
 
     /**
@@ -46,9 +51,22 @@ class Release
     /**
      * @return boolean
      */
-    public function isIsVisible()
+    public function isVisible()
     {
         return $this->isVisible;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getReleaseDate()
+    {
+        return $this->releaseDate;
+    }
+
+    public function setVisible( $flag )
+    {
+        $this->isVisible = $flag;
     }
 }
 //EOF Release.php

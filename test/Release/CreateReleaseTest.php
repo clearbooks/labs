@@ -44,7 +44,8 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
      */
     public function givenEmptyRequest_ReturnsNotSuccessfulAndGetBothInvalidArgumentsError()
     {
-        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub() ), array( Response::INVALID_NAME_ERROR, Response::INVALID_URL_ERROR ) );
+        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub() ),
+            array( Response::INVALID_NAME_ERROR, Response::INVALID_URL_ERROR ) );
     }
 
     /**
@@ -52,7 +53,8 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
      */
     public function givenInvalidName_ReturnsNotSuccessfulAndGetInvalidNameError()
     {
-        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( null, 'some url' ) ), array( Response::INVALID_NAME_ERROR ) );
+        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( null,
+            'some url' ) ), array( Response::INVALID_NAME_ERROR ) );
     }
 
     /**
@@ -60,7 +62,8 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
      */
     public function givenInvalidUrl_ReturnsNotSuccessfulAndGetInvalidUrlError()
     {
-        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( 'Release One', null ) ), array( Response::INVALID_URL_ERROR ) );
+        $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( 'Release One',
+            null ) ), array( Response::INVALID_URL_ERROR ) );
     }
 
     /**
@@ -74,9 +77,9 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( $response->isSuccessful() );
         $this->assertEmpty( $response->getValidationErrors() );
         $this->assertEquals( 1, $this->releaseGateway->getTimesAddReleaseCalled() );
-        $release = $this->releaseGateway->getAddReleaseParams()[0];
-        $this->assertEquals( $request->getReleaseName(), $release['releaseName'] );
-        $this->assertEquals( $request->getReleaseInfoUrl(), $release['url'] );
+        $release = $this->releaseGateway->getAddReleaseParams()[ 0 ];
+        $this->assertEquals( $request->getReleaseName(), $release[ 'releaseName' ] );
+        $this->assertEquals( $request->getReleaseInfoUrl(), $release[ 'url' ] );
     }
 
     private function createRelease( Request $request )

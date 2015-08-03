@@ -1,6 +1,7 @@
 <?php
 
 namespace Clearbooks\Labs\Release;
+
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
@@ -35,11 +36,12 @@ class CreateRelease implements \Clearbooks\Labs\Release\UseCase\CreateRelease
 
         $response = $this->getResponse( $errors );
 
-        if( !$response->isSuccessful() ) {
+        if ( !$response->isSuccessful() ) {
             return $response;
         }
 
-        $response->setId( $this->releaseGateway->addRelease( $request->getReleaseName(), $request->getReleaseInfoUrl() ) );
+        $response->setId( $this->releaseGateway->addRelease( $request->getReleaseName(),
+            $request->getReleaseInfoUrl() ) );
 
         return $response;
     }
@@ -69,11 +71,11 @@ class CreateRelease implements \Clearbooks\Labs\Release\UseCase\CreateRelease
         $releaseName = $request->getReleaseName();
         $url = $request->getReleaseInfoUrl();
 
-        if( empty( $releaseName ) ){
+        if ( empty( $releaseName ) ) {
             $errors[] = Response::INVALID_NAME_ERROR;
         }
 
-        if( empty( $url ) ){
+        if ( empty( $url ) ) {
             $errors[] = Response::INVALID_URL_ERROR;
         }
 

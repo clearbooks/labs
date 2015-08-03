@@ -7,6 +7,8 @@
 namespace Clearbooks\Labs\Release;
 
 
+use DateTime;
+
 class ReleaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -22,7 +24,8 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->release = new Release( self::RELEASE_NAME, self::RELEASE_URL, self::RELEASE_IS_VISIBLE );
+        $this->release = new Release( self::RELEASE_NAME, self::RELEASE_URL, self::getDate(),
+            self::RELEASE_IS_VISIBLE );
     }
 
     /**
@@ -41,9 +44,29 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( self::RELEASE_URL, $this->release->getReleaseInfoUrl() );
     }
 
+    /**
+     * @test
+     */
     public function givenRelease_GetReleaseIsVisibleReturnsUrl()
     {
-        $this->assertEquals( self::RELEASE_IS_VISIBLE, $this->release->isIsVisible() );
+        $this->assertEquals( self::RELEASE_IS_VISIBLE, $this->release->isVisible() );
+    }
+
+    /**
+     * @test
+     */
+    public function givenRelease_GetReleaseReleaseDateReturnsDate()
+    {
+        $this->assertEquals( self::getDate(), $this->release->getReleaseDate() );
+    }
+
+    /**
+     * @return DateTime
+     */
+    private function getDate()
+    {
+        return DateTime::createFromFormat( 'd/m/Y', '10/07/2015' );
     }
 }
+
 //EOF ReleaseTest.php
