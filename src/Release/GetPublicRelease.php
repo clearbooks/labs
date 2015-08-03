@@ -35,7 +35,10 @@ class GetPublicRelease
         $publicReleases = [ ];
 
         foreach ( $releases as $release ) {
-            if ( $release->isIsVisible() || $release->getReleaseDate()->getTimestamp() < time() ) {
+            if ( $release->isVisible() == false && $release->getReleaseDate()->getTimestamp() < time() ) {
+                $release->setVisible( true );
+            }
+            if ( $release->isVisible() ) {
                 $publicReleases [] = $release;
             }
         }

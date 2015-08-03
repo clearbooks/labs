@@ -51,7 +51,7 @@ class Release
     /**
      * @return boolean
      */
-    public function isIsVisible()
+    public function isVisible()
     {
         return $this->isVisible;
     }
@@ -62,6 +62,11 @@ class Release
     public function getReleaseDate()
     {
         return $this->releaseDate;
+    }
+
+    public function setVisible( $flag )
+    {
+        $this->isVisible = $flag;
     }
 }
 //EOF Release.php
