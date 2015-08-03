@@ -25,6 +25,7 @@ class GetPublicRelease
     }
 
     /**
+     * If release is visible or if its time has come/passed make it visible.
      * @return array
      */
     public function execute()
@@ -34,7 +35,7 @@ class GetPublicRelease
         $publicReleases = [ ];
 
         foreach ( $releases as $release ) {
-            if ( $release->isIsVisible() ) {
+            if ( $release->isIsVisible() || $release->getReleaseDate()->getTimestamp() < time() ) {
                 $publicReleases [] = $release;
             }
         }
