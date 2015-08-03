@@ -52,7 +52,7 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
      */
     public function givenRelease_GetReleaseIsVisibleReturnsUrl()
     {
-        $this->assertEquals( self::RELEASE_IS_VISIBLE, $this->release->isIsVisible() );
+        $this->assertEquals( self::RELEASE_IS_VISIBLE, $this->release->isVisible() );
     }
 
     /**
