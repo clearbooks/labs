@@ -14,14 +14,20 @@ use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 class GetPublicRelease
 {
     private $gateway;
+    /**
+     * @var \DateTime
+     */
+    private $currentDate;
 
     /**
      * GetPublicRelease constructor.
-     * @param $gateway
+     * @param ReleaseGateway $gateway
+     * @param \DateTime $currentDate
      */
-    public function __construct( ReleaseGateway $gateway )
+    public function __construct( ReleaseGateway $gateway, \DateTime $currentDate )
     {
         $this->gateway = $gateway;
+        $this->currentDate = $currentDate;
     }
 
     /**
@@ -35,14 +41,22 @@ class GetPublicRelease
         $publicReleases = [ ];
 
         foreach ( $releases as $release ) {
-            if ( !$release->isVisible() && $release->getReleaseDate()->getTimestamp() < time() ) {
-                $release->setVisible( true );
-            }
+            $this->forceVisibilityOnRelease( $release );
             if ( $release->isVisible() ) {
                 $publicReleases [] = $release;
             }
         }
 
         return $publicReleases;
+    }
+
+    /**
+     * @param $release
+     */
+    private function forceVisibilityOnRelease( Release $release )
+    {
+        if ( !$release->isVisible() && $release->getReleaseDate() < $this->currentDate ) {
+            $release->setVisible( true );
+        }
     }
 }
