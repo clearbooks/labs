@@ -20,9 +20,6 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
     const RELEASE_URL = 'url';
     const RELEASE_IS_VISIBLE = true;
 
-    /**
-     *
-     */
     public function setUp()
     {
         parent::setUp();
