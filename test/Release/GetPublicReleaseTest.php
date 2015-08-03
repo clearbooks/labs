@@ -16,8 +16,10 @@ use DateTime;
 
 class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
 {
+
     public function setUp()
     {
+
     }
 
     /**
@@ -48,7 +50,7 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
     {
         $expectedRelease = new Release( "TestRelease", "ClearBooks", self::getDate( 'd/m/Y', '10/07/2015' ) );
         $unexpectedRelease = new Release( "TestRelease3", "ClearBooks3", self::getFutureDate() );
-        $response = $this->getPublicRelease( new MockReleaseGateway( [ 1 => $expectedRelease, $unexpectedRelease ] ) );
+        $response = $this->getPublicRelease( new MockReleaseGateway( [ 1 => $expectedRelease, 2 => $unexpectedRelease ] ) );
         $this->assertEquals( [ $expectedRelease ], $response );
 
     }
@@ -60,7 +62,7 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
      */
     private function getPublicRelease( $gateway )
     {
-        return ( new GetPublicRelease( $gateway ) )->execute();
+        return ( new GetPublicRelease( $gateway, new DateTime() ) )->execute();
     }
 
     /**
