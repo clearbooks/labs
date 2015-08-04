@@ -1,5 +1,5 @@
 <?php
-namespace Clearbooks\Labs\User\UseCase\UserToggleActivator;
+namespace Clearbooks\Labs\User\UseCase\UserToggleDeactivator;
 
 use Clearbooks\Labs\User\UseCase\UserToggleRequest;
 
