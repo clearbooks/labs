@@ -16,7 +16,7 @@ use Clearbooks\Labs\Toggle\Gateway\UserToggleGateway;
 class GetUserTogglesForRelease
 {
     /**
-     * @var ReleaseGateway
+     * @var UserToggleGateway
      */
     private $gateway;
     /**
