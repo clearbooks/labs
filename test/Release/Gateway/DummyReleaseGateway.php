@@ -28,7 +28,6 @@ class DummyReleaseGateway implements ReleaseGateway
      */
     public function addRelease( $releaseName, $url )
     {
-        // TODO: Implement addRelease() method.
     }
 
     /**
@@ -37,7 +36,6 @@ class DummyReleaseGateway implements ReleaseGateway
      */
     public function getRelease( $releaseId )
     {
-        // TODO: Implement getRelease() method.
     }
 
     /**
@@ -45,6 +43,5 @@ class DummyReleaseGateway implements ReleaseGateway
      */
     public function getAllReleases()
     {
-        // TODO: Implement getAllReleases() method.
     }
 }

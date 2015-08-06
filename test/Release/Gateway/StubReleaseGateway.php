@@ -28,7 +28,6 @@ class StubReleaseGateway implements ReleaseGateway
      */
     public function addRelease( $releaseName, $url )
     {
-        // TODO: Implement addRelease() method.
     }
 
     /**

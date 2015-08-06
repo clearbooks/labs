@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Volodymyr
- * Date: 30/07/2015
- * Time: 12:16
+ * Date: 04/08/2015
+ * Time: 12:17
  */
 
 namespace Clearbooks\Labs\Release\Gateway;
@@ -11,21 +11,20 @@ namespace Clearbooks\Labs\Release\Gateway;
 
 use Clearbooks\Labs\Release\Release;
 
-class MockReleaseGateway implements ReleaseGateway
+class ConfigurableVisibilityReleaseGatewayMock implements ReleaseGateway
 {
+
     /**
      * @var
      */
-    private $releases;
+    private $visibility;
 
-    /**
-     * MockReleaseGateway constructor.
-     */
-    public function __construct( $releases )
+    function __construct( $visibility = true )
     {
 
-        $this->releases = $releases;
+        $this->visibility = $visibility;
     }
+
 
     /**
      * @param $releaseName
@@ -42,14 +41,13 @@ class MockReleaseGateway implements ReleaseGateway
      */
     public function getRelease( $releaseId )
     {
-        return $this->releases[ $releaseId ];
+        return new Release( "", "", new \DateTime(), $this->visibility );
     }
 
     /**
      * @return Release[]
      */
-    public function  getAllReleases()
+    public function getAllReleases()
     {
-        return $this->releases;
     }
 }

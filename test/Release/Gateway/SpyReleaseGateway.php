@@ -42,7 +42,7 @@ class SpyReleaseGateway implements ReleaseGateway
      */
     public function getRelease( $releaseId )
     {
-        return new Release( 'de', 'fault' );
+        return new Release( 'de', 'fault', new \DateTime() );
     }
 
     /**
@@ -66,7 +66,6 @@ class SpyReleaseGateway implements ReleaseGateway
      */
     public function getAllReleases()
     {
-        // TODO: Implement getAllReleases() method.
     }
 }
 //EOF SpyReleaseGateway.php
