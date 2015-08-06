@@ -29,4 +29,10 @@ class UserToggleStub implements UserToggle
     {
         return $this->releaseId;
     }
+
+    /** @return string */
+    public function getName()
+    {
+        // TODO: Implement getName() method.
+    }
 }

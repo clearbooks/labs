@@ -12,4 +12,12 @@ class BrollyToggle implements Toggle
     {
         return self::NAME;
     }
+
+    /**
+     * @return int
+     */
+    public function getRelease()
+    {
+        // TODO: Implement getRelease() method.
+    }
 }
