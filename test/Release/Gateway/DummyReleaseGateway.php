@@ -15,19 +15,13 @@ class DummyReleaseGateway implements ReleaseGateway
 {
 
     /**
-     * DummyReleaseGateway constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * @param $releaseName
      * @param $url
      * @return int
      */
     public function addRelease( $releaseName, $url )
     {
+        return 0;
     }
 
     /**

@@ -34,6 +34,7 @@ class MockReleaseGateway implements ReleaseGateway
      */
     public function addRelease( $releaseName, $url )
     {
+        return 0;
     }
 
     /**
