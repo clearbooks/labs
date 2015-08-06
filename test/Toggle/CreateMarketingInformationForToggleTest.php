@@ -17,12 +17,15 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
      */
     public function givenNoMarketingInformation_CreateMarketingInformationForToggle_SendsEmptyStringToGateway()
     {
-        $this->createMarketingInformationFroToggle();
+        $response = $this->createMarketingInformationFroToggle("","","","","","","");
     }
 
-    private function createMarketingInformationFroToggle()
+    /**
+     * @return string
+     */
+    private function createMarketingInformationFroToggle($imageLink, $descriptionToggle, $descriptionFunctionally, $descriptionOfReasonForImplementation, $descriptionOfLocation, $linkToGuide, $appNotificationText)
     {
-        
+        return "";
     }
 
 }
