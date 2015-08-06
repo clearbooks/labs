@@ -33,6 +33,5 @@ class UserToggleStub implements UserToggle
     /** @return string */
     public function getName()
     {
-        // TODO: Implement getName() method.
     }
 }

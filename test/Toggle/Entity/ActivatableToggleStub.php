@@ -29,12 +29,10 @@ class ActivatableToggleStub implements ActivatableToggle
 
     public function getRelease()
     {
-        // TODO: Implement getRelease() method.
     }
 
     /** @return string */
     public function getName()
     {
-        // TODO: Implement getName() method.
     }
 }

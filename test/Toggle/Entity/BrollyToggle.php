@@ -18,6 +18,5 @@ class BrollyToggle implements Toggle
      */
     public function getRelease()
     {
-        // TODO: Implement getRelease() method.
     }
 }
