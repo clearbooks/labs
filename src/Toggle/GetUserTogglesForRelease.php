@@ -35,6 +35,10 @@ class GetUserTogglesForRelease
         $this->releaseGateway = $releaseGateway;
     }
 
+    /**
+     * @param $releaseId
+     * @return UserToggle[]
+     */
     public function execute( $releaseId )
     {
         $togglesArray = $this->gateway->getAllUserToggles();
@@ -49,7 +53,7 @@ class GetUserTogglesForRelease
      * @param $releaseId
      * @param UserToggle []
      * @param $availableToggles
-     * @return array
+     * @return UserToggle[]
      */
     private function getUserTogglesFromRelease( $releaseId, $togglesArray, $availableToggles )
     {

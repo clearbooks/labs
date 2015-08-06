@@ -66,7 +66,6 @@ class SpyReleaseGateway implements ReleaseGateway
      */
     public function getAllReleases()
     {
-        // TODO: Implement getAllReleases() method.
     }
 }
 //EOF SpyReleaseGateway.php

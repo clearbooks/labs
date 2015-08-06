@@ -33,7 +33,6 @@ class ConfigurableVisibilityReleaseGatewayMock implements ReleaseGateway
      */
     public function addRelease( $releaseName, $url )
     {
-        // TODO: Implement addRelease() method.
     }
 
     /**
@@ -50,6 +49,5 @@ class ConfigurableVisibilityReleaseGatewayMock implements ReleaseGateway
      */
     public function getAllReleases()
     {
-        // TODO: Implement getAllReleases() method.
     }
 }

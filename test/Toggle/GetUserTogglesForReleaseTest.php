@@ -57,7 +57,12 @@ class GetUserTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( [ $availableToggle ], $response );
     }
 
-
+    /**
+     * @param $arrayOfToggles
+     * @param $releaseId
+     * @param bool|true $visibilityFlag
+     * @return Entity\UserToggle[]
+     */
     public function getUserTogglesForRelease( $arrayOfToggles, $releaseId, $visibilityFlag = true )
     {
         $gateway = new UserToggleGatewayStub( $arrayOfToggles );

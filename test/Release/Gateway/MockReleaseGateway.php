@@ -34,7 +34,6 @@ class MockReleaseGateway implements ReleaseGateway
      */
     public function addRelease( $releaseName, $url )
     {
-        // TODO: Implement addRelease() method.
     }
 
     /**
@@ -47,7 +46,7 @@ class MockReleaseGateway implements ReleaseGateway
     }
 
     /**
-     * @return mixed
+     * @return Release[]
      */
     public function  getAllReleases()
     {

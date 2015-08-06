@@ -27,11 +27,16 @@ class ActivatableToggleStub implements ActivatableToggle
         return $this->isActive;
     }
 
+    /**
+     * @return int
+     */
     public function getRelease()
     {
     }
 
-    /** @return string */
+    /**
+     * @return string
+     */
     public function getName()
     {
     }
