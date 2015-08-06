@@ -11,8 +11,11 @@ namespace Clearbooks\Labs\Toggle\Entity;
 
 interface Toggle
 {
-    /** @return string */
+    /**
+     * @return string
+     */
     public function getName();
+
     /**
      * @return int
      */
