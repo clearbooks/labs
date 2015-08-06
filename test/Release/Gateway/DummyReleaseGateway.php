@@ -36,6 +36,7 @@ class DummyReleaseGateway implements ReleaseGateway
      */
     public function getRelease( $releaseId )
     {
+        return null;
     }
 
     /**
@@ -43,5 +44,6 @@ class DummyReleaseGateway implements ReleaseGateway
      */
     public function getAllReleases()
     {
+        return [];
     }
 }

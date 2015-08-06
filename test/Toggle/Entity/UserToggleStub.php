@@ -38,5 +38,6 @@ class UserToggleStub implements UserToggle
      */
     public function getName()
     {
+        return "";
     }
 }

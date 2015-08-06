@@ -32,6 +32,7 @@ class ActivatableToggleStub implements ActivatableToggle
      */
     public function getRelease()
     {
+        return 0;
     }
 
     /**
@@ -39,5 +40,6 @@ class ActivatableToggleStub implements ActivatableToggle
      */
     public function getName()
     {
+        return "";
     }
 }

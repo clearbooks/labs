@@ -49,5 +49,6 @@ class ConfigurableVisibilityReleaseGatewayMock implements ReleaseGateway
      */
     public function getAllReleases()
     {
+        return [];
     }
 }
