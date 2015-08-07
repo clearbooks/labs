@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Toggle\Entity;
 
-class BrollyToggle implements Toggle
+class BrollyToggle implements MarketingToggle
 {
     const NAME = "Brolly";
 
