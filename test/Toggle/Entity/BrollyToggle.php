@@ -13,11 +13,4 @@ class BrollyToggle implements MarketingToggle
         return self::NAME;
     }
 
-    /**
-     * @return int
-     */
-    public function getRelease()
-    {
-        return 0;
-    }
 }
