@@ -2,8 +2,6 @@
 namespace Clearbooks\Labs\Release;
 
 use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
-use Clearbooks\Labs\Toggle\Entity\ReleasableToggle;
-use Clearbooks\Labs\Toggle\Entity\Toggle;
 
 class GetReleaseToggles
 {
