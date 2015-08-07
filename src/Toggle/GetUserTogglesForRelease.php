@@ -16,7 +16,7 @@ use Clearbooks\Labs\Toggle\Gateway\UserToggleGateway;
 class GetUserTogglesForRelease
 {
     /**
-     * @var ReleaseGateway
+     * @var UserToggleGateway
      */
     private $gateway;
     /**
@@ -36,7 +36,7 @@ class GetUserTogglesForRelease
     }
 
     /**
-     * @param $releaseId
+     * @param int $releaseId
      * @return UserToggle[]
      */
     public function execute( $releaseId )
@@ -50,9 +50,9 @@ class GetUserTogglesForRelease
     }
 
     /**
-     * @param $releaseId
-     * @param UserToggle []
-     * @param $availableToggles
+     * @param int $releaseId
+     * @param UserToggle [] $togglesArray
+     * @param UserToggle[] $availableToggles
      * @return UserToggle[]
      */
     private function getUserTogglesFromRelease( $releaseId, $togglesArray, $availableToggles )
@@ -68,7 +68,7 @@ class GetUserTogglesForRelease
     }
 
     /**
-     * @param $releaseId
+     * @param int $releaseId
      * @return bool
      */
     private function isReleaseVisible( $releaseId )

@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Release\Gateway;
 
-use Clearbooks\Labs\Toggle\Entity\Toggle;
+use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
 
 class ReleaseToggleCollectionMock implements ReleaseToggleCollection
 {
@@ -10,7 +10,7 @@ class ReleaseToggleCollectionMock implements ReleaseToggleCollection
 
     /**
      * @param string $releaseId
-     * @return Toggle[]
+     * @return MarketableToggle[]
      */
     public function getTogglesForRelease( $releaseId )
     {

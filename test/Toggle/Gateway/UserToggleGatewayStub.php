@@ -15,7 +15,7 @@ class UserToggleGatewayStub implements UserToggleGateway
 {
 
     /**
-     * @var
+     * @var UserToggle[]
      */
     private $userToggles;
 

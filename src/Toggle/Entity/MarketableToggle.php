@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Toggle\Entity;
 
 
-interface MarketingToggle
+interface MarketableToggle
 {
     /**
      * @return string

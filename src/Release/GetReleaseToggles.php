@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Release;
 
-use Clearbooks\Labs\Toggle\Entity\MarketingToggle;
+use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
 use Clearbooks\Labs\Toggle\Entity\ReleasableToggle;
 use Clearbooks\Labs\Toggle\Entity\Toggle;
 
@@ -24,7 +24,7 @@ class GetReleaseToggles
      */
     public function execute( $releaseId )
     {
-        return \array_map( function( MarketingToggle $toggle ) {
+        return \array_map( function( MarketableToggle $toggle ) {
             return new GetReleaseToggles\ResponseToggle( $toggle->getName() );
         }, (array) $this->releaseToggleCollection->getTogglesForRelease( $releaseId ) );
     }

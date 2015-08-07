@@ -15,8 +15,8 @@ class StubReleaseGateway implements ReleaseGateway
 {
 
     /**
-     * @param $releaseName
-     * @param $url
+     * @param string $releaseName
+     * @param string $url
      * @return int
      */
     public function addRelease( $releaseName, $url )
@@ -25,7 +25,7 @@ class StubReleaseGateway implements ReleaseGateway
     }
 
     /**
-     * @param $releaseId
+     * @param int $releaseId
      * @return Release
      */
     public function getRelease( $releaseId )

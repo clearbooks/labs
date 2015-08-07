@@ -24,8 +24,8 @@ class SpyReleaseGateway implements ReleaseGateway
     private $addReleaseParams = array();
 
     /**
-     * @param $releaseName
-     * @param $url
+     * @param string $releaseName
+     * @param string $url
      * @return int
      */
     public function addRelease( $releaseName, $url )
@@ -37,7 +37,7 @@ class SpyReleaseGateway implements ReleaseGateway
     }
 
     /**
-     * @param $releaseId
+     * @param int $releaseId
      * @return Release
      */
     public function getRelease( $releaseId )
