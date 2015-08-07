@@ -36,7 +36,7 @@ class GetUserTogglesForRelease
     }
 
     /**
-     * @param int $releaseId
+     * @param string $releaseId
      * @return UserToggle[]
      */
     public function execute( $releaseId )
@@ -50,7 +50,7 @@ class GetUserTogglesForRelease
     }
 
     /**
-     * @param int $releaseId
+     * @param string $releaseId
      * @param UserToggle [] $togglesArray
      * @param UserToggle[] $availableToggles
      * @return UserToggle[]
@@ -68,7 +68,7 @@ class GetUserTogglesForRelease
     }
 
     /**
-     * @param int $releaseId
+     * @param string $releaseId
      * @return bool
      */
     private function isReleaseVisible( $releaseId )

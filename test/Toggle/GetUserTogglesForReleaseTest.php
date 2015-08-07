@@ -59,7 +59,7 @@ class GetUserTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $arrayOfToggles
-     * @param int $releaseId
+     * @param string $releaseId
      * @param bool $visibilityFlag
      * @return Entity\UserToggle[]
      */

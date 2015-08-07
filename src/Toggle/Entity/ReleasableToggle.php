@@ -12,7 +12,7 @@ namespace Clearbooks\Labs\Toggle\Entity;
 interface ReleasableToggle
 {
     /**
-     * @return int
+     * @return string
      */
     public function getRelease();
 }

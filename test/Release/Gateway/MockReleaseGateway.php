@@ -38,7 +38,7 @@ class MockReleaseGateway implements ReleaseGateway
     }
 
     /**
-     * @param int $releaseId
+     * @param string $releaseId
      * @return Release
      */
     public function getRelease( $releaseId )

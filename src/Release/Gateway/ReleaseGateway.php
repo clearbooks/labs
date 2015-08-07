@@ -19,7 +19,7 @@ interface ReleaseGateway
     public function addRelease( $releaseName, $url );
 
     /**
-     * @param int $releaseId
+     * @param string $releaseId
      * @return Release
      */
     public function getRelease( $releaseId );
