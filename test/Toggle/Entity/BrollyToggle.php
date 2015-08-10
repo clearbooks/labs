@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Toggle\Entity;
 
-class BrollyToggle implements Toggle
+class BrollyToggle implements MarketableToggle
 {
     const NAME = "Brolly";
 
@@ -12,4 +12,5 @@ class BrollyToggle implements Toggle
     {
         return self::NAME;
     }
+
 }
