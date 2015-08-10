@@ -11,21 +11,33 @@ namespace Clearbooks\Labs\Toggle;
 
 class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @test
      */
     public function givenNoMarketingInformation_CreateMarketingInformationForToggle_SendsEmptyStringToGateway()
     {
-        $response = $this->createMarketingInformationFroToggle("","","","","","","");
+        $response = $this->createMarketingInformationFroToggle( "", "", "", "", "", "", "" );
+        $this->assertEquals( [""], $response );
     }
 
     /**
-     * @return string
+     * @param string $imageLink
+     * @param string $descriptionToggle
+     * @param string $descriptionFunctionally
+     * @param string $descriptionOfReasonForImplementation
+     * @param string $descriptionOfLocation
+     * @param string $linkToGuide
+     * @param string $appNotificationText
+     * @return string[]
      */
-    private function createMarketingInformationFroToggle($imageLink, $descriptionToggle, $descriptionFunctionally, $descriptionOfReasonForImplementation, $descriptionOfLocation, $linkToGuide, $appNotificationText)
+    private function createMarketingInformationFroToggle( $gateway, $imageLink, $descriptionToggle, $descriptionFunctionally,
+                                                          $descriptionOfReasonForImplementation, $descriptionOfLocation,
+                                                          $linkToGuide, $appNotificationText )
     {
-        return "";
+        ( new CreateMarketingInformationForToggle($gateway) )->execute( $imageLink, $descriptionToggle,
+            $descriptionFunctionally, $descriptionOfReasonForImplementation, $descriptionOfLocation, $linkToGuide,
+            $appNotificationText );
+        return [""];
     }
 
 }
