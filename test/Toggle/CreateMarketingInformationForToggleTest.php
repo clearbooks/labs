@@ -9,18 +9,53 @@
 namespace Clearbooks\Labs\Toggle;
 
 
+use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGateway;
+use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGatewaySpy;
+
 class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
      */
-    public function givenNoMarketingInformation_CreateMarketingInformationForToggle_SendsEmptyStringToGateway()
+    public function givenEmptyStringAsMarketingInformation_CreateMarketingInformationForToggle_SetsMarketingInformationToEmptyString()
     {
-        $response = $this->createMarketingInformationFroToggle( "", "", "", "", "", "", "" );
-        $this->assertEquals( [""], $response );
+        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(), "", "", "", "", "",
+            "", "" );
+        $this->assertEquals( [ "", "", "", "", "", "", "" ], $response );
     }
 
     /**
+     * @test
+     */
+    public function givenNull_CreateMarketingInformationForToggle_SetsMarketingInformationToEmptyString()
+    {
+        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(), null, null, null,
+            null, null, null, null );
+        $this->assertEquals( [ "", "", "", "", "", "", "" ], $response );
+    }
+
+    /**
+     * @test
+     */
+    public function givenMarketingInformation_CreateMarketingInformationForToggle_SetsMarketingInformationToGivenMarketingInformation()
+    {
+        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(), "This", "is", "a",
+            "test", "of", "Marketing", "information" );
+        $this->assertEquals( [ "This", "is", "a", "test", "of", "Marketing", "information" ], $response );
+    }
+
+    /**
+     * @test
+     */
+    public function givenDifferentDataType_CreateMarketingInformationForToggle_SetsMarketingInformationToGivenInformationAsString()
+    {
+        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(), 1, 2.1, true, [ 1 ],
+            "", null, -1 );
+        $this->assertEquals( [ "1", "2.1", "1", "Array", "", "", "-1" ], $response );
+    }
+
+    /**
+     * @param MarketableToggleGatewaySpy $gateway
      * @param string $imageLink
      * @param string $descriptionToggle
      * @param string $descriptionFunctionally
@@ -30,14 +65,16 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
      * @param string $appNotificationText
      * @return string[]
      */
-    private function createMarketingInformationFroToggle( $gateway, $imageLink, $descriptionToggle, $descriptionFunctionally,
+    private function createMarketingInformationFroToggle( $gateway, $imageLink, $descriptionToggle,
+                                                          $descriptionFunctionally,
                                                           $descriptionOfReasonForImplementation, $descriptionOfLocation,
                                                           $linkToGuide, $appNotificationText )
     {
-        ( new CreateMarketingInformationForToggle($gateway) )->execute( $imageLink, $descriptionToggle,
+        ( new CreateMarketingInformationForToggle( $gateway ) )->execute( $imageLink, $descriptionToggle,
             $descriptionFunctionally, $descriptionOfReasonForImplementation, $descriptionOfLocation, $linkToGuide,
             $appNotificationText );
-        return [""];
+
+        return $gateway->getMarketingInfo();
     }
 
 }
