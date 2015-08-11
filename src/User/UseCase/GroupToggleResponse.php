@@ -9,6 +9,7 @@ interface GroupToggleResponse
     const ERROR_TOGGLE_ALREADY_ACTIVE = 3;
     const ERROR_TOGGLE_NOT_ACTIVE = 4;
     const ERROR_UNKNOWN_GROUP = 5;
+    const ERROR_USER_IS_NOT_GROUP_ADMIN = 6;
 
     /**
      * @return string
