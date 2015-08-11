@@ -13,6 +13,7 @@ class UserToggleDeactivatorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        parent::setUp();
         $this->userToggleDeactivator = new UserToggleDeactivator( new SuccessfulUserToggleService() );
     }
 
