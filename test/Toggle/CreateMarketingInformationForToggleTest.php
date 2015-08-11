@@ -49,9 +49,9 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
      */
     public function givenDifferentDataType_CreateMarketingInformationForToggle_SetsMarketingInformationToGivenInformationAsString()
     {
-        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(), 1, 2.1, true, [ 1 ],
+        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(), 1, 2.1, true, 4353536,
             "", null, -1 );
-        $this->assertEquals( [ "1", "2.1", "1", "Array", "", "", "-1" ], $response );
+        $this->assertEquals( [ "1", "2.1", "1", "4353536", "", "", "-1" ], $response );
     }
 
     /**
