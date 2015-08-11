@@ -53,7 +53,7 @@ class GetReleaseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @param ReleaseGateway $gateway
      * @return Release|int
      */

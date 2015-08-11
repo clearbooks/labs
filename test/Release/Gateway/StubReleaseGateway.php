@@ -15,24 +15,17 @@ class StubReleaseGateway implements ReleaseGateway
 {
 
     /**
-     * StubReleaseGateway constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     * @param $releaseName
-     * @param $url
+     * @param string $releaseName
+     * @param string $url
      * @return int
      */
     public function addRelease( $releaseName, $url )
     {
-        // TODO: Implement addRelease() method.
+        return 0;
     }
 
     /**
-     * @param $releaseId
+     * @param string $releaseId
      * @return Release
      */
     public function getRelease( $releaseId )

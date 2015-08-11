@@ -24,8 +24,8 @@ class SpyReleaseGateway implements ReleaseGateway
     private $addReleaseParams = array();
 
     /**
-     * @param $releaseName
-     * @param $url
+     * @param string $releaseName
+     * @param string $url
      * @return int
      */
     public function addRelease( $releaseName, $url )
@@ -37,12 +37,12 @@ class SpyReleaseGateway implements ReleaseGateway
     }
 
     /**
-     * @param $releaseId
+     * @param string $releaseId
      * @return Release
      */
     public function getRelease( $releaseId )
     {
-        return new Release( 'de', 'fault' );
+        return new Release( 'de', 'fault', new \DateTime() );
     }
 
     /**
@@ -66,7 +66,7 @@ class SpyReleaseGateway implements ReleaseGateway
      */
     public function getAllReleases()
     {
-        // TODO: Implement getAllReleases() method.
+        return [];
     }
 }
 //EOF SpyReleaseGateway.php
