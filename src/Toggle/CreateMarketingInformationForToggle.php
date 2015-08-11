@@ -9,6 +9,7 @@
 namespace Clearbooks\Labs\Toggle;
 
 
+use Clearbooks\Labs\Toggle\Entity\CreateMarketingInformationRequest;
 use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGateway;
 
 class CreateMarketingInformationForToggle
@@ -28,22 +29,11 @@ class CreateMarketingInformationForToggle
     }
 
     /**
-     * @param string $imageLink
-     * @param string $descriptionToggle
-     * @param string $descriptionFunctionally
-     * @param string $descriptionOfReasonForImplementation
-     * @param string $descriptionOfLocation
-     * @param string $linkToGuide
-     * @param string $appNotificationText
+     * @param CreateMarketingInformationRequest $request
      */
-    public function execute( $imageLink, $descriptionToggle, $descriptionFunctionally,
-                             $descriptionOfReasonForImplementation, $descriptionOfLocation, $linkToGuide,
-                             $appNotificationText )
+    public function execute( CreateMarketingInformationRequest $request )
     {
 
-        $this->gateway->setMarketingInformationForToggle( (string) $imageLink, (string) $descriptionToggle,
-            (string) $descriptionFunctionally,
-            (string) $descriptionOfReasonForImplementation, (string) $descriptionOfLocation, (string) $linkToGuide,
-            (string) $appNotificationText );
+        $this->gateway->setMarketingInformationForToggle( $request );
     }
 }

@@ -9,13 +9,12 @@
 namespace Clearbooks\Labs\Toggle\Gateway;
 
 
+use Clearbooks\Labs\Toggle\Entity\CreateMarketingInformationRequest;
+
 interface MarketableToggleGateway
 {
     /**
-     * @return void
+     * @param CreateMarketingInformationRequest $request
      */
-    public function setMarketingInformationForToggle( $imageLink, $descriptionToggle, $descriptionFunctionally,
-                                                      $descriptionOfReasonForImplementation, $descriptionOfLocation,
-                                                      $linkToGuide,
-                                                      $appNotificationText );
+    public function setMarketingInformationForToggle( CreateMarketingInformationRequest $request );
 }

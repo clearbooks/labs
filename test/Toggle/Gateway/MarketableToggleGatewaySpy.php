@@ -9,6 +9,8 @@
 namespace Clearbooks\Labs\Toggle\Gateway;
 
 
+use Clearbooks\Labs\Toggle\Entity\CreateMarketingInformationRequest;
+
 class MarketableToggleGatewaySpy implements MarketableToggleGateway
 {
 
@@ -18,17 +20,14 @@ class MarketableToggleGatewaySpy implements MarketableToggleGateway
     private $marketingInfo = [ ];
 
     /**
-     * @return void
+     * @param CreateMarketingInformationRequest $request
      */
-    public function setMarketingInformationForToggle( $imageLink, $descriptionToggle, $descriptionFunctionally,
-                                                      $descriptionOfReasonForImplementation, $descriptionOfLocation,
-                                                      $linkToGuide,
-                                                      $appNotificationText )
+    public function setMarketingInformationForToggle( CreateMarketingInformationRequest $request )
     {
-        $this->marketingInfo = [ $imageLink, $descriptionToggle, $descriptionFunctionally,
-            $descriptionOfReasonForImplementation, $descriptionOfLocation,
-            $linkToGuide,
-            $appNotificationText ];
+        $this->marketingInfo = [ $request->getToggleId(), $request->getImageLink(), $request->getDescriptionOfToggle(), $request->getDescriptionOfFunctionality(),
+            $request->getDescriptionOfReasonForImplementation(), $request->getDescriptionOfLocation(),
+            $request->getLinkToGuide(),
+            $request->getAppNotificationText() ];
     }
 
 
