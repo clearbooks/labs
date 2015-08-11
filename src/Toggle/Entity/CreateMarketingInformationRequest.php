@@ -52,7 +52,8 @@ class CreateMarketingInformationRequest
      * @param string $linkToGuide
      * @param string $appNotificationText
      */
-    public function __construct( $toggleId, $imageLink = "", $descriptionOfToggle = "", $descriptionOfFunctionality = "",
+    public function __construct( $toggleId, $imageLink = "", $descriptionOfToggle = "",
+                                 $descriptionOfFunctionality = "",
                                  $descriptionOfReasonForImplementation = "", $descriptionOfLocation = "",
                                  $linkToGuide = "",
                                  $appNotificationText = "" )
