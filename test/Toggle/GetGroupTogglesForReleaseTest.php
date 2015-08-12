@@ -7,9 +7,8 @@
 namespace Clearbooks\Labs\Toggle;
 
 
-use Clearbooks\Labs\Release\Gateway\VisibleStubReleaseGateway;
+use Clearbooks\Labs\Release\Gateway\ConfigurableVisibilityReleaseGatewayMock;
 use Clearbooks\Labs\Toggle\Entity\GroupToggleStub;
-use Clearbooks\Labs\Toggle\Gateway\DummyGroupToggleGateway;
 use Clearbooks\Labs\Toggle\Gateway\StubGroupToggleGateway;
 
 class GetGroupTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
@@ -17,8 +16,15 @@ class GetGroupTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
 
     const RELEASEID = 1;
 
-    private function getGroupTogglesForRelease( $gateway, $releaseGateway )
+    /**
+     * @param array $toggles
+     * @param bool $visibilityFlag
+     * @return Entity\GroupToggle[]
+     */
+    private function getGroupTogglesForRelease( $toggles, $visibilityFlag = true )
     {
+        $gateway = new StubGroupToggleGateway( $toggles );
+        $releaseGateway = new ConfigurableVisibilityReleaseGatewayMock( $visibilityFlag );
         return ( new GetGroupTogglesForRelease( $gateway, $releaseGateway ) )->execute( self::RELEASEID );
     }
 
@@ -27,8 +33,8 @@ class GetGroupTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
      */
     public function givenNoGroupTogglesInRelease_GetGroupTogglesForReleaseReturnsEmptyArray()
     {
-        $toggles = $this->getGroupTogglesForRelease( new DummyGroupToggleGateway(), new VisibleStubReleaseGateway() );
-        $this->assertEquals( [ ], $toggles );
+        $toggles = $this->getGroupTogglesForRelease( [] );
+        $this->assertEquals( [], $toggles );
     }
 
     /**
@@ -36,7 +42,7 @@ class GetGroupTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
      */
     public function givenReleaseNotVisible_GetGroupTogglesForReleaseReturnsEmptyArray()
     {
-        $toggles = $this->getGroupTogglesForRelease( new DummyGroupToggleGateway(), new VisibleStubReleaseGateway( false ) );
+        $toggles = $this->getGroupTogglesForRelease( [ new GroupToggleStub( self::RELEASEID ) ], false );
         $this->assertEquals( [ ], $toggles );
     }
 
@@ -46,7 +52,7 @@ class GetGroupTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
     public function givenVisibleRelease_AndAvailableGroupToggles_GetGroupTogglesForReleaseReturnsToggles()
     {
         $expectedToggles = [ new GroupToggleStub( self::RELEASEID ) ];
-        $toggles = $this->getGroupTogglesForRelease( new StubGroupToggleGateway( $expectedToggles ), new VisibleStubReleaseGateway() );
+        $toggles = $this->getGroupTogglesForRelease( $expectedToggles );
         $this->assertEquals( $expectedToggles, $toggles );
     }
 
@@ -57,7 +63,7 @@ class GetGroupTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
     {
         $expectedToggles = new GroupToggleStub( self::RELEASEID );
         $unexpectedToggles = new GroupToggleStub( 2 );
-        $toggles = $this->getGroupTogglesForRelease( new StubGroupToggleGateway( [ $expectedToggles, $unexpectedToggles ] ), new VisibleStubReleaseGateway() );
+        $toggles = $this->getGroupTogglesForRelease( [ $expectedToggles, $unexpectedToggles ] );
         $this->assertEquals( [ $expectedToggles ], $toggles );
     }
 }
