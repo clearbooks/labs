@@ -30,7 +30,7 @@ class GetRelease
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return Release|int
      */
     public function execute( $id )

@@ -13,16 +13,19 @@ use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 
 class GetPublicRelease
 {
+    /**
+     * @var ReleaseGateway
+     */
     private $gateway;
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $currentDate;
 
     /**
      * GetPublicRelease constructor.
      * @param ReleaseGateway $gateway
-     * @param \DateTime $currentDate
+     * @param \DateTimeInterface $currentDate
      */
     public function __construct( ReleaseGateway $gateway, \DateTimeInterface $currentDate )
     {
@@ -32,7 +35,7 @@ class GetPublicRelease
 
     /**
      * If release is visible or if its time has come/passed make it visible.
-     * @return array
+     * @return Release[]
      */
     public function execute()
     {
@@ -51,7 +54,7 @@ class GetPublicRelease
     }
 
     /**
-     * @param $release
+     * @param Release $release
      */
     private function forceVisibilityOnRelease( Release $release )
     {

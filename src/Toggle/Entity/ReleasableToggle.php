@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Toggle\Entity;
 
 
-interface Toggle
+interface ReleasableToggle
 {
     /**
      * @return string

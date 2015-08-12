@@ -12,19 +12,22 @@ namespace Clearbooks\Labs\Toggle\Entity;
 class UserToggleStub implements UserToggle
 {
     /**
-     * @var
+     * @var string
      */
     private $releaseId;
 
     /**
      * UserToggleStub constructor.
-     * @param $releaseId
+     * @param string $releaseId
      */
     public function __construct( $releaseId )
     {
         $this->releaseId = $releaseId;
     }
 
+    /**
+     * @return string
+     */
     public function getRelease()
     {
         return $this->releaseId;

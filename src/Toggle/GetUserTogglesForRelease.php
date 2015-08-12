@@ -35,21 +35,25 @@ class GetUserTogglesForRelease
         $this->releaseGateway = $releaseGateway;
     }
 
+    /**
+     * @param string $releaseId
+     * @return UserToggle[]
+     */
     public function execute( $releaseId )
     {
         $togglesArray = $this->gateway->getAllUserToggles();
         $availableToggles = [ ];
-        if ( $this->releaseGateway->getRelease( $releaseId )->isVisible() ) {
+        if ( $this->isReleaseVisible( $releaseId ) ) {
             $availableToggles = $this->getUserTogglesFromRelease( $releaseId, $togglesArray, $availableToggles );
         }
         return $availableToggles;
     }
 
     /**
-     * @param $releaseId
-     * @param UserToggle []
-     * @param $availableToggles
-     * @return array
+     * @param string $releaseId
+     * @param UserToggle [] $togglesArray
+     * @param UserToggle[] $availableToggles
+     * @return UserToggle[]
      */
     private function getUserTogglesFromRelease( $releaseId, $togglesArray, $availableToggles )
     {
@@ -61,6 +65,15 @@ class GetUserTogglesForRelease
             }
         }
         return $availableToggles;
+    }
+
+    /**
+     * @param string $releaseId
+     * @return bool
+     */
+    private function isReleaseVisible( $releaseId )
+    {
+        return $this->releaseGateway->getRelease( $releaseId )->isVisible();
     }
 
 }

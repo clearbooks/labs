@@ -15,29 +15,22 @@ class DummyReleaseGateway implements ReleaseGateway
 {
 
     /**
-     * DummyReleaseGateway constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     * @param $releaseName
-     * @param $url
+     * @param string $releaseName
+     * @param string $url
      * @return int
      */
     public function addRelease( $releaseName, $url )
     {
-        // TODO: Implement addRelease() method.
+        return 0;
     }
 
     /**
-     * @param $releaseId
+     * @param string $releaseId
      * @return Release
      */
     public function getRelease( $releaseId )
     {
-        // TODO: Implement getRelease() method.
+        return null;
     }
 
     /**
@@ -45,6 +38,6 @@ class DummyReleaseGateway implements ReleaseGateway
      */
     public function getAllReleases()
     {
-        // TODO: Implement getAllReleases() method.
+        return [];
     }
 }

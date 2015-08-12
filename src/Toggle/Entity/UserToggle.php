@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Toggle\Entity;
 
 
-interface UserToggle extends Toggle
+interface UserToggle extends ReleasableToggle
 {
 
 }
