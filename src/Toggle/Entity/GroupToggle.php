@@ -7,7 +7,7 @@
 namespace Clearbooks\Labs\Toggle\Entity;
 
 
-interface GroupToggle extends Toggle
+interface GroupToggle extends ReleasableToggle
 {
 }
 //EOF GroupToggle.php
