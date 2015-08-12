@@ -32,4 +32,5 @@ class UserToggleStub implements UserToggle
     {
         return $this->releaseId;
     }
+
 }

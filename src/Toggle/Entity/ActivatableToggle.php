@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Toggle\Entity;
 
-interface ActivatableToggle extends Toggle
+interface ActivatableToggle
 {
     /** @return string */
     public function isActive();
