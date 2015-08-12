@@ -7,6 +7,7 @@
 namespace Clearbooks\Labs\Release\Gateway;
 
 
+use Clearbooks\Labs\Release\Entity\PublicRelease;
 use Clearbooks\Labs\Release\Release;
 
 interface ReleaseGateway
@@ -25,7 +26,7 @@ interface ReleaseGateway
     public function getRelease( $releaseId );
 
     /**
-     * @return Release[]
+     * @return PublicRelease
      */
     public function getAllReleases();
 }

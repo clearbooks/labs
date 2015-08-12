@@ -57,7 +57,7 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param MockReleaseGateway/StubReleaseGateway $gateway
-     * @return Release|int
+     * @return \PublicRelease|int
      */
     private function getPublicRelease( $gateway )
     {
@@ -76,7 +76,6 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @return DateTime
-     *
      */
     private function getFutureDate()
     {

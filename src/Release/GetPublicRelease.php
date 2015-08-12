@@ -9,6 +9,7 @@
 namespace Clearbooks\Labs\Release;
 
 
+use Clearbooks\Labs\Release\Entity\PublicRelease;
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 
 class GetPublicRelease
@@ -25,7 +26,7 @@ class GetPublicRelease
     /**
      * GetPublicRelease constructor.
      * @param ReleaseGateway $gateway
-     * @param \DateTime $currentDate
+     * @param \DateTime|\DateTimeInterface $currentDate
      */
     public function __construct( ReleaseGateway $gateway, \DateTimeInterface $currentDate )
     {
@@ -35,7 +36,7 @@ class GetPublicRelease
 
     /**
      * If release is visible or if its time has come/passed make it visible.
-     * @return Release[]
+     * @return PublicRelease
      */
     public function execute()
     {
@@ -54,9 +55,9 @@ class GetPublicRelease
     }
 
     /**
-     * @param Release $release
+     * @param PublicRelease $release
      */
-    private function forceVisibilityOnRelease( Release $release )
+    private function forceVisibilityOnRelease( PublicRelease $release )
     {
         if ( !$release->isVisible() && $release->getReleaseDate() < $this->currentDate ) {
             $release->setVisible( true );

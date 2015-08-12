@@ -8,8 +8,9 @@ namespace Clearbooks\Labs\Release;
 
 
 use DateTime;
+use Clearbooks\Labs\Release\Entity\PublicRelease;
 
-class Release
+class Release implements PublicRelease
 {
     private $releaseName;
     private $releaseInfoUrl;
