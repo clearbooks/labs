@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: playerone
- * Date: 23/07/15
- * Time: 13:17
- */
-
 namespace Clearbooks\Labs\AutoSubscribe;
-
 
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriberProvider;
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;

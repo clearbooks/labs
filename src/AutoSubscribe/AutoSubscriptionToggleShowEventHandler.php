@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: playerone
- * Date: 23/07/15
- * Time: 13:08
- */
-
 namespace Clearbooks\Labs\AutoSubscribe;
-
 
 use Clearbooks\Labs\AutoSubscribe\Entity\User;
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriberProvider;
@@ -28,7 +20,6 @@ class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,Use
     private $activatorResponse;
 
     /**
-     * AutoSubscriptionToggleShowEventHandler constructor.
      * @param AutoSubscriberProvider $autoSubscriberProvider
      * @param UserToggleActivator $toggleActivator
      */
@@ -61,3 +52,4 @@ class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,Use
         $this->activatorResponse = $response;
     }
 }
+//EOF AutoSubscriptionToggleShowEventHandler.php

@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: playerone
- * Date: 21/07/15
- * Time: 10:57
- */
-
 namespace Clearbooks\Labs\Event;
-
 
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;

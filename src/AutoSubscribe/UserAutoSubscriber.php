@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: playerone
- * Date: 20/07/15
- * Time: 14:40
- */
 namespace Clearbooks\Labs\AutoSubscribe;
 
 use Clearbooks\Labs\AutoSubscribe\Entity\User;

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: playerone
- * Date: 20/07/15
- * Time: 14:35
- */
-
 namespace Clearbooks\Labs\AutoSubscribe;
 
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderUpdateMock;

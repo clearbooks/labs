@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: playerone
- * Date: 24/07/15
- * Time: 11:34
- */
-
 namespace Clearbooks\Labs\AutoSubscribe\Gateway;
-
 
 use Clearbooks\Labs\AutoSubscribe\Entity\User;
 
@@ -35,3 +27,4 @@ class AutoSubscriberProviderStub implements AutoSubscriberProvider
         return $this->users;
     }
 }
+//EOF AutoSubscriberProviderStub.php

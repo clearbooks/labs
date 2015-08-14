@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: playerone
- * Date: 23/07/15
- * Time: 11:11
- */
-
 namespace Clearbooks\Labs\AutoSubscribe\Gateway;
-
 
 use Clearbooks\Labs\AutoSubscribe\Entity\User;
 

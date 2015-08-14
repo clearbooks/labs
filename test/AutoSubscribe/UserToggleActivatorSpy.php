@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: playerone
- * Date: 23/07/15
- * Time: 13:30
- */
-
 namespace Clearbooks\Labs\AutoSubscribe;
-
 
 use Clearbooks\Labs\User\UserToggleActivator\Response;
 use Clearbooks\Labs\User\UseCase\UserToggleActivator;
