@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Release;
 
 
-use Clearbooks\Labs\Release\Entity\PublicRelease;
+use Clearbooks\Labs\Release\UseCase\GetPublicRelease\PublicRelease;
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 
 class GetPublicRelease
