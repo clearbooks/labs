@@ -3,44 +3,17 @@ namespace Clearbooks\Labs\User;
 
 use Clearbooks\Labs\User\UseCase\GroupToggleRequest;
 
-abstract class AbstractGroupToggleRequest implements GroupToggleRequest
+abstract class AbstractGroupToggleRequest extends AbstractToggleRequest implements GroupToggleRequest
 {
-    /**
-     * @var string
-     */
-    private $toggleIdentifier;
-
     /**
      * @var int
      */
     private $groupIdentifier;
 
-    /**
-     * @var int
-     */
-    private $userIdentifier;
-
     public function __construct( $toggleIdentifier, $groupIdentifier, $userIdentifier )
     {
-        $this->setToggleIdentifier( $toggleIdentifier );
+        parent::__construct( $toggleIdentifier, $userIdentifier );
         $this->setGroupIdentifier( $groupIdentifier );
-        $this->setUserIdentifier( $userIdentifier );
-    }
-
-    /**
-     * @return string
-     */
-    public function getToggleIdentifier()
-    {
-        return $this->toggleIdentifier;
-    }
-
-    /**
-     * @param string $toggleIdentifier
-     */
-    public function setToggleIdentifier( $toggleIdentifier )
-    {
-        $this->toggleIdentifier = $toggleIdentifier;
     }
 
     /**
@@ -57,22 +30,6 @@ abstract class AbstractGroupToggleRequest implements GroupToggleRequest
     public function setGroupIdentifier( $groupIdentifier )
     {
         $this->groupIdentifier = $groupIdentifier;
-    }
-
-    /**
-     * @return int
-     */
-    public function getUserIdentifier()
-    {
-        return $this->userIdentifier;
-    }
-
-    /**
-     * @param int $userIdentifier
-     */
-    public function setUserIdentifier( $userIdentifier )
-    {
-        $this->userIdentifier = $userIdentifier;
     }
 }
 //EOF AbstractGroupToggleRequest.php
