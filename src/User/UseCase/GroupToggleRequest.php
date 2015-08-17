@@ -1,18 +1,8 @@
 <?php
 namespace Clearbooks\Labs\User\UseCase;
 
-interface GroupToggleRequest
+interface GroupToggleRequest extends ToggleRequest
 {
-    /**
-     * @return string
-     */
-    public function getToggleIdentifier();
-
-    /**
-     * @param string $toggleIdentifier
-     */
-    public function setToggleIdentifier( $toggleIdentifier );
-
     /**
      * @return int
      */
@@ -22,15 +12,5 @@ interface GroupToggleRequest
      * @param int $groupIdentifier
      */
     public function setGroupIdentifier( $groupIdentifier );
-
-    /**
-     * @return int
-     */
-    public function getUserIdentifier();
-
-    /**
-     * @param int $userIdentifier
-     */
-    public function setUserIdentifier( $userIdentifier );
 }
 //EOF GroupToggleRequest.php

@@ -6,7 +6,7 @@ use Clearbooks\Labs\User\UseCase\GroupToggleResponse;
 use Clearbooks\Labs\User\UseCase\GroupToggleService;
 use Clearbooks\Labs\User\UseCase\PermissionService;
 
-abstract class AbstractGroupToggleInteractor
+abstract class AbstractGroupToggleInteractor extends AbstractToggleInteractor
 {
     /**
      * @var GroupToggleService
@@ -49,18 +49,10 @@ abstract class AbstractGroupToggleInteractor
      */
     protected function validateRequest( GroupToggleRequest $request )
     {
-        $errors = [ ];
-
-        if ( empty( $request->getToggleIdentifier() ) ) {
-            $errors[] = GroupToggleResponse::ERROR_UNKNOWN_TOGGLE;
-        }
+        $errors = $this->validateToggleRequest( $request );
 
         if ( $request->getGroupIdentifier() <= 0 ) {
             $errors[] = GroupToggleResponse::ERROR_UNKNOWN_GROUP;
-        }
-
-        if ( $request->getUserIdentifier() <= 0 ) {
-            $errors[] = GroupToggleResponse::ERROR_UNKNOWN_USER;
         }
 
         if ( !in_array( GroupToggleResponse::ERROR_UNKNOWN_GROUP, $errors )
