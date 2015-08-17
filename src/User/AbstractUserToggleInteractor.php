@@ -5,7 +5,7 @@ use Clearbooks\Labs\User\UseCase\UserToggleRequest;
 use Clearbooks\Labs\User\UseCase\UserToggleResponse;
 use Clearbooks\Labs\User\UseCase\UserToggleService;
 
-abstract class AbstractUserToggleInteractor
+abstract class AbstractUserToggleInteractor extends AbstractToggleInteractor
 {
     /**
      * @var UserToggleService
@@ -23,7 +23,7 @@ abstract class AbstractUserToggleInteractor
      */
     protected function handleRequest( UserToggleRequest $request )
     {
-        $errors = $this->validateRequest( $request );
+        $errors = $this->validateToggleRequest( $request );
 
         if ( empty( $errors ) ) {
             $success = $this->changeToggleState( $request );
@@ -31,25 +31,6 @@ abstract class AbstractUserToggleInteractor
             if ( !$success ) {
                 $errors[] = UserToggleResponse::ERROR_UNKNOWN_ERROR;
             }
-        }
-
-        return $errors;
-    }
-
-    /**
-     * @param UserToggleRequest $request
-     * @return array
-     */
-    protected function validateRequest( UserToggleRequest $request )
-    {
-        $errors = [ ];
-
-        if ( empty( $request->getToggleIdentifier() ) ) {
-            $errors[] = UserToggleResponse::ERROR_UNKNOWN_TOGGLE;
-        }
-
-        if ( $request->getUserIdentifier() <= 0 ) {
-            $errors[] = UserToggleResponse::ERROR_UNKNOWN_USER;
         }
 
         return $errors;
