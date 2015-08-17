@@ -19,16 +19,16 @@ class GetPublicRelease
      */
     private $gateway;
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $currentDate;
 
     /**
      * GetPublicRelease constructor.
      * @param ReleaseGateway $gateway
-     * @param \DateTime $currentDate
+     * @param \DateTimeInterface $currentDate
      */
-    public function __construct( ReleaseGateway $gateway, \DateTime $currentDate )
+    public function __construct( ReleaseGateway $gateway, \DateTimeInterface $currentDate )
     {
         $this->gateway = $gateway;
         $this->currentDate = $currentDate;

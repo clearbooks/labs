@@ -65,8 +65,8 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param string $format
-     * @param DateTime $date
-     * @return DateTime
+     * @param \DateTimeInterface $date
+     * @return \DateTimeInterface
      */
     private function getDate( $format, $date )
     {
@@ -74,7 +74,7 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     private function getFutureDate()
     {

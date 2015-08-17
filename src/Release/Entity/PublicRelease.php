@@ -15,7 +15,7 @@ interface PublicRelease
     public function isVisible();
 
     /**
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getReleaseDate();
 
