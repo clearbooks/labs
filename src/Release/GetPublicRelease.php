@@ -26,7 +26,7 @@ class GetPublicRelease
     /**
      * GetPublicRelease constructor.
      * @param ReleaseGateway $gateway
-     * @param \DateTime|\DateTimeInterface $currentDate
+     * @param \DateTime $currentDate
      */
     public function __construct( ReleaseGateway $gateway, \DateTimeInterface $currentDate )
     {
