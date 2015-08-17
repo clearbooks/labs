@@ -21,7 +21,7 @@ abstract class AbstractUserToggleInteractor
      * @param UserToggleRequest $request
      * @return array
      */
-    protected function handleRequest( UserToggleRequest $request )
+    protected function handleUserToggleRequest( UserToggleRequest $request )
     {
         $errors = $this->validateRequest( $request );
 
