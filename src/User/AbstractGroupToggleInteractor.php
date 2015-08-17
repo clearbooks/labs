@@ -28,7 +28,7 @@ abstract class AbstractGroupToggleInteractor
      * @param GroupToggleRequest $request
      * @return array
      */
-    protected function handleGroupToggleRequest( GroupToggleRequest $request )
+    protected function handleRequest( GroupToggleRequest $request )
     {
         $errors = $this->validateRequest( $request );
 

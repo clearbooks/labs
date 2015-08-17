@@ -9,7 +9,7 @@ class GroupToggleActivator extends AbstractGroupToggleInteractor implements UseC
 {
     public function execute( Request $request, UseCase\GroupToggleActivatorResponseHandler $responseHandler )
     {
-        $errors = $this->handleGroupToggleRequest( $request );
+        $errors = $this->handleRequest( $request );
         $response = $this->createResponse( $request, $errors );
         $responseHandler->handleResponse( $response );
     }

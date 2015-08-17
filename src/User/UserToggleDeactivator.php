@@ -9,7 +9,7 @@ class UserToggleDeactivator extends AbstractUserToggleInteractor implements UseC
 {
     public function execute( Request $request, UseCase\UserToggleDeactivatorResponseHandler $responseHandler )
     {
-        $errors = $this->handleUserToggleRequest( $request );
+        $errors = $this->handleRequest( $request );
         $response = $this->createResponse( $request, $errors );
         $responseHandler->handleResponse( $response );
     }

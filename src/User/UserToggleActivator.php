@@ -9,7 +9,7 @@ class UserToggleActivator extends AbstractUserToggleInteractor implements UseCas
 {
     public function execute( Request $request, UseCase\UserToggleActivatorResponseHandler $responseHandler )
     {
-        $errors = $this->handleUserToggleRequest( $request );
+        $errors = $this->handleRequest( $request );
         $response = $this->createResponse( $request, $errors );
         $responseHandler->handleResponse( $response );
     }
