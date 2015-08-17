@@ -26,7 +26,7 @@ interface ReleaseGateway
     public function getRelease( $releaseId );
 
     /**
-     * @return PublicRelease
+     * @return PublicRelease[]
      */
     public function getAllReleases();
 }

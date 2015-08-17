@@ -11,7 +11,6 @@ namespace Clearbooks\Labs\Release;
 
 use Clearbooks\Labs\Release\Gateway\MockReleaseGateway;
 use Clearbooks\Labs\Release\Gateway\StubReleaseGateway;
-use DateInterval;
 use DateTime;
 
 class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase

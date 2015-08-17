@@ -11,6 +11,9 @@ namespace Clearbooks\Labs\Toggle\Entity;
 
 class CreateMarketingInformationRequest
 {
+    /**
+     * @var string
+     */
     private $toggleId;
     /**
      * @var string

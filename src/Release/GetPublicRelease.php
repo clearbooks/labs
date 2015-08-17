@@ -36,7 +36,7 @@ class GetPublicRelease
 
     /**
      * If release is visible or if its time has come/passed make it visible.
-     * @return PublicRelease
+     * @return PublicRelease[]
      */
     public function execute()
     {
