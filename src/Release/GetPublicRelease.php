@@ -55,9 +55,9 @@ class GetPublicRelease
     }
 
     /**
-     * @param PublicRelease $release
+     * @param Entity\PublicRelease $release
      */
-    private function forceVisibilityOnRelease( PublicRelease $release )
+    private function forceVisibilityOnRelease( \Clearbooks\Labs\Release\Entity\PublicRelease $release )
     {
         if ( !$release->isVisible() && $release->getReleaseDate() < $this->currentDate ) {
             $release->setVisible( true );
