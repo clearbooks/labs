@@ -6,7 +6,6 @@
 
 namespace Clearbooks\Labs\Toggle;
 
-
 use Clearbooks\Labs\Release\Gateway\ConfigurableVisibilityReleaseGatewayMock;
 use Clearbooks\Labs\Toggle\Entity\GroupToggleStub;
 use Clearbooks\Labs\Toggle\Gateway\StubGroupToggleGateway;

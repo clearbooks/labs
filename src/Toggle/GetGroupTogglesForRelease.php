@@ -6,7 +6,6 @@
 
 namespace Clearbooks\Labs\Toggle;
 
-
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 use Clearbooks\Labs\Toggle\Entity\GroupToggle;
 use Clearbooks\Labs\Toggle\Gateway\GroupToggleGateway;
