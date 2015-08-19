@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\User\UseCase;
 
-interface UserToggleResponse
+interface ToggleResponse
 {
     const ERROR_UNKNOWN_ERROR = 0;
     const ERROR_UNKNOWN_TOGGLE = 1;
@@ -39,4 +39,4 @@ interface UserToggleResponse
      */
     public function setErrors( array $errors );
 }
-//EOF UserToggleResponse.php
+//EOF ToggleResponse.php

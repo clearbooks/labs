@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\User\UseCase;
 
-interface UserToggleRequest
+interface ToggleRequest
 {
     /**
      * @return string
@@ -23,4 +23,4 @@ interface UserToggleRequest
      */
     public function setUserIdentifier( $userIdentifier );
 }
-//EOF UserToggleRequest.php
+//EOF ToggleRequest.php

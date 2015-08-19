@@ -1,10 +1,10 @@
 <?php
 namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\UseCase\UserToggleDeactivator\Response;
-use Clearbooks\Labs\User\UseCase\UserToggleDeactivatorResponseHandler;
+use Clearbooks\Labs\User\UseCase\ToggleActivator\Response;
+use Clearbooks\Labs\User\UseCase\ToggleActivatorResponseHandler;
 
-class UserToggleDeactivatorResponseHandlerSpy implements UserToggleDeactivatorResponseHandler
+class ToggleActivatorResponseHandlerSpy implements ToggleActivatorResponseHandler
 {
     /**
      * @var Response
@@ -24,4 +24,4 @@ class UserToggleDeactivatorResponseHandlerSpy implements UserToggleDeactivatorRe
         return $this->lastHandledResponse;
     }
 }
-//EOF UserUserToggleDeactivatorResponseHandlerSpy.php
+//EOF ToggleActivatorResponseHandlerSpy.php

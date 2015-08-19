@@ -1,9 +1,9 @@
 <?php
 namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\UseCase\UserToggleService;
+use Clearbooks\Labs\User\UseCase\ToggleService;
 
-class SuccessfulUserToggleService implements UserToggleService
+class FailingToggleService implements ToggleService
 {
     /**
      * @param string $toggleIdentifier
@@ -12,7 +12,7 @@ class SuccessfulUserToggleService implements UserToggleService
      */
     public function activateToggle( $toggleIdentifier, $userIdentifier )
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,7 +22,7 @@ class SuccessfulUserToggleService implements UserToggleService
      */
     public function deActivateToggle( $toggleIdentifier, $userIdentifier )
     {
-        return true;
+        return false;
     }
 }
-//EOF SuccessfulUserToggleService.php
+//EOF FailingToggleService.php

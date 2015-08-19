@@ -8,12 +8,12 @@ use Clearbooks\Labs\Event\ToggleShowEventStub;
 use Clearbooks\Labs\Event\ToggleShowEventExecutor;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
 use Clearbooks\Labs\Event\UseCase\TriggerToggleShow;
-use Clearbooks\Labs\User\UserToggleActivator;
+use Clearbooks\Labs\User\ToggleActivator;
 
 class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_TestCase
 {
     const FEATURE_TOGGLE_NAME = 'Feature 1';
-    /** @var UserToggleActivatorSpy */
+    /** @var ToggleActivatorSpy */
     private $toggleActivator;
     /** @var AutoSubscriberProvider */
     private $subscribedProvider;
@@ -29,7 +29,7 @@ class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_Test
         parent::setUp();
         $this->subscribedProvider = new AutoSubscriberProviderStub([new UserStub(1),new UserStub(2)]);
         $this->unSubscribedProvider = new AutoSubscriberProviderStub([]);
-        $this->toggleActivator = new UserToggleActivatorSpy();
+        $this->toggleActivator = new ToggleActivatorSpy();
     }
 
     /**

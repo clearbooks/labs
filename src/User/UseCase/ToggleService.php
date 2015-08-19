@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\User\UseCase;
 
-interface UserToggleService
+interface ToggleService
 {
     /**
      * @param string $toggleIdentifier
@@ -17,4 +17,4 @@ interface UserToggleService
      */
     public function deActivateToggle( $toggleIdentifier, $userIdentifier );
 }
-//EOF UserToggleService.php
+//EOF ToggleService.php

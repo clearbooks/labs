@@ -3,7 +3,7 @@ namespace Clearbooks\Labs\AutoSubscribe;
 
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriberProvider;
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
-use Clearbooks\Labs\User\UseCase\UserToggleActivator;
+use Clearbooks\Labs\User\UseCase\ToggleActivator;
 
 class AutoSubscriptionToggleShowEventHandlerSpy extends AutoSubscriptionToggleShowEventHandler
 {
@@ -13,9 +13,9 @@ class AutoSubscriptionToggleShowEventHandlerSpy extends AutoSubscriptionToggleSh
     /**
      * AutoSubscriptionToggleShowEventHandlerSpy constructor.
      * @param AutoSubscriberProvider $autoSubscriberProvider
-     * @param UserToggleActivator $toggleActivator
+     * @param ToggleActivator $toggleActivator
      */
-    public function __construct(AutoSubscriberProvider $autoSubscriberProvider,UserToggleActivator $toggleActivator)
+    public function __construct(AutoSubscriberProvider $autoSubscriberProvider, ToggleActivator $toggleActivator)
     {
         parent::__construct($autoSubscriberProvider, $toggleActivator);
     }

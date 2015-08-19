@@ -5,25 +5,25 @@ use Clearbooks\Labs\AutoSubscribe\Entity\User;
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriberProvider;
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
-use Clearbooks\Labs\User\UserToggleActivator\Request;
-use Clearbooks\Labs\User\UseCase\UserToggleActivator;
-use Clearbooks\Labs\User\UseCase\UserToggleActivator\Response;
-use Clearbooks\Labs\User\UseCase\UserToggleActivatorResponseHandler;
+use Clearbooks\Labs\User\ToggleActivator\Request;
+use Clearbooks\Labs\User\UseCase\ToggleActivator;
+use Clearbooks\Labs\User\UseCase\ToggleActivator\Response;
+use Clearbooks\Labs\User\UseCase\ToggleActivatorResponseHandler;
 
-class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,UserToggleActivatorResponseHandler
+class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,ToggleActivatorResponseHandler
 {
     /** @var AutoSubscriberProvider */
     private $autoSubscriberProvider;
-    /** @var UserToggleActivator */
+    /** @var ToggleActivator */
     private $toggleActivator;
     /** @var Response */
     private $activatorResponse;
 
     /**
      * @param AutoSubscriberProvider $autoSubscriberProvider
-     * @param UserToggleActivator $toggleActivator
+     * @param ToggleActivator $toggleActivator
      */
-    public function __construct(AutoSubscriberProvider $autoSubscriberProvider,UserToggleActivator $toggleActivator)
+    public function __construct(AutoSubscriberProvider $autoSubscriberProvider, ToggleActivator $toggleActivator)
     {
         $this->autoSubscriberProvider = $autoSubscriberProvider;
         $this->toggleActivator = $toggleActivator;
