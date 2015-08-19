@@ -6,150 +6,78 @@ use Clearbooks\Labs\User\UseCase\ToggleStatusModifierService;
 class SuccessfulToggleStatusModifierServiceSpy implements ToggleStatusModifierService
 {
     /**
-     * @var bool
+     * @var array
      */
-    private $activateToggleForUserCalled = false;
+    private $userToggleStatuses = [ ];
 
     /**
-     * @var bool
+     * @var array
      */
-    private $deActivateToggleForUserCalled = false;
-
-    /**
-     * @var bool
-     */
-    private $unsetToggleForUserCalled = false;
-
-    /**
-     * @var bool
-     */
-    private $activateToggleForGroupCalled = false;
-
-    /**
-     * @var bool
-     */
-    private $deActivateToggleForGroupCalled = false;
-
-    /**
-     * @var bool
-     */
-    private $unsetToggleForGroupCalled = false;
+    private $groupToggleStatuses = [ ];
 
     /**
      * @param string $toggleIdentifier
+     * @param string $toggleStatus
      * @param int    $userIdentifier
      * @return bool
      */
-    public function activateToggleForUser( $toggleIdentifier, $userIdentifier )
+    public function setToggleStatusForUser( $toggleIdentifier, $toggleStatus, $userIdentifier )
     {
-        $this->activateToggleForUserCalled = true;
+        if ( !isset( $this->userToggleStatuses[$toggleIdentifier] ) ) {
+            $this->userToggleStatuses[$toggleIdentifier] = [ ];
+        }
+
+        $this->userToggleStatuses[$toggleIdentifier][$userIdentifier] = $toggleStatus;
+        return true;
+    }
+
+    /**
+     * @param string $toggleIdentifier
+     * @param string $toggleStatus
+     * @param int    $groupIdentifier
+     * @param int    $actingUserIdentifier
+     * @return bool
+     */
+    public function setToggleStatusForGroup( $toggleIdentifier, $toggleStatus, $groupIdentifier, $actingUserIdentifier )
+    {
+        if ( !isset( $this->groupToggleStatuses[$toggleIdentifier] ) ) {
+            $this->groupToggleStatuses[$toggleIdentifier] = [ ];
+        }
+
+        $this->groupToggleStatuses[$toggleIdentifier][$groupIdentifier] = $toggleStatus;
         return true;
     }
 
     /**
      * @param string $toggleIdentifier
      * @param int    $userIdentifier
-     * @return bool
+     * @return string
      */
-    public function deActivateToggleForUser( $toggleIdentifier, $userIdentifier )
+    public function getToggleStatusForUser( $toggleIdentifier, $userIdentifier )
     {
-        $this->deActivateToggleForUserCalled = true;
-        return true;
-    }
+        if ( !isset( $this->userToggleStatuses[$toggleIdentifier] )
+                || !isset( $this->userToggleStatuses[$toggleIdentifier][$userIdentifier] ) ) {
 
-    /**
-     * @param string $toggleIdentifier
-     * @param int    $userIdentifier
-     * @return bool
-     */
-    public function unsetToggleForUser( $toggleIdentifier, $userIdentifier )
-    {
-        $this->unsetToggleForUserCalled = true;
-        return true;
+            return ToggleStatusModifier::TOGGLE_STATUS_UNSET;
+        }
+
+        return $this->userToggleStatuses[$toggleIdentifier][$userIdentifier];
     }
 
     /**
      * @param string $toggleIdentifier
      * @param int    $groupIdentifier
-     * @param  int   $actingUserIdentifier
-     * @return bool
+     * @return string
      */
-    public function activateToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier )
+    public function getToggleStatusForGroup( $toggleIdentifier, $groupIdentifier )
     {
-        $this->activateToggleForGroupCalled = true;
-        return true;
-    }
+        if ( !isset( $this->groupToggleStatuses[$toggleIdentifier] )
+                || !isset( $this->groupToggleStatuses[$toggleIdentifier][$groupIdentifier] ) ) {
 
-    /**
-     * @param string  $toggleIdentifier
-     * @param  int    $groupIdentifier
-     * @param     int $actingUserIdentifier
-     * @return bool
-     */
-    public function deActivateToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier )
-    {
-        $this->deActivateToggleForGroupCalled = true;
-        return true;
-    }
+            return ToggleStatusModifier::TOGGLE_STATUS_UNSET;
+        }
 
-    /**
-     * @param string $toggleIdentifier
-     * @param  int   $groupIdentifier
-     * @param  int   $actingUserIdentifier
-     * @return bool
-     */
-    public function unsetToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier )
-    {
-        $this->unsetToggleForGroupCalled = true;
-        return true;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isActivateToggleForUserCalled()
-    {
-        return $this->activateToggleForUserCalled;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isDeActivateToggleForUserCalled()
-    {
-        return $this->deActivateToggleForUserCalled;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isUnsetToggleForUserCalled()
-    {
-        return $this->unsetToggleForUserCalled;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isActivateToggleForGroupCalled()
-    {
-        return $this->activateToggleForGroupCalled;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isDeActivateToggleForGroupCalled()
-    {
-        return $this->deActivateToggleForGroupCalled;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isUnsetToggleForGroupCalled()
-    {
-        return $this->unsetToggleForGroupCalled;
+        return $this->groupToggleStatuses[$toggleIdentifier][$groupIdentifier];
     }
 }
 //EOF SuccessfulToggleStatusModifierServiceSpy.php

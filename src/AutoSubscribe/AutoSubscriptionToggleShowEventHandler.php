@@ -40,7 +40,7 @@ class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,Tog
         $result = false;
         /** @var User $user */
         foreach ( $subscribers as $user ) {
-            $request = new Request($event->getToggleName(), Request::TOGGLE_STATUS_ACTIVE, $user->getId());
+            $request = new Request($event->getToggleName(), ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, $user->getId());
             $this->toggleStatusModifier->execute($request, $this);
             $result = empty($this->activatorResponse->getErrors()) || $result;
         }

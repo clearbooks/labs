@@ -7,63 +7,23 @@ class FailingToggleStatusModifierService implements ToggleStatusModifierService
 {
     /**
      * @param string $toggleIdentifier
+     * @param string $toggleStatus
      * @param int    $userIdentifier
      * @return bool
      */
-    public function activateToggleForUser( $toggleIdentifier, $userIdentifier )
+    public function setToggleStatusForUser( $toggleIdentifier, $toggleStatus, $userIdentifier )
     {
         return false;
     }
 
     /**
      * @param string $toggleIdentifier
-     * @param int    $userIdentifier
-     * @return bool
-     */
-    public function deActivateToggleForUser( $toggleIdentifier, $userIdentifier )
-    {
-        return false;
-    }
-
-    /**
-     * @param string $toggleIdentifier
+     * @param string $toggleStatus
      * @param int    $groupIdentifier
-     * @param  int   $actingUserIdentifier
+     * @param int    $actingUserIdentifier
      * @return bool
      */
-    public function activateToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier )
-    {
-        return false;
-    }
-
-    /**
-     * @param string  $toggleIdentifier
-     * @param  int    $groupIdentifier
-     * @param     int $actingUserIdentifier
-     * @return bool
-     */
-    public function deActivateToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier )
-    {
-        return false;
-    }
-
-    /**
-     * @param string $toggleIdentifier
-     * @param int    $userIdentifier
-     * @return bool
-     */
-    public function unsetToggleForUser( $toggleIdentifier, $userIdentifier )
-    {
-        return false;
-    }
-
-    /**
-     * @param string $toggleIdentifier
-     * @param  int   $groupIdentifier
-     * @param  int   $actingUserIdentifier
-     * @return bool
-     */
-    public function unsetToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier )
+    public function setToggleStatusForGroup( $toggleIdentifier, $toggleStatus, $groupIdentifier, $actingUserIdentifier )
     {
         return false;
     }

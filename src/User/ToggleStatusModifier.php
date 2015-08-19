@@ -40,7 +40,7 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
         $errors = $this->validateRequest( $request );
 
         if ( empty( $errors ) ) {
-            $success = $this->changeToggleState( $request );
+            $success = $this->changeToggleStatus( $request );
 
             if ( !$success ) {
                 $errors[] = Response::ERROR_UNKNOWN_ERROR;
@@ -63,8 +63,9 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
         }
 
         if ( !in_array( $request->getNewToggleStatus(),
-                        [ Request::TOGGLE_STATUS_ACTIVE, Request::TOGGLE_STATUS_INACTIVE,
-                          Request::TOGGLE_STATUS_UNSET ] )
+                        [ self::TOGGLE_STATUS_ACTIVE,
+                          self::TOGGLE_STATUS_INACTIVE,
+                          self::TOGGLE_STATUS_UNSET ] )
         ) {
             $errors[] = Response::ERROR_INVALID_TOGGLE_STATUS;
         }
@@ -94,40 +95,18 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
      * @param Request $request
      * @return bool
      */
-    private function changeToggleState( Request $request )
+    private function changeToggleStatus( Request $request )
     {
-        switch ( $request->getNewToggleStatus() ) {
-            case Request::TOGGLE_STATUS_ACTIVE:
-                if ( empty( $request->getGroupIdentifier() ) ) {
-                    return $this->toggleStatusModifierService->activateToggleForUser( $request->getToggleIdentifier(),
-                                                                                      $request->getUserIdentifier() );
-                }
-
-                return $this->toggleStatusModifierService->activateToggleForGroup( $request->getToggleIdentifier(),
-                                                                                   $request->getGroupIdentifier(),
-                                                                                   $request->getUserIdentifier() );
-
-            case Request::TOGGLE_STATUS_INACTIVE:
-                if ( empty( $request->getGroupIdentifier() ) ) {
-                    return $this->toggleStatusModifierService->deActivateToggleForUser( $request->getToggleIdentifier(),
-                                                                                        $request->getUserIdentifier() );
-                }
-
-                return $this->toggleStatusModifierService->deActivateToggleForGroup( $request->getToggleIdentifier(),
-                                                                                     $request->getGroupIdentifier(),
-                                                                                     $request->getUserIdentifier() );
-
-            case Request::TOGGLE_STATUS_UNSET:
-            default:
-                if ( empty( $request->getGroupIdentifier() ) ) {
-                    return $this->toggleStatusModifierService->unsetToggleForUser( $request->getToggleIdentifier(),
-                                                                                   $request->getUserIdentifier() );
-                }
-
-                return $this->toggleStatusModifierService->unsetToggleForGroup( $request->getToggleIdentifier(),
-                                                                                $request->getGroupIdentifier(),
-                                                                                $request->getUserIdentifier() );
+        if ( empty( $request->getGroupIdentifier() ) ) {
+            return $this->toggleStatusModifierService->setToggleStatusForUser( $request->getToggleIdentifier(),
+                                                                               $request->getNewToggleStatus(),
+                                                                               $request->getUserIdentifier() );
         }
+
+        return $this->toggleStatusModifierService->setToggleStatusForGroup( $request->getToggleIdentifier(),
+                                                                            $request->getNewToggleStatus(),
+                                                                            $request->getGroupIdentifier(),
+                                                                            $request->getUserIdentifier() );
     }
 
     /**

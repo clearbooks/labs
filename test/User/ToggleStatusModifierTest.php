@@ -37,7 +37,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingValidToggleActivationRequest_ResponseHandlerReceivesResponse()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, 1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, 1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -49,7 +49,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingValidToggleDeactivationRequest_ResponseHandlerReceivesResponse()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_INACTIVE, 1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_INACTIVE, 1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -61,7 +61,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingValidToggleUnsetRequest_ResponseHandlerReceivesResponse()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_UNSET, 1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_UNSET, 1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -86,7 +86,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingToggleActivationRequestWithoutToggleId_ResultsInUnknownIdentifierError()
     {
-        $request = new Request( "", Request::TOGGLE_STATUS_ACTIVE, 1 );
+        $request = new Request( "", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, 1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -99,7 +99,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingToggleActivationRequestWithoutUserId_ResultsInUnknownUserError()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, null );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, null );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -112,7 +112,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingToggleActivationRequestWithInvalidGroupId_ResultsInUnknownGroupError()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, 1, -1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, 1, -1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -125,7 +125,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingValidToggleActivationRequest_ResultsInSuccessfulResponse()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, 1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, 1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -142,7 +142,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
 
         $this->permissionService->addAsGroupAdmin( $userIdentifier, $groupIdentifier );
 
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, $userIdentifier, $groupIdentifier );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, $userIdentifier, $groupIdentifier );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -159,7 +159,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
 
         $this->permissionService->addAsGroupAdmin( $userIdentifier, $groupIdentifier );
 
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, $userIdentifier, $groupIdentifier );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, $userIdentifier, $groupIdentifier );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -178,7 +178,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function GivenToggleServiceIsNotAbleToActivateToggles_WhenExecutingValidToggleActivationRequest_ResultsInUnknownError()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, 1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, 1 );
         $failingToggleActivator = new ToggleStatusModifier( new FailingToggleStatusModifierService(),
                                                             $this->permissionService );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
@@ -193,7 +193,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingValidGroupToggleActivationRequestWithNonGroupAdminUser_ResultsInUserIsNotGroupAdminError()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, 1, 1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, 1, 1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
@@ -204,13 +204,15 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function WhenExecutingValidToggleActivationRequest_ActivateToggleForUserIsCalled()
+    public function WhenExecutingValidToggleActivationRequest_SetToggleStatusForUserIsCalled()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, 1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, 1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
-        $this->assertTrue( $this->successfulToggleStatusModifierServiceSpy->isActivateToggleForUserCalled() );
+        $this->assertEquals( ToggleStatusModifier::TOGGLE_STATUS_ACTIVE,
+                             $this->successfulToggleStatusModifierServiceSpy->getToggleStatusForUser( $request->getToggleIdentifier(),
+                                                                                                      $request->getUserIdentifier() ) );
     }
 
     /**
@@ -218,11 +220,13 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingValidToggleDeActivationRequest_DeActivateToggleForUserIsCalled()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_INACTIVE, 1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_INACTIVE, 1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
-        $this->assertTrue( $this->successfulToggleStatusModifierServiceSpy->isDeActivateToggleForUserCalled() );
+        $this->assertEquals( ToggleStatusModifier::TOGGLE_STATUS_INACTIVE,
+                             $this->successfulToggleStatusModifierServiceSpy->getToggleStatusForUser( $request->getToggleIdentifier(),
+                                                                                                      $request->getUserIdentifier() ) );
     }
 
     /**
@@ -230,11 +234,13 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     public function WhenExecutingValidToggleUnsetRequest_UnsetToggleForUserIsCalled()
     {
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_UNSET, 1 );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_UNSET, 1 );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
-        $this->assertTrue( $this->successfulToggleStatusModifierServiceSpy->isUnsetToggleForUserCalled() );
+        $this->assertEquals( ToggleStatusModifier::TOGGLE_STATUS_UNSET,
+                             $this->successfulToggleStatusModifierServiceSpy->getToggleStatusForUser( $request->getToggleIdentifier(),
+                                                                                                      $request->getUserIdentifier() ) );
     }
 
     /**
@@ -247,11 +253,13 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
 
         $this->permissionService->addAsGroupAdmin( $userIdentifier, $groupIdentifier );
 
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_ACTIVE, $userIdentifier, $groupIdentifier );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, $userIdentifier, $groupIdentifier );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
-        $this->assertTrue( $this->successfulToggleStatusModifierServiceSpy->isActivateToggleForGroupCalled() );
+        $this->assertEquals( ToggleStatusModifier::TOGGLE_STATUS_ACTIVE,
+                             $this->successfulToggleStatusModifierServiceSpy->getToggleStatusForGroup( $request->getToggleIdentifier(),
+                                                                                                       $request->getGroupIdentifier() ) );
     }
 
     /**
@@ -264,11 +272,13 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
 
         $this->permissionService->addAsGroupAdmin( $userIdentifier, $groupIdentifier );
 
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_INACTIVE, $userIdentifier, $groupIdentifier );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_INACTIVE, $userIdentifier, $groupIdentifier );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
-        $this->assertTrue( $this->successfulToggleStatusModifierServiceSpy->isDeActivateToggleForGroupCalled() );
+        $this->assertEquals( ToggleStatusModifier::TOGGLE_STATUS_INACTIVE,
+                             $this->successfulToggleStatusModifierServiceSpy->getToggleStatusForGroup( $request->getToggleIdentifier(),
+                                                                                                       $request->getGroupIdentifier() ) );
     }
 
     /**
@@ -281,11 +291,13 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
 
         $this->permissionService->addAsGroupAdmin( $userIdentifier, $groupIdentifier );
 
-        $request = new Request( "test_toggle", Request::TOGGLE_STATUS_UNSET, $userIdentifier, $groupIdentifier );
+        $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_UNSET, $userIdentifier, $groupIdentifier );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $this->toggleStatusModifier->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 
-        $this->assertTrue( $this->successfulToggleStatusModifierServiceSpy->isUnsetToggleForGroupCalled() );
+        $this->assertEquals( ToggleStatusModifier::TOGGLE_STATUS_UNSET,
+                             $this->successfulToggleStatusModifierServiceSpy->getToggleStatusForGroup( $request->getToggleIdentifier(),
+                                                                                                       $request->getGroupIdentifier() ) );
     }
 }
 //EOF ToggleStatusModifierTest.php

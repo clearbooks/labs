@@ -3,10 +3,6 @@ namespace Clearbooks\Labs\User\UseCase\ToggleStatusModifier;
 
 interface Request
 {
-    const TOGGLE_STATUS_ACTIVE = "active";
-    const TOGGLE_STATUS_INACTIVE = "inactive";
-    const TOGGLE_STATUS_UNSET = "unset";
-
     /**
      * @return string
      */
