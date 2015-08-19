@@ -1,14 +1,17 @@
 <?php
-namespace Clearbooks\Labs\User;
+namespace Clearbooks\Labs\User\ToggleStatusModifier;
 
-use Clearbooks\Labs\User\UseCase\ToggleResponse;
-
-abstract class AbstractToggleResponse implements ToggleResponse
+class Response implements \Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Response
 {
     /**
      * @var string
      */
     private $toggleIdentifier;
+
+    /**
+     * @var string
+     */
+    private $newToggleStatus;
 
     /**
      * @var int
@@ -25,9 +28,11 @@ abstract class AbstractToggleResponse implements ToggleResponse
      */
     private $errors = [ ];
 
-    public function __construct( $toggleIdentifier, $userIdentifier, $groupIdentifier = null, array $errors = [ ] )
+    public function __construct( $toggleIdentifier, $newToggleStatus, $userIdentifier, $groupIdentifier = null,
+                                 array $errors = [ ] )
     {
         $this->setToggleIdentifier( $toggleIdentifier );
+        $this->setNewToggleStatus( $newToggleStatus );
         $this->setUserIdentifier( $userIdentifier );
         $this->setGroupIdentifier( $groupIdentifier );
         $this->setErrors( $errors );
@@ -47,6 +52,22 @@ abstract class AbstractToggleResponse implements ToggleResponse
     public function setToggleIdentifier( $toggleIdentifier )
     {
         $this->toggleIdentifier = $toggleIdentifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewToggleStatus()
+    {
+        return $this->newToggleStatus;
+    }
+
+    /**
+     * @param string $toggleStatus
+     */
+    public function setNewToggleStatus( $toggleStatus )
+    {
+        $this->newToggleStatus = $toggleStatus;
     }
 
     /**
@@ -97,4 +118,4 @@ abstract class AbstractToggleResponse implements ToggleResponse
         $this->errors = $errors;
     }
 }
-//EOF AbstractToggleResponse.php
+//EOF Response.php

@@ -1,10 +1,10 @@
 <?php
 namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\UseCase\ToggleActivator\Response;
-use Clearbooks\Labs\User\UseCase\ToggleActivatorResponseHandler;
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Response;
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifierResponseHandler;
 
-class ToggleActivatorResponseHandlerSpy implements ToggleActivatorResponseHandler
+class ToggleStatusModifierResponseHandlerSpy implements ToggleStatusModifierResponseHandler
 {
     /**
      * @var Response
@@ -24,4 +24,4 @@ class ToggleActivatorResponseHandlerSpy implements ToggleActivatorResponseHandle
         return $this->lastHandledResponse;
     }
 }
-//EOF ToggleActivatorResponseHandlerSpy.php
+//EOF ToggleStatusModifierResponseHandlerSpy.php

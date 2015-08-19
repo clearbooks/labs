@@ -27,11 +27,6 @@ class MockPermissionService implements PermissionService
         $this->groupAdminData[$groupIdentifier][] = $userIdentifier;
     }
 
-    public function clearGroupAdminData()
-    {
-        $this->groupAdminData = [];
-    }
-
     /**
      * @param int $userIdentifier
      * @param int $groupIdentifier

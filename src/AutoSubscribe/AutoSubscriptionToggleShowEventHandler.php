@@ -5,28 +5,28 @@ use Clearbooks\Labs\AutoSubscribe\Entity\User;
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriberProvider;
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
-use Clearbooks\Labs\User\ToggleActivator\Request;
-use Clearbooks\Labs\User\UseCase\ToggleActivator;
-use Clearbooks\Labs\User\UseCase\ToggleActivator\Response;
-use Clearbooks\Labs\User\UseCase\ToggleActivatorResponseHandler;
+use Clearbooks\Labs\User\ToggleStatusModifier\Request;
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifier;
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Response;
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifierResponseHandler;
 
-class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,ToggleActivatorResponseHandler
+class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,ToggleStatusModifierResponseHandler
 {
     /** @var AutoSubscriberProvider */
     private $autoSubscriberProvider;
-    /** @var ToggleActivator */
-    private $toggleActivator;
+    /** @var ToggleStatusModifier */
+    private $toggleStatusModifier;
     /** @var Response */
     private $activatorResponse;
 
     /**
      * @param AutoSubscriberProvider $autoSubscriberProvider
-     * @param ToggleActivator $toggleActivator
+     * @param ToggleStatusModifier   $toggleStatusModifier
      */
-    public function __construct(AutoSubscriberProvider $autoSubscriberProvider, ToggleActivator $toggleActivator)
+    public function __construct(AutoSubscriberProvider $autoSubscriberProvider, ToggleStatusModifier $toggleStatusModifier)
     {
         $this->autoSubscriberProvider = $autoSubscriberProvider;
-        $this->toggleActivator = $toggleActivator;
+        $this->toggleStatusModifier = $toggleStatusModifier;
     }
 
     /**
@@ -40,8 +40,8 @@ class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,Tog
         $result = false;
         /** @var User $user */
         foreach ( $subscribers as $user ) {
-            $request = new Request($event->getToggleName(),$user->getId());
-            $this->toggleActivator->execute($request, $this);
+            $request = new Request($event->getToggleName(), Request::TOGGLE_STATUS_ACTIVE, $user->getId());
+            $this->toggleStatusModifier->execute($request, $this);
             $result = empty($this->activatorResponse->getErrors()) || $result;
         }
         return $result;

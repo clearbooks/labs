@@ -1,15 +1,11 @@
 <?php
-namespace Clearbooks\Labs\User\UseCase;
+namespace Clearbooks\Labs\User\UseCase\ToggleStatusModifier;
 
-interface ToggleResponse
+interface Request
 {
-    const ERROR_UNKNOWN_ERROR = 0;
-    const ERROR_UNKNOWN_TOGGLE = 1;
-    const ERROR_UNKNOWN_USER = 2;
-    const ERROR_TOGGLE_ALREADY_ACTIVE = 3;
-    const ERROR_TOGGLE_NOT_ACTIVE = 4;
-    const ERROR_UNKNOWN_GROUP = 5;
-    const ERROR_USER_IS_NOT_GROUP_ADMIN = 6;
+    const TOGGLE_STATUS_ACTIVE = "active";
+    const TOGGLE_STATUS_INACTIVE = "inactive";
+    const TOGGLE_STATUS_UNSET = "unset";
 
     /**
      * @return string
@@ -20,6 +16,16 @@ interface ToggleResponse
      * @param string $toggleIdentifier
      */
     public function setToggleIdentifier( $toggleIdentifier );
+
+    /**
+     * @return string
+     */
+    public function getNewToggleStatus();
+
+    /**
+     * @param string $toggleStatus
+     */
+    public function setNewToggleStatus( $toggleStatus );
 
     /**
      * @return int
@@ -40,15 +46,5 @@ interface ToggleResponse
      * @param int $groupIdentifier
      */
     public function setGroupIdentifier( $groupIdentifier );
-
-    /**
-     * @return int[]
-     */
-    public function getErrors();
-
-    /**
-     * @param int[] $errors
-     */
-    public function setErrors( array $errors );
 }
-//EOF ToggleResponse.php
+//EOF Request.php

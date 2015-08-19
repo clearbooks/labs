@@ -1,14 +1,17 @@
 <?php
-namespace Clearbooks\Labs\User;
+namespace Clearbooks\Labs\User\ToggleStatusModifier;
 
-use Clearbooks\Labs\User\UseCase\ToggleRequest;
-
-abstract class AbstractToggleRequest implements ToggleRequest
+class Request implements \Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Request
 {
     /**
      * @var string
      */
     private $toggleIdentifier;
+
+    /**
+     * @var string
+     */
+    private $newToggleStatus;
 
     /**
      * @var int
@@ -20,9 +23,10 @@ abstract class AbstractToggleRequest implements ToggleRequest
      */
     private $groupIdentifier;
 
-    public function __construct( $toggleIdentifier, $userIdentifier, $groupIdentifier = null )
+    public function __construct( $toggleIdentifier, $newToggleStatus, $userIdentifier, $groupIdentifier = null )
     {
         $this->setToggleIdentifier( $toggleIdentifier );
+        $this->setNewToggleStatus( $newToggleStatus );
         $this->setUserIdentifier( $userIdentifier );
         $this->setGroupIdentifier( $groupIdentifier );
     }
@@ -41,6 +45,22 @@ abstract class AbstractToggleRequest implements ToggleRequest
     public function setToggleIdentifier( $toggleIdentifier )
     {
         $this->toggleIdentifier = $toggleIdentifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewToggleStatus()
+    {
+        return $this->newToggleStatus;
+    }
+
+    /**
+     * @param string $toggleStatus
+     */
+    public function setNewToggleStatus( $toggleStatus )
+    {
+        $this->newToggleStatus = $toggleStatus;
     }
 
     /**
@@ -75,4 +95,4 @@ abstract class AbstractToggleRequest implements ToggleRequest
         $this->groupIdentifier = $groupIdentifier;
     }
 }
-//EOF AbstractToggleRequest.php
+//EOF Request.php

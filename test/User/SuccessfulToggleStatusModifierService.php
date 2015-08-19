@@ -1,9 +1,9 @@
 <?php
 namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\UseCase\ToggleService;
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifierService;
 
-class SuccessfulToggleService implements ToggleService
+class SuccessfulToggleStatusModifierService implements ToggleStatusModifierService
 {
     /**
      * @param string $toggleIdentifier
@@ -46,5 +46,26 @@ class SuccessfulToggleService implements ToggleService
     {
         return true;
     }
+
+    /**
+     * @param string $toggleIdentifier
+     * @param int    $userIdentifier
+     * @return bool
+     */
+    public function unsetToggleForUser( $toggleIdentifier, $userIdentifier )
+    {
+        return true;
+    }
+
+    /**
+     * @param string $toggleIdentifier
+     * @param  int   $groupIdentifier
+     * @param  int   $actingUserIdentifier
+     * @return bool
+     */
+    public function unsetToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier )
+    {
+        return true;
+    }
 }
-//EOF SuccessfulToggleService.php
+//EOF SuccessfulToggleStatusModifierService.php
