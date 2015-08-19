@@ -29,7 +29,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
         $this->permissionService = new MockPermissionService();
 
         $this->toggleStatusModifier = new ToggleStatusModifier( $this->successfulToggleStatusModifierServiceSpy,
-                                                                $this->permissionService );
+                                                                new ToggleStatusModifierRequestValidator( $this->permissionService ) );
     }
 
     /**
@@ -180,7 +180,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request( "test_toggle", ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, 1 );
         $failingToggleActivator = new ToggleStatusModifier( new FailingToggleStatusModifierService(),
-                                                            $this->permissionService );
+                                                            new ToggleStatusModifierRequestValidator( $this->permissionService ) );
         $toggleStatusModifierResponseHandlerSpy = new ToggleStatusModifierResponseHandlerSpy();
         $failingToggleActivator->execute( $request, $toggleStatusModifierResponseHandlerSpy );
 

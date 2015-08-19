@@ -1,7 +1,6 @@
 <?php
 namespace Clearbooks\Labs\User;
 
-use Clearbooks\Labs\User\UseCase\PermissionService;
 use Clearbooks\Labs\User\UseCase\ToggleStatusModifierService;
 use Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Request;
 use Clearbooks\Labs\User\ToggleStatusModifier\Response;
@@ -14,14 +13,14 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
     private $toggleStatusModifierService;
 
     /**
-     * @var PermissionService
+     * @var ToggleStatusModifierRequestValidator
      */
-    private $permissionService;
+    private $toggleStatusModifierRequestValidator;
 
-    public function __construct( ToggleStatusModifierService $toggleService, PermissionService $permissionService )
+    public function __construct( ToggleStatusModifierService $toggleService, ToggleStatusModifierRequestValidator $toggleStatusModifierRequestValidator )
     {
         $this->toggleStatusModifierService = $toggleService;
-        $this->permissionService = $permissionService;
+        $this->toggleStatusModifierRequestValidator = $toggleStatusModifierRequestValidator;
     }
 
     public function execute( Request $request, UseCase\ToggleStatusModifierResponseHandler $responseHandler )
@@ -56,48 +55,7 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
      */
     private function validateRequest( Request $request )
     {
-        $errors = [ ];
-
-        if ( empty( $request->getToggleIdentifier() ) ) {
-            $errors[] = Response::ERROR_UNKNOWN_TOGGLE;
-        }
-
-        if ( !in_array( $request->getNewToggleStatus(),
-                        [ self::TOGGLE_STATUS_ACTIVE,
-                          self::TOGGLE_STATUS_INACTIVE,
-                          self::TOGGLE_STATUS_UNSET ] )
-        ) {
-            $errors[] = Response::ERROR_INVALID_TOGGLE_STATUS;
-        }
-
-        if ( $request->getUserIdentifier() <= 0 ) {
-            $errors[] = Response::ERROR_UNKNOWN_USER;
-        }
-
-        $errors = array_merge( $errors, $this->validateGroupRelatedInput( $request ) );
-
-        return $errors;
-    }
-
-    private function validateGroupRelatedInput( Request $request )
-    {
-        $errors = [ ];
-
-        if ( !empty( $request->getGroupIdentifier() ) ) {
-            if ( $request->getGroupIdentifier() <= 0 ) {
-                $errors[] = Response::ERROR_UNKNOWN_GROUP;
-            }
-
-            if ( !in_array( Response::ERROR_UNKNOWN_GROUP, $errors )
-                    && !in_array( Response::ERROR_UNKNOWN_USER, $errors )
-                    && !$this->permissionService->isGroupAdmin( $request->getUserIdentifier(),
-                                                                $request->getGroupIdentifier() )
-            ) {
-                $errors[] = Response::ERROR_USER_IS_NOT_GROUP_ADMIN;
-            }
-        }
-
-        return $errors;
+        return $this->toggleStatusModifierRequestValidator->validate( $request );
     }
 
     /**
