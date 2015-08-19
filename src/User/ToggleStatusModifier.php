@@ -118,6 +118,7 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
                                                                                      $request->getUserIdentifier() );
 
             case Request::TOGGLE_STATUS_UNSET:
+            default:
                 if ( empty( $request->getGroupIdentifier() ) ) {
                     return $this->toggleStatusModifierService->unsetToggleForUser( $request->getToggleIdentifier(),
                                                                                    $request->getUserIdentifier() );
@@ -127,8 +128,6 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
                                                                                 $request->getGroupIdentifier(),
                                                                                 $request->getUserIdentifier() );
         }
-
-        return false;
     }
 
     /**
