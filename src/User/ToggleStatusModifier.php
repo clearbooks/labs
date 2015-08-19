@@ -74,6 +74,15 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
             $errors[] = Response::ERROR_UNKNOWN_USER;
         }
 
+        $errors = array_merge( $errors, $this->validateGroupRelatedInput( $request ) );
+
+        return $errors;
+    }
+
+    private function validateGroupRelatedInput( Request $request )
+    {
+        $errors = [ ];
+
         if ( !empty( $request->getGroupIdentifier() ) ) {
             if ( $request->getGroupIdentifier() <= 0 ) {
                 $errors[] = Response::ERROR_UNKNOWN_GROUP;
