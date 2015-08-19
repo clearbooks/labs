@@ -11,12 +11,12 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
     /**
      * @var ToggleStatusModifierService
      */
-    protected $toggleStatusModifierService;
+    private $toggleStatusModifierService;
 
     /**
      * @var PermissionService
      */
-    protected $permissionService;
+    private $permissionService;
 
     public function __construct( ToggleStatusModifierService $toggleService, PermissionService $permissionService )
     {
@@ -35,7 +35,7 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
      * @param Request $request
      * @return array
      */
-    protected function handleRequest( Request $request )
+    private function handleRequest( Request $request )
     {
         $errors = $this->validateRequest( $request );
 
@@ -54,7 +54,7 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
      * @param Request $request
      * @return array
      */
-    protected function validateRequest( Request $request )
+    private function validateRequest( Request $request )
     {
         $errors = [ ];
 
@@ -94,7 +94,7 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
      * @param Request $request
      * @return bool
      */
-    protected function changeToggleState( Request $request )
+    private function changeToggleState( Request $request )
     {
         switch ( $request->getNewToggleStatus() ) {
             case Request::TOGGLE_STATUS_ACTIVE:
@@ -136,7 +136,7 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
      * @param                   $errors
      * @return Response
      */
-    protected function createResponse( Request $request, $errors )
+    private function createResponse( Request $request, $errors )
     {
         return new Response( $request->getToggleIdentifier(), $request->getNewToggleStatus(),
                              $request->getUserIdentifier(), $request->getGroupIdentifier(), $errors );
