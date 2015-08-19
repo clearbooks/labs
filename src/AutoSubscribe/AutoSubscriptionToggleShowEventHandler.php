@@ -10,7 +10,7 @@ use Clearbooks\Labs\User\UseCase\ToggleStatusModifier;
 use Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Response;
 use Clearbooks\Labs\User\UseCase\ToggleStatusModifierResponseHandler;
 
-class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber,ToggleStatusModifierResponseHandler
+class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber, ToggleStatusModifierResponseHandler
 {
     /** @var AutoSubscriberProvider */
     private $autoSubscriberProvider;
