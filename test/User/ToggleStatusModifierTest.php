@@ -165,6 +165,8 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals( $request->getToggleIdentifier(),
                              $toggleStatusModifierResponseHandlerSpy->getLastHandledResponse()->getToggleIdentifier() );
+        $this->assertEquals( $request->getNewToggleStatus(),
+                             $toggleStatusModifierResponseHandlerSpy->getLastHandledResponse()->getNewToggleStatus() );
         $this->assertEquals( $request->getUserIdentifier(),
                              $toggleStatusModifierResponseHandlerSpy->getLastHandledResponse()->getUserIdentifier() );
         $this->assertEquals( $request->getGroupIdentifier(),
