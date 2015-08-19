@@ -1,6 +1,7 @@
 <?php
 namespace Clearbooks\Labs\User;
 
+use Clearbooks\Labs\User\UseCase\PermissionService;
 use Clearbooks\Labs\User\UseCase\ToggleRequest;
 use Clearbooks\Labs\User\UseCase\ToggleResponse;
 use Clearbooks\Labs\User\UseCase\ToggleService;
@@ -12,9 +13,15 @@ abstract class AbstractToggleInteractor
      */
     protected $toggleService;
 
-    public function __construct( ToggleService $toggleService )
+    /**
+     * @var PermissionService
+     */
+    protected $permissionService;
+
+    public function __construct( ToggleService $toggleService, PermissionService $permissionService )
     {
         $this->toggleService = $toggleService;
+        $this->permissionService = $permissionService;
     }
 
     /**
@@ -50,6 +57,20 @@ abstract class AbstractToggleInteractor
 
         if ( $request->getUserIdentifier() <= 0 ) {
             $errors[] = ToggleResponse::ERROR_UNKNOWN_USER;
+        }
+
+        if ( !empty( $request->getGroupIdentifier() ) ) {
+            if ( $request->getGroupIdentifier() <= 0 ) {
+                $errors[] = ToggleResponse::ERROR_UNKNOWN_GROUP;
+            }
+
+            if ( !in_array( ToggleResponse::ERROR_UNKNOWN_GROUP, $errors )
+                    && !in_array( ToggleResponse::ERROR_UNKNOWN_USER, $errors )
+                    && !$this->permissionService->isGroupAdmin( $request->getUserIdentifier(),
+                                                                $request->getGroupIdentifier() )
+            ) {
+                $errors[] = ToggleResponse::ERROR_USER_IS_NOT_GROUP_ADMIN;
+            }
         }
 
         return $errors;

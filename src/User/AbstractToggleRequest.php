@@ -15,10 +15,16 @@ abstract class AbstractToggleRequest implements ToggleRequest
      */
     private $userIdentifier;
 
-    public function __construct( $toggleIdentifier, $userIdentifier )
+    /**
+     * @var int|null
+     */
+    private $groupIdentifier;
+
+    public function __construct( $toggleIdentifier, $userIdentifier, $groupIdentifier = null )
     {
         $this->setToggleIdentifier( $toggleIdentifier );
         $this->setUserIdentifier( $userIdentifier );
+        $this->setGroupIdentifier( $groupIdentifier );
     }
 
     /**
@@ -51,6 +57,22 @@ abstract class AbstractToggleRequest implements ToggleRequest
     public function setUserIdentifier( $userIdentifier )
     {
         $this->userIdentifier = $userIdentifier;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getGroupIdentifier()
+    {
+        return $this->groupIdentifier;
+    }
+
+    /**
+     * @param int $groupIdentifier
+     */
+    public function setGroupIdentifier( $groupIdentifier )
+    {
+        $this->groupIdentifier = $groupIdentifier;
     }
 }
 //EOF AbstractToggleRequest.php

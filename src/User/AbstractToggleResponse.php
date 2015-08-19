@@ -16,14 +16,20 @@ abstract class AbstractToggleResponse implements ToggleResponse
     private $userIdentifier;
 
     /**
+     * @var int
+     */
+    private $groupIdentifier;
+
+    /**
      * @var int[]
      */
     private $errors = [ ];
 
-    public function __construct( $toggleIdentifier, $userIdentifier, array $errors = [ ] )
+    public function __construct( $toggleIdentifier, $userIdentifier, $groupIdentifier = null, array $errors = [ ] )
     {
         $this->setToggleIdentifier( $toggleIdentifier );
         $this->setUserIdentifier( $userIdentifier );
+        $this->setGroupIdentifier( $groupIdentifier );
         $this->setErrors( $errors );
     }
 
@@ -57,6 +63,22 @@ abstract class AbstractToggleResponse implements ToggleResponse
     public function setUserIdentifier( $userIdentifier )
     {
         $this->userIdentifier = $userIdentifier;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getGroupIdentifier()
+    {
+        return $this->groupIdentifier;
+    }
+
+    /**
+     * @param int $groupIdentifier
+     */
+    public function setGroupIdentifier( $groupIdentifier )
+    {
+        $this->groupIdentifier = $groupIdentifier;
     }
 
     /**

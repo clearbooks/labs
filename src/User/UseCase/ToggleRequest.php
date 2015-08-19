@@ -22,5 +22,15 @@ interface ToggleRequest
      * @param int $userIdentifier
      */
     public function setUserIdentifier( $userIdentifier );
+
+    /**
+     * @return int|null
+     */
+    public function getGroupIdentifier();
+
+    /**
+     * @param int $groupIdentifier
+     */
+    public function setGroupIdentifier( $groupIdentifier );
 }
 //EOF ToggleRequest.php

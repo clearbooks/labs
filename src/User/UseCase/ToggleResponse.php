@@ -8,6 +8,8 @@ interface ToggleResponse
     const ERROR_UNKNOWN_USER = 2;
     const ERROR_TOGGLE_ALREADY_ACTIVE = 3;
     const ERROR_TOGGLE_NOT_ACTIVE = 4;
+    const ERROR_UNKNOWN_GROUP = 5;
+    const ERROR_USER_IS_NOT_GROUP_ADMIN = 6;
 
     /**
      * @return string
@@ -28,6 +30,16 @@ interface ToggleResponse
      * @param int $userIdentifier
      */
     public function setUserIdentifier( $userIdentifier );
+
+    /**
+     * @return int|null
+     */
+    public function getGroupIdentifier();
+
+    /**
+     * @param int $groupIdentifier
+     */
+    public function setGroupIdentifier( $groupIdentifier );
 
     /**
      * @return int[]

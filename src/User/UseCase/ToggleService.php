@@ -4,17 +4,33 @@ namespace Clearbooks\Labs\User\UseCase;
 interface ToggleService
 {
     /**
-     * @param string $toggleIdentifier
-     * @param int    $userIdentifier
+     * @param string   $toggleIdentifier
+     * @param int      $userIdentifier
      * @return bool
      */
-    public function activateToggle( $toggleIdentifier, $userIdentifier );
+    public function activateToggleForUser( $toggleIdentifier, $userIdentifier );
+
+    /**
+     * @param string   $toggleIdentifier
+     * @param int      $userIdentifier
+     * @return bool
+     */
+    public function deActivateToggleForUser( $toggleIdentifier, $userIdentifier );
 
     /**
      * @param string $toggleIdentifier
-     * @param int    $userIdentifier
+     * @param int    $groupIdentifier
+     * @param  int   $actingUserIdentifier
      * @return bool
      */
-    public function deActivateToggle( $toggleIdentifier, $userIdentifier );
+    public function activateToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier );
+
+    /**
+     * @param string  $toggleIdentifier
+     * @param  int    $groupIdentifier
+     * @param     int $actingUserIdentifier
+     * @return bool
+     */
+    public function deActivateToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier );
 }
 //EOF ToggleService.php

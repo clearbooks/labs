@@ -20,7 +20,14 @@ class ToggleDeactivator extends AbstractToggleInteractor implements UseCase\Togg
      */
     protected function changeToggleState( ToggleRequest $request )
     {
-        return $this->toggleService->deActivateToggle( $request->getToggleIdentifier(), $request->getUserIdentifier() );
+        if ( empty( $request->getGroupIdentifier() ) ) {
+            return $this->toggleService->deActivateToggleForUser( $request->getToggleIdentifier(),
+                                                                  $request->getUserIdentifier() );
+        }
+
+        return $this->toggleService->deActivateToggleForGroup( $request->getToggleIdentifier(),
+                                                               $request->getGroupIdentifier(),
+                                                               $request->getUserIdentifier() );
     }
 
     /**
@@ -30,7 +37,8 @@ class ToggleDeactivator extends AbstractToggleInteractor implements UseCase\Togg
      */
     protected function createResponse( ToggleRequest $request, $errors )
     {
-        return new Response( $request->getToggleIdentifier(), $request->getUserIdentifier(), $errors );
+        return new Response( $request->getToggleIdentifier(), $request->getUserIdentifier(),
+                             $request->getGroupIdentifier(), $errors );
     }
 }
 //EOF ToggleDeactivator.php

@@ -10,7 +10,7 @@ class SuccessfulToggleService implements ToggleService
      * @param int    $userIdentifier
      * @return bool
      */
-    public function activateToggle( $toggleIdentifier, $userIdentifier )
+    public function activateToggleForUser( $toggleIdentifier, $userIdentifier )
     {
         return true;
     }
@@ -20,7 +20,29 @@ class SuccessfulToggleService implements ToggleService
      * @param int    $userIdentifier
      * @return bool
      */
-    public function deActivateToggle( $toggleIdentifier, $userIdentifier )
+    public function deActivateToggleForUser( $toggleIdentifier, $userIdentifier )
+    {
+        return true;
+    }
+
+    /**
+     * @param string $toggleIdentifier
+     * @param int    $groupIdentifier
+     * @param  int   $actingUserIdentifier
+     * @return bool
+     */
+    public function activateToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier )
+    {
+        return true;
+    }
+
+    /**
+     * @param string  $toggleIdentifier
+     * @param  int    $groupIdentifier
+     * @param     int $actingUserIdentifier
+     * @return bool
+     */
+    public function deActivateToggleForGroup( $toggleIdentifier, $groupIdentifier, $actingUserIdentifier )
     {
         return true;
     }

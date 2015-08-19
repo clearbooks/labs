@@ -20,7 +20,14 @@ class ToggleActivator extends AbstractToggleInteractor implements UseCase\Toggle
      */
     protected function changeToggleState( ToggleRequest $request )
     {
-        return $this->toggleService->activateToggle( $request->getToggleIdentifier(), $request->getUserIdentifier() );
+        if ( empty( $request->getGroupIdentifier() ) ) {
+            return $this->toggleService->activateToggleForUser( $request->getToggleIdentifier(),
+                                                                $request->getUserIdentifier() );
+        }
+
+        return $this->toggleService->activateToggleForGroup( $request->getToggleIdentifier(),
+                                                             $request->getGroupIdentifier(),
+                                                             $request->getUserIdentifier() );
     }
 
     /**
@@ -30,7 +37,8 @@ class ToggleActivator extends AbstractToggleInteractor implements UseCase\Toggle
      */
     protected function createResponse( ToggleRequest $request, $errors )
     {
-        return new Response( $request->getToggleIdentifier(), $request->getUserIdentifier(), $errors );
+        return new Response( $request->getToggleIdentifier(), $request->getUserIdentifier(),
+                             $request->getGroupIdentifier(), $errors );
     }
 }
 //EOF ToggleActivator.php
