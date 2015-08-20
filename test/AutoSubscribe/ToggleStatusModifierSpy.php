@@ -1,17 +1,17 @@
 <?php
 namespace Clearbooks\Labs\AutoSubscribe;
 
-use Clearbooks\Labs\User\UserToggleActivator\Response;
-use Clearbooks\Labs\User\UseCase\UserToggleActivator;
-use Clearbooks\Labs\User\UseCase\UserToggleActivator\Request;
-use Clearbooks\Labs\User\UseCase\UserToggleActivatorResponseHandler;
+use Clearbooks\Labs\User\ToggleStatusModifier\Response;
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifier;
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Request;
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifierResponseHandler;
 
-class UserToggleActivatorSpy implements UserToggleActivator
+class ToggleStatusModifierSpy implements ToggleStatusModifier
 {
     /** @var int[][] */
     private $executePairs = [];
 
-    public function execute(Request $request, UserToggleActivatorResponseHandler $responseHandler)
+    public function execute(Request $request, ToggleStatusModifierResponseHandler $responseHandler)
     {
         $this->logAndIncrementToggleUserIdCall($request);
         $this->makeASuccessfulResponse($request, $responseHandler);
@@ -43,12 +43,12 @@ class UserToggleActivatorSpy implements UserToggleActivator
 
     /**
      * @param Request $request
-     * @param UserToggleActivatorResponseHandler $responseHandler
+     * @param ToggleStatusModifierResponseHandler $responseHandler
      * @return mixed
      */
-    private function makeASuccessfulResponse(Request $request, UserToggleActivatorResponseHandler $responseHandler)
+    private function makeASuccessfulResponse(Request $request, ToggleStatusModifierResponseHandler $responseHandler)
     {
         return $responseHandler->handleResponse(new Response($request->getToggleIdentifier(), $request->getUserIdentifier(), []));
     }
 }
-//EOF UserToggleActivatorSpy.php
+//EOF ToggleStatusModifierSpy.php

@@ -1,9 +1,7 @@
 <?php
-namespace Clearbooks\Labs\User;
+namespace Clearbooks\Labs\User\ToggleStatusModifier;
 
-use Clearbooks\Labs\User\UseCase\UserToggleResponse;
-
-abstract class AbstractUserToggleResponse implements UserToggleResponse
+class Response implements \Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Response
 {
     /**
      * @var string
@@ -11,19 +9,32 @@ abstract class AbstractUserToggleResponse implements UserToggleResponse
     private $toggleIdentifier;
 
     /**
+     * @var string
+     */
+    private $newToggleStatus;
+
+    /**
      * @var int
      */
     private $userIdentifier;
+
+    /**
+     * @var int
+     */
+    private $groupIdentifier;
 
     /**
      * @var int[]
      */
     private $errors = [ ];
 
-    public function __construct( $toggleIdentifier, $userIdentifier, array $errors = [ ] )
+    public function __construct( $toggleIdentifier, $newToggleStatus, $userIdentifier, $groupIdentifier = null,
+                                 array $errors = [ ] )
     {
         $this->setToggleIdentifier( $toggleIdentifier );
+        $this->setNewToggleStatus( $newToggleStatus );
         $this->setUserIdentifier( $userIdentifier );
+        $this->setGroupIdentifier( $groupIdentifier );
         $this->setErrors( $errors );
     }
 
@@ -44,6 +55,22 @@ abstract class AbstractUserToggleResponse implements UserToggleResponse
     }
 
     /**
+     * @return string
+     */
+    public function getNewToggleStatus()
+    {
+        return $this->newToggleStatus;
+    }
+
+    /**
+     * @param string $toggleStatus
+     */
+    public function setNewToggleStatus( $toggleStatus )
+    {
+        $this->newToggleStatus = $toggleStatus;
+    }
+
+    /**
      * @return int
      */
     public function getUserIdentifier()
@@ -57,6 +84,22 @@ abstract class AbstractUserToggleResponse implements UserToggleResponse
     public function setUserIdentifier( $userIdentifier )
     {
         $this->userIdentifier = $userIdentifier;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getGroupIdentifier()
+    {
+        return $this->groupIdentifier;
+    }
+
+    /**
+     * @param int $groupIdentifier
+     */
+    public function setGroupIdentifier( $groupIdentifier )
+    {
+        $this->groupIdentifier = $groupIdentifier;
     }
 
     /**
@@ -75,4 +118,4 @@ abstract class AbstractUserToggleResponse implements UserToggleResponse
         $this->errors = $errors;
     }
 }
-//EOF AbstractUserToggleResponse.php
+//EOF Response.php
