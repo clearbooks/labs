@@ -11,7 +11,7 @@ namespace Clearbooks\Labs\Toggle\Gateway;
 
 use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
 
-class DummyActivatedToggleGateway implements ActivatedToggleGateway
+class ActivatedToggleGatewayDummy implements ActivatedToggleGateway
 {
 
     /**
@@ -19,6 +19,6 @@ class DummyActivatedToggleGateway implements ActivatedToggleGateway
      */
     public function getAllMyActivatedToggles()
     {
-        return null;
+        return [];
     }
 }

@@ -9,8 +9,9 @@
 namespace Clearbooks\Labs\Toggle;
 
 
-use Clearbooks\Labs\Toggle\Gateway\ActivatedToggleGateway;
-use Clearbooks\Labs\Toggle\Gateway\DummyActivatedToggleGateway;
+use Clearbooks\Labs\Toggle\Entity\ActivatedToggleStub;
+use Clearbooks\Labs\Toggle\Gateway\ActivatedToggleGatewayDummy;
+use Clearbooks\Labs\Toggle\Gateway\ActivatedToggleGatewayStub;
 
 class GetActivatedTogglesTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,9 +24,21 @@ class GetActivatedTogglesTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function givenNoActivatedToggles_GetActivatedToggles_ReturnsEmptyArray()
+    public function givenNoMyActivatedToggles_GetActivatedToggles_ReturnsEmptyArray()
     {
-        $response = (new DummyActivatedToggleGateway())->getAllMyActivatedToggles();
+        $response = (new ActivatedToggleGatewayDummy())->getAllMyActivatedToggles();
         $this->assertEquals([], $response);
+    }
+
+    /**
+     * @test
+     */
+    public function givenExistentMyActivatedToggle_getActivatedToggles_ReturnsArrayOfToggles()
+    {
+
+        $expectedToggles = [new ActivatedToggleStub()];
+
+        $response = (new ActivatedToggleGatewayStub($expectedToggles))->getAllMyActivatedToggles();
+        $this->assertEquals( $expectedToggles, $response);
     }
 }
