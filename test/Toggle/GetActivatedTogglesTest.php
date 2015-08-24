@@ -16,11 +16,6 @@ use Clearbooks\Labs\Toggle\Gateway\ActivatedToggleGatewayStub;
 class GetActivatedTogglesTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp()
-    {
-
-    }
-
     /**
      * @test
      */
