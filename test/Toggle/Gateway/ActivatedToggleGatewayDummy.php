@@ -17,7 +17,7 @@ class ActivatedToggleGatewayDummy implements ActivatedToggleGateway
     /**
      * @return ActivatableToggle[]
      */
-    public function getAllMyActivatedToggles()
+    public function getAllMyActivatedToggles($user_identifier)
     {
         return [];
     }

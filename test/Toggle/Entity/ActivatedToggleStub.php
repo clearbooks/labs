@@ -17,7 +17,7 @@ class ActivatedToggleStub implements ActivatableToggle
     }
 
     /**
-     * @return string
+     * @return bool
      */
     public function isActive()
     {

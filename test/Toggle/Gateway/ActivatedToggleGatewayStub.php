@@ -30,7 +30,7 @@ class ActivatedToggleGatewayStub implements ActivatedToggleGateway
     /**
      * @return ActivatableToggle[]
      */
-    public function getAllMyActivatedToggles()
+    public function getAllMyActivatedToggles($user_identifier)
     {
         return $this->expectedToggles;
     }
