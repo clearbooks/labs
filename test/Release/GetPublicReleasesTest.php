@@ -10,17 +10,10 @@ namespace Clearbooks\Labs\Release;
 
 
 use Clearbooks\Labs\Release\Gateway\MockPublicReleaseGateway;
-use Clearbooks\Labs\Release\Gateway\MockReleaseGateway;
-use Clearbooks\Labs\Release\Gateway\StubReleaseGateway;
 use DateTime;
 
 class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function setUp()
-    {
-
-    }
 
     /**
      * @test
@@ -61,7 +54,7 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
      */
     private function getPublicRelease( $gateway )
     {
-        return ( new GetPublicRelease( $gateway ) )->execute();
+        return ( new GetPublicReleases( $gateway ) )->execute();
     }
 
     /**

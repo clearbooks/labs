@@ -19,8 +19,4 @@ interface PublicRelease
      */
     public function getReleaseDate();
 
-    /**
-     * @param $visivilityStatus
-     */
-    public function setVisible( $visivilityStatus );
 }

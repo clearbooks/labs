@@ -63,10 +63,5 @@ class Release implements Entity\PublicRelease, UseCase\GetPublicRelease\PublicRe
     {
         return $this->releaseDate;
     }
-
-    public function setVisible( $flag )
-    {
-        $this->isVisible = $flag;
-    }
 }
 //EOF Release.php
