@@ -11,11 +11,6 @@ namespace Clearbooks\Labs\Toggle\Entity;
 
 class ActivatedToggleStub implements ActivatableToggle
 {
-
-    public function __construct( )
-    {
-    }
-
     /**
      * @return bool
      */
