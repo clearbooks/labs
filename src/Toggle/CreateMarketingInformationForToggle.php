@@ -21,16 +21,6 @@ class CreateMarketingInformationForToggle
     private $gateway;
 
     /**
-     * @var array
-     */
-    private $marketingInformation;
-
-    /**
-     * @var string
-     */
-    private $toggleId;
-
-    /**
      * CreateMarketingInformationForToggle constructor.
      * @param MarketableToggleGateway $gateway
      */
