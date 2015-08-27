@@ -9,25 +9,18 @@
 namespace Clearbooks\Labs\Release;
 
 
-use Clearbooks\Labs\Release\Gateway\MockReleaseGateway;
-use Clearbooks\Labs\Release\Gateway\StubReleaseGateway;
-use DateInterval;
+use Clearbooks\Labs\Release\Gateway\MockPublicReleaseGateway;
 use DateTime;
 
 class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function setUp()
-    {
-
-    }
 
     /**
      * @test
      */
     public function givenNoPublicReleaseIsFound_onPublicReleaseRequestReturnsEmptyArray()
     {
-        $response = $this->getPublicRelease( new StubReleaseGateway() );
+        $response = $this->getPublicRelease( new MockPublicReleaseGateway( [ ] ) );
         $this->assertEquals( [ ], $response );
     }
 
@@ -39,7 +32,7 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
         $expectedRelease = new Release( "TestRelease", "ClearBooks", self::getDate( 'd/m/Y', '10/07/2015' ), true );
         $expectedRelease2 = new Release( "TestRelease2", "ClearBooks2", self::getFutureDate(), true );
         $unexpectedRelease = new Release( "TestRelease3", "ClearBooks3", self::getFutureDate() );
-        $response = $this->getPublicRelease( new MockReleaseGateway( [ 1 => $expectedRelease, 2 => $expectedRelease2, 3 => $unexpectedRelease ] ) );
+        $response = $this->getPublicRelease( new MockPublicReleaseGateway( [ 1 => $expectedRelease, 2 => $expectedRelease2, 3 => $unexpectedRelease ] ) );
         $this->assertEquals( [ $expectedRelease, $expectedRelease2 ], $response );
     }
 
@@ -50,24 +43,24 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
     {
         $expectedRelease = new Release( "TestRelease", "ClearBooks", self::getDate( 'd/m/Y', '10/07/2015' ) );
         $unexpectedRelease = new Release( "TestRelease3", "ClearBooks3", self::getFutureDate() );
-        $response = $this->getPublicRelease( new MockReleaseGateway( [ 1 => $expectedRelease, 2 => $unexpectedRelease ] ) );
+        $response = $this->getPublicRelease( new MockPublicReleaseGateway( [ 1 => $expectedRelease, 2 => $unexpectedRelease ] ) );
         $this->assertEquals( [ $expectedRelease ], $response );
 
     }
 
     /**
-     * @param MockReleaseGateway/StubReleaseGateway $gateway
-     * @return Release|int
+     * @param MockReleaseGateway /StubReleaseGateway $gateway
+     * @return \PublicRelease|int
      */
     private function getPublicRelease( $gateway )
     {
-        return ( new GetPublicRelease( $gateway, new DateTime() ) )->execute();
+        return ( new GetPublicReleases( $gateway ) )->execute();
     }
 
     /**
      * @param string $format
-     * @param DateTime $date
-     * @return DateTime
+     * @param \DateTimeInterface $date
+     * @return \DateTimeInterface
      */
     private function getDate( $format, $date )
     {
@@ -75,8 +68,7 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return DateTime
-     *
+     * @return \DateTimeInterface
      */
     private function getFutureDate()
     {

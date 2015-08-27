@@ -13,6 +13,9 @@ use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\Marketing
 
 class CreateMarketingInformationRequest implements MarketingInformationRequest
 {
+    /**
+     * @var string
+     */
     private $toggleId;
     /**
      * @var string

@@ -9,7 +9,7 @@ namespace Clearbooks\Labs\Release;
 
 use DateTime;
 
-class Release
+class Release implements Entity\PublicRelease, UseCase\GetPublicRelease\PublicRelease
 {
     private $releaseName;
     private $releaseInfoUrl;
@@ -62,11 +62,6 @@ class Release
     public function getReleaseDate()
     {
         return $this->releaseDate;
-    }
-
-    public function setVisible( $flag )
-    {
-        $this->isVisible = $flag;
     }
 }
 //EOF Release.php
