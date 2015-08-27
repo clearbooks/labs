@@ -11,6 +11,7 @@ namespace Clearbooks\Labs\Toggle;
 
 use Clearbooks\Labs\Toggle\Entity\CreateMarketingInformationRequest;
 use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGateway;
+use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;
 
 class CreateMarketingInformationForToggle
 {
@@ -29,9 +30,9 @@ class CreateMarketingInformationForToggle
     }
 
     /**
-     * @param CreateMarketingInformationRequest $request
+     * @param MarketingInformationRequest $request
      */
-    public function execute( CreateMarketingInformationRequest $request )
+    public function execute( MarketingInformationRequest $request )
     {
 
         $this->gateway->setMarketingInformationForToggle( $request );

@@ -9,7 +9,9 @@
 namespace Clearbooks\Labs\Toggle\Entity;
 
 
-class CreateMarketingInformationRequest
+use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;
+
+class CreateMarketingInformationRequest implements MarketingInformationRequest
 {
     private $toggleId;
     /**
