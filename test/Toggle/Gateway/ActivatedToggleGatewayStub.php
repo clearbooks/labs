@@ -14,13 +14,13 @@ use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
 class ActivatedToggleGatewayStub implements ActivatedToggleGateway
 {
     /**
-     * @var array
+     * @var ActivatableToggle[]
      */
     private $expectedToggles;
 
     /**
      * ActivatedToggleGatewayStub constructor.
-     * @param array $expectedToggles
+     * @param ActivatableToggle[] $expectedToggles
      */
     public function __construct($expectedToggles)
     {

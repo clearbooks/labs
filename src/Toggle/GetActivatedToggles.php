@@ -28,10 +28,11 @@ class GetActivatedToggles
     }
 
     /**
-     * @param string $user_identifier
+     * @param string $userIdentifier
+     * @return ActivatableToggle[]
      */
-    public function execute($user_identifier)
+    public function execute($userIdentifier)
     {
-        return $this->gateway->getAllMyActivatedToggles($user_identifier);
+        return $this->gateway->getAllMyActivatedToggles($userIdentifier);
     }
 }
