@@ -29,10 +29,10 @@ class MarketableToggleGatewaySpy implements MarketableToggleGateway
         $this->marketingInfo = [
             $toggleId,
             $marketingInformation['screenshot_urls'],
-            $marketingInformation['discription_of_toggle'],
-            $marketingInformation['discription_of_functionality'],
-            $marketingInformation['discription_of_benefits_and_reasonForImplementation'],
-            $marketingInformation['discription_of_location'],
+            $marketingInformation['description_of_toggle'],
+            $marketingInformation['description_of_functionality'],
+            $marketingInformation['description_of_implementation_reason'],
+            $marketingInformation['description_of_location'],
             $marketingInformation['guide_url'],
             $marketingInformation['app_notification_copy_text']
         ];

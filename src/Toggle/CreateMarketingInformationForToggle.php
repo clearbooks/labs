@@ -37,10 +37,10 @@ class CreateMarketingInformationForToggle
         $toggleId = $request->getToggleId();
         $marketingInformation = [
             'screenshot_urls' => $request->getImageLink(),
-            'discription_of_toggle' => $request->getDescriptionOfToggle(),
-            'discription_of_functionality' => $request->getDescriptionOfFunctionality(),
-            'discription_of_benefits_and_reasonForImplementation' => $request->getDescriptionOfReasonForImplementation(),
-            'discription_of_location' => $request->getDescriptionOfLocation(),
+            'description_of_toggle' => $request->getDescriptionOfToggle(),
+            'description_of_functionality' => $request->getDescriptionOfFunctionality(),
+            'description_of_implementation_reason' => $request->getDescriptionOfReasonForImplementation(),
+            'description_of_location' => $request->getDescriptionOfLocation(),
             'guide_url' => $request->getLinkToGuide(),
             'app_notification_copy_text' => $request->getAppNotificationText()
         ];
