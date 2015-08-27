@@ -21,14 +21,21 @@ class MarketableToggleGatewaySpy implements MarketableToggleGateway
     private $marketingInfo = [ ];
 
     /**
-     * @param MarketingInformationRequest $request
+     * @param string $toggleId
+     * @param array $marketingInformation
      */
-    public function setMarketingInformationForToggle( MarketingInformationRequest $request )
+    public function setMarketingInformationForToggle( $toggleId, $marketingInformation )
     {
-        $this->marketingInfo = [ $request->getToggleId(), $request->getImageLink(), $request->getDescriptionOfToggle(), $request->getDescriptionOfFunctionality(),
-            $request->getDescriptionOfReasonForImplementation(), $request->getDescriptionOfLocation(),
-            $request->getLinkToGuide(),
-            $request->getAppNotificationText() ];
+        $this->marketingInfo = [
+            $toggleId,
+            $marketingInformation['screenshot_urls'],
+            $marketingInformation['discription_of_toggle'],
+            $marketingInformation['discription_of_functionality'],
+            $marketingInformation['discription_of_benefits_and_reasonForImplementation'],
+            $marketingInformation['discription_of_location'],
+            $marketingInformation['guide_url'],
+            $marketingInformation['app_notification_copy_text']
+        ];
     }
 
     /**

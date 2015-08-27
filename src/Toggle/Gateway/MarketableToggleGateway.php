@@ -14,7 +14,8 @@ use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\Marketing
 interface MarketableToggleGateway
 {
     /**
-     * @param MarketingInformationRequest $request
+     * @param string $toggleId
+     * @param array $marketingInformation
      */
-    public function setMarketingInformationForToggle( MarketingInformationRequest $request );
+    public function setMarketingInformationForToggle( $toggleId, $marketingInformation );
 }

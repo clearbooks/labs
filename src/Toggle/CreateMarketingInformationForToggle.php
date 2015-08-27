@@ -21,6 +21,16 @@ class CreateMarketingInformationForToggle
     private $gateway;
 
     /**
+     * @var array
+     */
+    private $marketingInformation;
+
+    /**
+     * @var string
+     */
+    private $toggleId;
+
+    /**
      * CreateMarketingInformationForToggle constructor.
      * @param MarketableToggleGateway $gateway
      */
@@ -34,7 +44,17 @@ class CreateMarketingInformationForToggle
      */
     public function execute( MarketingInformationRequest $request )
     {
+        $toggleId = $request->getToggleId();
+        $marketingInformation = [
+            'screenshot_urls' => $request->getImageLink(),
+            'discription_of_toggle' => $request->getDescriptionOfToggle(),
+            'discription_of_functionality' => $request->getDescriptionOfFunctionality(),
+            'discription_of_benefits_and_reasonForImplementation' => $request->getDescriptionOfReasonForImplementation(),
+            'discription_of_location' => $request->getDescriptionOfLocation(),
+            'guide_url' => $request->getLinkToGuide(),
+            'app_notification_copy_text' => $request->getAppNotificationText()
+        ];
 
-        $this->gateway->setMarketingInformationForToggle( $request );
+        $this->gateway->setMarketingInformationForToggle( $toggleId, $marketingInformation );
     }
 }

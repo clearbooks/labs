@@ -17,12 +17,22 @@ use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\Marketing
 class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var MarketableToggleGateway
+     */
+    private $marketableToggleGateway;
+
+    public function setUp()
+    {
+        $this->marketableToggleGateway = new MarketableToggleGatewaySpy();
+    }
+
+    /**
      * @test
      */
     public function givenNoParameters_CreateMarketingInformationForToggle_SetsMarketingInformationToEmptyString()
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1 );
-        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(),
+        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
             $marketingInformation );
         $this->assertEquals( [ "1", "", "", "", "", "", "", "" ], $response );
     }
@@ -34,7 +44,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, "", "", "", "", "",
             "", "" );
-        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(),
+        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
             $marketingInformation );
         $this->assertEquals( [ "1", "", "", "", "", "", "", "" ], $response );
     }
@@ -46,7 +56,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, null, null, null,
             null, null, null, null );
-        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(),
+        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
             $marketingInformation );
         $this->assertEquals( [ "1", "", "", "", "", "", "", "" ], $response );
     }
@@ -58,7 +68,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, "This", "is", "a",
             "test", "of", "Marketing", "information" );
-        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(),
+        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
             $marketingInformation );
         $this->assertEquals( [ "1", "This", "is", "a", "test", "of", "Marketing", "information" ], $response );
     }
@@ -70,7 +80,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, 1, 2.1, true, 4353536,
             "", null, -1 );
-        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(),
+        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
             $marketingInformation );
         $this->assertEquals( [ "1", "1", "2.1", "1", "4353536", "", "", "-1" ], $response );
     }
@@ -82,7 +92,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, "hello", "this",
             "is a test", 123 );
-        $response = $this->createMarketingInformationFroToggle( new MarketableToggleGatewaySpy(),
+        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
             $marketingInformation );
         $this->assertEquals( [ "1", "hello", "this", "is a test", "123", "", "", "" ], $response );
     }
