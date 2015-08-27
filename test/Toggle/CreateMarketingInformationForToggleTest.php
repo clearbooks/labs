@@ -32,8 +32,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     public function givenNoParameters_CreateMarketingInformationForToggle_SetsMarketingInformationToEmptyString()
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1 );
-        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
-            $marketingInformation );
+        $response = $this->createMarketingInformationFroToggle( $marketingInformation );
         $this->assertEquals( [ "1", "", "", "", "", "", "", "" ], $response );
     }
 
@@ -44,8 +43,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, "", "", "", "", "",
             "", "" );
-        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
-            $marketingInformation );
+        $response = $this->createMarketingInformationFroToggle( $marketingInformation );
         $this->assertEquals( [ "1", "", "", "", "", "", "", "" ], $response );
     }
 
@@ -56,8 +54,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, null, null, null,
             null, null, null, null );
-        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
-            $marketingInformation );
+        $response = $this->createMarketingInformationFroToggle( $marketingInformation );
         $this->assertEquals( [ "1", "", "", "", "", "", "", "" ], $response );
     }
 
@@ -68,8 +65,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, "This", "is", "a",
             "test", "of", "Marketing", "information" );
-        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
-            $marketingInformation );
+        $response = $this->createMarketingInformationFroToggle( $marketingInformation );
         $this->assertEquals( [ "1", "This", "is", "a", "test", "of", "Marketing", "information" ], $response );
     }
 
@@ -80,8 +76,7 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, 1, 2.1, true, 4353536,
             "", null, -1 );
-        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
-            $marketingInformation );
+        $response = $this->createMarketingInformationFroToggle( $marketingInformation );
         $this->assertEquals( [ "1", "1", "2.1", "1", "4353536", "", "", "-1" ], $response );
     }
 
@@ -92,21 +87,19 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     {
         $marketingInformation = new CreateMarketingInformationRequest( 1, "hello", "this",
             "is a test", 123 );
-        $response = $this->createMarketingInformationFroToggle( $this->marketableToggleGateway,
-            $marketingInformation );
+        $response = $this->createMarketingInformationFroToggle( $marketingInformation );
         $this->assertEquals( [ "1", "hello", "this", "is a test", "123", "", "", "" ], $response );
     }
 
     /**
-     * @param MarketableToggleGateway $gateway
      * @param MarketingInformationRequest $request
      * @return \string[]
      */
-    private function createMarketingInformationFroToggle( $gateway, MarketingInformationRequest $request )
+    private function createMarketingInformationFroToggle( MarketingInformationRequest $request )
     {
-        ( new CreateMarketingInformationForToggle( $gateway ) )->execute( $request );
+        ( new CreateMarketingInformationForToggle( $this->marketableToggleGateway ) )->execute( $request );
 
-        return $gateway->getMarketingInfo();
+        return $this->marketableToggleGateway->getMarketingInfo();
     }
 
 }
