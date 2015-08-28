@@ -45,7 +45,7 @@ class GetReleaseTest extends \PHPUnit_Framework_TestCase
      */
     public function givenValidID_withRelease_getReleaseReturnsRelease()
     {
-        $expectedRelease = new Release( "TestRelease", "ClearBooks",
+        $expectedRelease = new Release( 2, "TestRelease", "ClearBooks",
             \DateTime::createFromFormat( 'd/m/Y', '10/07/2015' ) );
         $response = $this->getRelease( 2, new MockReleaseGateway( [ 2 => $expectedRelease ] ) );
         $this->assertEquals( $expectedRelease, $response );

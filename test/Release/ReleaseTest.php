@@ -24,7 +24,7 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->release = new Release( self::RELEASE_NAME, self::RELEASE_URL, self::getDate(),
+        $this->release = new Release( 1, self::RELEASE_NAME, self::RELEASE_URL, self::getDate(),
             self::RELEASE_IS_VISIBLE );
     }
 

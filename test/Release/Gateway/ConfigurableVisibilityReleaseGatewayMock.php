@@ -42,7 +42,7 @@ class ConfigurableVisibilityReleaseGatewayMock implements ReleaseGateway
      */
     public function getRelease( $releaseId )
     {
-        return new Release( "", "", new \DateTime(), $this->visibility );
+        return new Release( 1, "", "", new \DateTime(), $this->visibility );
     }
 
     /**

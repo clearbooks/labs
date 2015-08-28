@@ -19,4 +19,9 @@ interface PublicRelease
      */
     public function getReleaseDate();
 
+    /**
+     * @return string
+     */
+    public function getReleaseId();
+
 }

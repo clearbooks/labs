@@ -29,9 +29,9 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
      */
     public function givenPublicReleaseExists_GetPublicReleaseReturnsArrayOfReleases()
     {
-        $expectedRelease = new Release( "TestRelease", "ClearBooks", self::getDate( 'd/m/Y', '10/07/2015' ), true );
-        $expectedRelease2 = new Release( "TestRelease2", "ClearBooks2", self::getFutureDate(), true );
-        $unexpectedRelease = new Release( "TestRelease3", "ClearBooks3", self::getFutureDate() );
+        $expectedRelease = new Release( 1, "TestRelease", "ClearBooks", self::getDate( 'd/m/Y', '10/07/2015' ), true );
+        $expectedRelease2 = new Release( 2, "TestRelease2", "ClearBooks2", self::getFutureDate(), true );
+        $unexpectedRelease = new Release( 3, "TestRelease3", "ClearBooks3", self::getFutureDate() );
         $response = $this->getPublicRelease( new MockPublicReleaseGateway( [ 1 => $expectedRelease, 2 => $expectedRelease2, 3 => $unexpectedRelease ] ) );
         $this->assertEquals( [ $expectedRelease, $expectedRelease2 ], $response );
     }
@@ -41,8 +41,8 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
      */
     public function givenPublicReleaseInThePast_GetPublicReleaseReturnsArrayOfReleases()
     {
-        $expectedRelease = new Release( "TestRelease", "ClearBooks", self::getDate( 'd/m/Y', '10/07/2015' ) );
-        $unexpectedRelease = new Release( "TestRelease3", "ClearBooks3", self::getFutureDate() );
+        $expectedRelease = new Release( 1, "TestRelease", "ClearBooks", self::getDate( 'd/m/Y', '10/07/2015' ) );
+        $unexpectedRelease = new Release( 2, "TestRelease3", "ClearBooks3", self::getFutureDate() );
         $response = $this->getPublicRelease( new MockPublicReleaseGateway( [ 1 => $expectedRelease, 2 => $unexpectedRelease ] ) );
         $this->assertEquals( [ $expectedRelease ], $response );
 
