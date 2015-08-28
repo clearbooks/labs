@@ -16,6 +16,7 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
      */
     private $release;
 
+    const RELEASE_ID = 1;
     const RELEASE_NAME = 'name';
     const RELEASE_URL = 'url';
     const RELEASE_IS_VISIBLE = true;
@@ -24,7 +25,7 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->release = new Release( 1, self::RELEASE_NAME, self::RELEASE_URL, self::getDate(),
+        $this->release = new Release( self::RELEASE_ID, self::RELEASE_NAME, self::RELEASE_URL, self::getDate(),
             self::RELEASE_IS_VISIBLE );
     }
 
@@ -58,6 +59,14 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
     public function givenRelease_GetReleaseReleaseDateReturnsDate()
     {
         $this->assertEquals( self::getDate(), $this->release->getReleaseDate() );
+    }
+
+    /**
+     * @test
+     */
+    public function givenRelease_GetReleaseIdReturnsReleaseId()
+    {
+        $this->assertEquals( self::RELEASE_ID, $this->release->getReleaseId() );
     }
 
     /**
