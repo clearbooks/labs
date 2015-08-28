@@ -15,4 +15,39 @@ interface MarketableToggle
      * @return string
      */
     public function getName();
+
+    /**
+     * @return string
+     */
+    public function getScreenshotUrl();
+
+    /**
+     * @return string
+     */
+    public function getDetdescriptionOfToggle();
+
+    /**
+     * @return string
+     */
+    public function getDescriptionOfFunctionality();
+
+    /**
+     * @return string
+     */
+    public function getDescriptionOfImplementationReason();
+
+    /**
+     * @return string
+     */
+    public function  getDescriptionOfLocation();
+
+    /**
+     * @return string
+     */
+    public function getGuideUrl();
+
+    /**
+     * @return string
+     */
+    public function getAppNotificationCopyText();
 }
