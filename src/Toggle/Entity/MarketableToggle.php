@@ -24,7 +24,7 @@ interface MarketableToggle
     /**
      * @return string
      */
-    public function getDetdescriptionOfToggle();
+    public function getDescriptionOfToggle();
 
     /**
      * @return string

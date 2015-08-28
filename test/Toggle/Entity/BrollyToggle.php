@@ -18,15 +18,15 @@ class BrollyToggle implements MarketableToggle
      */
     public function getScreenshotUrl()
     {
-        // TODO: Implement getScreenshotUrl() method.
+        return null;
     }
 
     /**
      * @return string
      */
-    public function getDetdescriptionOfToggle()
+    public function getDescriptionOfToggle()
     {
-        // TODO: Implement getDetdescriptionOfToggle() method.
+        return null;
     }
 
     /**
@@ -34,7 +34,7 @@ class BrollyToggle implements MarketableToggle
      */
     public function getDescriptionOfFunctionality()
     {
-        // TODO: Implement getDescriptionOfFunctionality() method.
+        return null;
     }
 
     /**
@@ -42,7 +42,7 @@ class BrollyToggle implements MarketableToggle
      */
     public function getDescriptionOfImplementationReason()
     {
-        // TODO: Implement getDescriptionOfImplementationReason() method.
+        return null;
     }
 
     /**
@@ -50,7 +50,7 @@ class BrollyToggle implements MarketableToggle
      */
     public function  getDescriptionOfLocation()
     {
-        // TODO: Implement getDescriptionOfLocation() method.
+        return null;
     }
 
     /**
@@ -58,7 +58,7 @@ class BrollyToggle implements MarketableToggle
      */
     public function getGuideUrl()
     {
-        // TODO: Implement getGuideUrl() method.
+        return null;
     }
 
     /**
@@ -66,6 +66,6 @@ class BrollyToggle implements MarketableToggle
      */
     public function getAppNotificationCopyText()
     {
-        // TODO: Implement getAppNotificationCopyText() method.
+        return null;
     }
 }
