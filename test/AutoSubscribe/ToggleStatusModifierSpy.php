@@ -11,10 +11,14 @@ class ToggleStatusModifierSpy implements ToggleStatusModifier
     /** @var int[][] */
     private $executePairs = [];
 
-    public function execute(Request $request, ToggleStatusModifierResponseHandler $responseHandler)
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function execute(Request $request)
     {
         $this->logAndIncrementToggleUserIdCall($request);
-        $this->makeASuccessfulResponse($request, $responseHandler);
+        return $this->makeASuccessfulResponse($request);
     }
 
     /**
@@ -43,12 +47,11 @@ class ToggleStatusModifierSpy implements ToggleStatusModifier
 
     /**
      * @param Request $request
-     * @param ToggleStatusModifierResponseHandler $responseHandler
      * @return mixed
      */
-    private function makeASuccessfulResponse(Request $request, ToggleStatusModifierResponseHandler $responseHandler)
+    private function makeASuccessfulResponse(Request $request)
     {
-        return $responseHandler->handleResponse(new Response($request->getToggleIdentifier(), $request->getUserIdentifier(), []));
+        return new Response($request->getToggleIdentifier(), $request->getUserIdentifier(), []);
     }
 }
 //EOF ToggleStatusModifierSpy.php

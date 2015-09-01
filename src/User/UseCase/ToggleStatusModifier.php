@@ -1,6 +1,7 @@
 <?php
 namespace Clearbooks\Labs\User\UseCase;
 
+use Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Response;
 use Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Request;
 
 interface ToggleStatusModifier
@@ -9,6 +10,10 @@ interface ToggleStatusModifier
     const TOGGLE_STATUS_INACTIVE = "inactive";
     const TOGGLE_STATUS_UNSET = "unset";
 
-    public function execute( Request $request, ToggleStatusModifierResponseHandler $responseHandler );
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function execute( Request $request );
 }
 //EOF ToggleStatusModifier.php
