@@ -6,12 +6,12 @@
  * Time: 11:15
  */
 
-namespace Clearbooks\Labs\Toggle\Entity;
+namespace Clearbooks\Labs\Toggle\CreateMarketingInformationForToggle;
 
 
-use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;
+use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\CreateMarketingInformationRequest as CreateMarketingInformationRequestInterface;
 
-class CreateMarketingInformationRequest implements MarketingInformationRequest
+class CreateMarketingInformationRequest implements CreateMarketingInformationRequestInterface
 {
     /**
      * @var string

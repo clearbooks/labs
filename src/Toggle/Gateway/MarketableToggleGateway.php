@@ -8,9 +8,6 @@
 
 namespace Clearbooks\Labs\Toggle\Gateway;
 
-
-use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;
-
 interface MarketableToggleGateway
 {
     /**
