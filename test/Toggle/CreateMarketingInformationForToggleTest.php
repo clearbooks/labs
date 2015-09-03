@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Toggle;
 
 
-use Clearbooks\Labs\Toggle\Entity\CreateMarketingInformationRequest;
+use Clearbooks\Labs\Toggle\CreateMarketingInformationForToggle\CreateMarketingInformationRequest;
 use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGateway;
 use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGatewaySpy;
 use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;

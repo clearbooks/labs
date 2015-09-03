@@ -6,7 +6,7 @@
  * Time: 11:15
  */
 
-namespace Clearbooks\Labs\Toggle\Entity;
+namespace Clearbooks\Labs\Toggle\CreateMarketingInformationForToggle;
 
 
 use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;

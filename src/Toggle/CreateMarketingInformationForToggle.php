@@ -13,7 +13,7 @@ use Clearbooks\Labs\Toggle\Entity\CreateMarketingInformationRequest;
 use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGateway;
 use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;
 
-class CreateMarketingInformationForToggle
+class CreateMarketingInformationForToggle implements \Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle
 {
     /**
      * @var MarketableToggleGateway
