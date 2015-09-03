@@ -3,7 +3,7 @@ namespace Clearbooks\Labs\Release;
 
 use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
 
-class GetReleaseToggles
+class GetReleaseToggles implements UseCase\GetReleaseToggles
 {
     /** @var Gateway\ReleaseToggleCollection */
     private $releaseToggleCollection;
