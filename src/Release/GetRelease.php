@@ -11,7 +11,7 @@ namespace Clearbooks\Labs\Release;
 
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 
-class GetRelease
+class GetRelease implements UseCase\GetRelease
 {
     const INVALID_ID_ERROR = 21;
     const NO_RELEASE_FOUND = 22;
@@ -22,6 +22,7 @@ class GetRelease
 
     /**
      * GetRelease constructor.
+     * @param ReleaseGateway $gateway
      */
     public function __construct( ReleaseGateway $gateway )
     {
