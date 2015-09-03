@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Toggle\Gateway;
 
 
-use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;
+use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\CreateMarketingInformationRequest;
 
 interface MarketableToggleGateway
 {

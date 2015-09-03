@@ -9,15 +9,13 @@
 namespace Clearbooks\Labs\Toggle;
 
 
-use Clearbooks\Labs\Toggle\CreateMarketingInformationForToggle\CreateMarketingInformationRequest;
-use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGateway;
 use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGatewaySpy;
-use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;
+use Clearbooks\Labs\Toggle\CreateMarketingInformationForToggle\CreateMarketingInformationRequest;
 
 class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var MarketableToggleGateway
+     * @var MarketableToggleGatewaySpy
      */
     private $marketableToggleGateway;
 
@@ -92,10 +90,10 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
     }
 
     /**
-     * @param MarketingInformationRequest $request
+     * @param CreateMarketingInformationRequest $request
      * @return \string[]
      */
-    private function createMarketingInformationFroToggle( MarketingInformationRequest $request )
+    private function createMarketingInformationFroToggle( CreateMarketingInformationRequest $request )
     {
         ( new CreateMarketingInformationForToggle( $this->marketableToggleGateway ) )->execute( $request );
 

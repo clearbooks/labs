@@ -7,12 +7,12 @@
  */
 namespace Clearbooks\Labs\Toggle\UseCase;
 
-use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;
+use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\CreateMarketingInformationRequest;
 
 interface CreateMarketingInformationForToggle
 {
     /**
-     * @param MarketingInformationRequest $request
+     * @param CreateMarketingInformationRequest $request
      */
-    public function execute( MarketingInformationRequest $request );
+    public function execute( CreateMarketingInformationRequest $request );
 }

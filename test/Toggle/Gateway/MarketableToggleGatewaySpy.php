@@ -8,10 +8,6 @@
 
 namespace Clearbooks\Labs\Toggle\Gateway;
 
-
-use Clearbooks\Labs\Toggle\Entity\CreateMarketingInformationRequest;
-use Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle\MarketingInformationRequest;
-
 class MarketableToggleGatewaySpy implements MarketableToggleGateway
 {
 

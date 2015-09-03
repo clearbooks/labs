@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Toggle\UseCase\CreateMarketingInformationForToggle;
 
 
-interface MarketingInformationRequest
+interface CreateMarketingInformationRequest
 {
     /**
      * @return mixed
