@@ -23,11 +23,15 @@ class ToggleStatusModifier implements UseCase\ToggleStatusModifier
         $this->toggleStatusModifierRequestValidator = $toggleStatusModifierRequestValidator;
     }
 
-    public function execute( Request $request, UseCase\ToggleStatusModifierResponseHandler $responseHandler )
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function execute( Request $request )
     {
         $errors = $this->handleRequest( $request );
         $response = $this->createResponse( $request, $errors );
-        $responseHandler->handleResponse( $response );
+        return $response;
     }
 
     /**

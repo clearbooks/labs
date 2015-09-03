@@ -10,7 +10,7 @@ use Clearbooks\Labs\User\UseCase\ToggleStatusModifier;
 use Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Response;
 use Clearbooks\Labs\User\UseCase\ToggleStatusModifierResponseHandler;
 
-class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber, ToggleStatusModifierResponseHandler
+class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber
 {
     /** @var AutoSubscriberProvider */
     private $autoSubscriberProvider;
@@ -41,15 +41,10 @@ class AutoSubscriptionToggleShowEventHandler implements ToggleShowSubscriber, To
         /** @var User $user */
         foreach ( $subscribers as $user ) {
             $request = new Request($event->getToggleName(), ToggleStatusModifier::TOGGLE_STATUS_ACTIVE, $user->getId());
-            $this->toggleStatusModifier->execute($request, $this);
+            $this->activatorResponse = $this->toggleStatusModifier->execute($request);
             $result = empty($this->activatorResponse->getErrors()) || $result;
         }
         return $result;
-    }
-
-    public function handleResponse(Response $response)
-    {
-        $this->activatorResponse = $response;
     }
 }
 //EOF AutoSubscriptionToggleShowEventHandler.php
