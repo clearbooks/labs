@@ -3,7 +3,7 @@ namespace Clearbooks\Labs\Toggle;
 
 use Clearbooks\Labs\Toggle\Gateway\ActivatableToggleGateway;
 
-class IsToggleActive implements \Clearbooks\Labs\Toggle\UseCase\IsToggleActive
+class IsToggleActive implements UseCase\IsToggleActive
 {
     /**
      * @var ActivatableToggleGateway

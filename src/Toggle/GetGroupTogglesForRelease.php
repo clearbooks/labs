@@ -10,7 +10,7 @@ use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 use Clearbooks\Labs\Toggle\Entity\GroupToggle;
 use Clearbooks\Labs\Toggle\Gateway\GroupToggleGateway;
 
-class GetGroupTogglesForRelease
+class GetGroupTogglesForRelease implements UseCase\GetGroupTogglesForRelease
 {
     /**
      * @var GroupToggleGateway

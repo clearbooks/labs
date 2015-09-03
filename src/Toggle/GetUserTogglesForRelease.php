@@ -13,7 +13,7 @@ use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 use Clearbooks\Labs\Toggle\Entity\UserToggle;
 use Clearbooks\Labs\Toggle\Gateway\UserToggleGateway;
 
-class GetUserTogglesForRelease
+class GetUserTogglesForRelease implements UseCase\GetUserTogglesForRelease
 {
     /**
      * @var UserToggleGateway
