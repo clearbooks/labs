@@ -11,7 +11,7 @@ use Clearbooks\Labs\Release\CreateRelease\ResponseModel;
  * @author: Ryan Wood <ryanw@clearbooks.co.uk>
  * @created: 15/07/15
  */
-class CreateRelease implements \Clearbooks\Labs\Release\UseCase\CreateRelease
+class CreateRelease implements UseCase\CreateRelease
 {
     /**
      * @var ReleaseGateway

@@ -12,7 +12,7 @@ namespace Clearbooks\Labs\Release;
 use Clearbooks\Labs\Release\Gateway\PublicReleaseGateway;
 use Clearbooks\Labs\Release\UseCase\GetPublicRelease\PublicRelease;
 
-class GetPublicReleases
+class GetPublicReleases implements UseCase\GetPublicReleases
 {
     /**
      * @var PublicReleaseGateway
