@@ -26,7 +26,7 @@ class ResponseToggleTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function given__()
+    public function givenToggleDescription_WhenGetDescription_ReturnsCorrectDescription()
     {
         $this->assertEquals( self::DESC, ( new ResponseToggle( null, null, self::DESC ) )->getDescription() );
     }
