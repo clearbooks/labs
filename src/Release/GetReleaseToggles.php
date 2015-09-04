@@ -23,7 +23,7 @@ class GetReleaseToggles implements UseCase\GetReleaseToggles
     public function execute( $releaseId )
     {
         return \array_map( function( MarketableToggle $toggle ) {
-            return new GetReleaseToggles\ResponseToggle( $toggle->getName() );
+            return new GetReleaseToggles\ResponseToggle( $toggle->getId(), $toggle->getName(), $toggle->getDescriptionOfToggle() );
         }, (array) $this->releaseToggleCollection->getTogglesForRelease( $releaseId ) );
     }
 }

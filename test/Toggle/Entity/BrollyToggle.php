@@ -4,6 +4,16 @@ namespace Clearbooks\Labs\Toggle\Entity;
 class BrollyToggle implements MarketableToggle
 {
     const NAME = "Brolly";
+    const DESC = "An Umbrella";
+    const ID = 1;
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return self::ID;
+    }
 
     /**
      * @return string
@@ -26,7 +36,7 @@ class BrollyToggle implements MarketableToggle
      */
     public function getDescriptionOfToggle()
     {
-        return null;
+        return self::DESC;
     }
 
     /**
