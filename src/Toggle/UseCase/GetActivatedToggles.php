@@ -12,8 +12,7 @@ use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
 interface GetActivatedToggles
 {
     /**
-     * @param string $userIdentifier
      * @return ActivatableToggle[]
      */
-    public function execute( $userIdentifier );
+    public function execute();
 }

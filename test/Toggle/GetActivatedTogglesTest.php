@@ -21,7 +21,7 @@ class GetActivatedTogglesTest extends \PHPUnit_Framework_TestCase
      */
     public function givenNoMyActivatedToggles_GetActivatedToggles_ReturnsEmptyArray()
     {
-        $response = (new GetActivatedToggles(new ActivatedToggleGatewayDummy()))->execute("1");
+        $response = (new GetActivatedToggles(new ActivatedToggleGatewayDummy()))->execute();
         $this->assertEquals([], $response);
     }
 
@@ -33,7 +33,7 @@ class GetActivatedTogglesTest extends \PHPUnit_Framework_TestCase
 
         $expectedToggles = [new ActivatedToggleStub()];
 
-        $response = (new GetActivatedToggles(new ActivatedToggleGatewayStub($expectedToggles )))->execute("1");
+        $response = (new GetActivatedToggles(new ActivatedToggleGatewayStub($expectedToggles )))->execute();
         $this->assertEquals($expectedToggles, $response);
     }
 }
