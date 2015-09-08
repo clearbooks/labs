@@ -29,11 +29,10 @@ class GetActivatedToggles implements UseCase\GetActivatedToggles
     }
 
     /**
-     * @param string $userIdentifier
      * @return ActivatableToggle[]
      */
-    public function execute( $userIdentifier )
+    public function execute()
     {
-        return $this->gateway->getAllMyActivatedToggles( $userIdentifier );
+        return $this->gateway->getAllMyActivatedToggles();
     }
 }
