@@ -2,7 +2,7 @@
 namespace Clearbooks\Labs\Release;
 
 use Clearbooks\Labs\Release\GetReleaseToggles\ResponseToggle;
-use Clearbooks\Labs\Toggle\Entity\BrollyToggle;
+use Clearbooks\Labs\Toggle\Entity\Brolly;
 
 class GetReleaseTogglesTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,8 +32,9 @@ class GetReleaseTogglesTest extends \PHPUnit_Framework_TestCase
      */
     public function GivenReleaseWithToggle_WhenGetReleaseToggles_ThenReturnsToggle()
     {
+        $brolly = new Brolly;
         $responseToggle = $this->executeGetReleaseToggles( new Gateway\BrollyReleaseToggleCollection, self::RELEASE_ID );
-        $this->assertEquals( [ new ResponseToggle( BrollyToggle::ID, BrollyToggle::NAME, BrollyToggle::DESC ) ], $responseToggle );
+        $this->assertEquals( [ new ResponseToggle( $brolly->getId(), $brolly->getName(), $brolly->getDescriptionOfToggle() ) ], $responseToggle );
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Release\Gateway;
 
-use Clearbooks\Labs\Toggle\Entity\BrollyToggle;
+use Clearbooks\Labs\Toggle\Entity\Brolly;
 use Clearbooks\Labs\Toggle\Entity\Toggle;
 
 class BrollyReleaseToggleCollection implements ReleaseToggleCollection
@@ -13,6 +13,6 @@ class BrollyReleaseToggleCollection implements ReleaseToggleCollection
      */
     public function getTogglesForRelease( $releaseId )
     {
-        return [ new BrollyToggle() ];
+        return [ new Brolly() ];
     }
 }

@@ -9,31 +9,50 @@
 namespace Clearbooks\Labs\Toggle;
 
 
+use Clearbooks\Labs\Client\Toggle\Entity\Group;
+use Clearbooks\Labs\Client\Toggle\Entity\User;
+use Clearbooks\Labs\Client\Toggle\UseCase\ToggleChecker;
 use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
-use Clearbooks\Labs\Toggle\Gateway\ActivatedToggleGateway;
+use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
+use Clearbooks\Labs\Toggle\Gateway\GetAllTogglesGateway;
 
 class GetActivatedToggles implements UseCase\GetActivatedToggles
 {
     /**
-     * @var ActivatedToggleGateway
+     * @var GetAllTogglesGateway
      */
     private $gateway;
+    /**
+     * @var ToggleChecker
+     */
+    private $toggleChecker;
 
     /**
      * GetActivatedToggles constructor.
-     * @param ActivatedToggleGateway $gateway
+     * @param GetAllTogglesGateway $gateway
+     * @param ToggleChecker $toggleChecker
      */
-    public function __construct( ActivatedToggleGateway $gateway )
+    public function __construct( GetAllTogglesGateway $gateway, ToggleChecker $toggleChecker )
     {
         $this->gateway = $gateway;
+        $this->toggleChecker = $toggleChecker;
     }
 
     /**
-     * @param string $userIdentifier
-     * @return ActivatableToggle[]
+     * @param User $user
+     * @param Group $group
+     * @return MarketableToggle[]
      */
-    public function execute( $userIdentifier )
+    public function execute( User $user, Group $group )
     {
-        return $this->gateway->getAllMyActivatedToggles( $userIdentifier );
+        $activatedToggles = [ ];
+        $toggles = $this->gateway->getAllToggles();
+        foreach ( $toggles as $toggle ) {
+            if ( $this->toggleChecker->isToggleActive( $toggle->getName(), $user, $group ) ) {
+                $activatedToggles[] = $toggle;
+            }
+        }
+
+        return $activatedToggles;
     }
 }

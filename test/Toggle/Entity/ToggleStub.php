@@ -1,18 +1,26 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Volodymyr
+ * Date: 09/09/2015
+ * Time: 15:21
+ */
+
 namespace Clearbooks\Labs\Toggle\Entity;
 
-class BrollyToggle implements MarketableToggle
+
+abstract class ToggleStub implements MarketableToggle
 {
-    const NAME = "Brolly";
-    const DESC = "An Umbrella";
-    const ID = 1;
+    protected $name;
+    protected $desc;
+    protected $id;
 
     /**
      * @return string
      */
     public function getId()
     {
-        return self::ID;
+        return $this->id;
     }
 
     /**
@@ -20,7 +28,7 @@ class BrollyToggle implements MarketableToggle
      */
     public function getName()
     {
-        return self::NAME;
+        return $this->name;
     }
 
     /**
@@ -36,7 +44,7 @@ class BrollyToggle implements MarketableToggle
      */
     public function getDescriptionOfToggle()
     {
-        return self::DESC;
+        return $this->desc;
     }
 
     /**
