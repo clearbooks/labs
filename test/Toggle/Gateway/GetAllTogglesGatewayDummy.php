@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Vovaxs
  * Date: 24/08/2015
- * Time: 11:45
+ * Time: 11:51
  */
 
 namespace Clearbooks\Labs\Toggle\Gateway;
@@ -11,11 +11,14 @@ namespace Clearbooks\Labs\Toggle\Gateway;
 
 use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
 
-interface ActivatedToggleGateway
+class GetAllTogglesGatewayDummy implements GetAllTogglesGateway
 {
+
     /**
-     * @param string $userIdentifier
      * @return ActivatableToggle[]
      */
-    public function getAllMyActivatedToggles($userIdentifier);
+    public function getAllToggles()
+    {
+        return [];
+    }
 }

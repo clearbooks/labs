@@ -11,7 +11,7 @@ namespace Clearbooks\Labs\Toggle\Gateway;
 
 use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
 
-class ActivatedToggleGatewayStub implements ActivatedToggleGateway
+class GetAllTogglesGatewayStub implements GetAllTogglesGateway
 {
     /**
      * @var ActivatableToggle[]
@@ -30,7 +30,7 @@ class ActivatedToggleGatewayStub implements ActivatedToggleGateway
     /**
      * @return ActivatableToggle[]
      */
-    public function getAllMyActivatedToggles($user_identifier)
+    public function getAllToggles()
     {
         return $this->expectedToggles;
     }

@@ -10,20 +10,20 @@ namespace Clearbooks\Labs\Toggle;
 
 
 use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
-use Clearbooks\Labs\Toggle\Gateway\ActivatedToggleGateway;
+use Clearbooks\Labs\Toggle\Gateway\GetAllTogglesGateway;
 
 class GetActivatedToggles implements UseCase\GetActivatedToggles
 {
     /**
-     * @var ActivatedToggleGateway
+     * @var GetAllTogglesGateway
      */
     private $gateway;
 
     /**
      * GetActivatedToggles constructor.
-     * @param ActivatedToggleGateway $gateway
+     * @param GetAllTogglesGateway $gateway
      */
-    public function __construct( ActivatedToggleGateway $gateway )
+    public function __construct( GetAllTogglesGateway $gateway )
     {
         $this->gateway = $gateway;
     }
@@ -34,6 +34,6 @@ class GetActivatedToggles implements UseCase\GetActivatedToggles
      */
     public function execute( $userIdentifier )
     {
-        return $this->gateway->getAllMyActivatedToggles( $userIdentifier );
+        return $this->gateway->getAllToggles();
     }
 }
