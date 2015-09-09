@@ -9,12 +9,12 @@
 namespace Clearbooks\Labs\Toggle\Gateway;
 
 
-use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
+use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
 
 interface GetAllTogglesGateway
 {
     /**
-     * @return ActivatableToggle[]
+     * @return MarketableToggle[]
      */
     public function getAllToggles();
 }

@@ -9,26 +9,26 @@
 namespace Clearbooks\Labs\Toggle\Gateway;
 
 
-use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
+use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
 
 class GetAllTogglesGatewayStub implements GetAllTogglesGateway
 {
     /**
-     * @var ActivatableToggle[]
+     * @var MarketableToggle[]
      */
     private $expectedToggles;
 
     /**
      * ActivatedToggleGatewayStub constructor.
-     * @param ActivatableToggle[] $expectedToggles
+     * @param MarketableToggle[] $expectedToggles
      */
-    public function __construct($expectedToggles)
+    public function __construct( $expectedToggles )
     {
         $this->expectedToggles = $expectedToggles;
     }
 
     /**
-     * @return ActivatableToggle[]
+     * @return MarketableToggle[]
      */
     public function getAllToggles()
     {
