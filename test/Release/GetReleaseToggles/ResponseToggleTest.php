@@ -12,7 +12,7 @@ class ResponseToggleTest extends \PHPUnit_Framework_TestCase
      */
     public function GivenToggleName_WhenGetName_ThenReturnsName()
     {
-        $this->assertEquals( self::NAME, ( new ResponseToggle( null, self::NAME, null ) )->getName() );
+        $this->assertEquals( self::NAME, ( new ResponseToggle( null, self::NAME, null, null ) )->getName() );
     }
 
     /**
@@ -20,7 +20,7 @@ class ResponseToggleTest extends \PHPUnit_Framework_TestCase
      */
     public function givenToggleId_WhenGetId_IdReturnedIsCorrect()
     {
-        $this->assertEquals( self::ID, ( new ResponseToggle( self::ID, null, null ) )->getId() );
+        $this->assertEquals( self::ID, ( new ResponseToggle( self::ID, null, null, null ) )->getId() );
     }
 
     /**
@@ -28,6 +28,6 @@ class ResponseToggleTest extends \PHPUnit_Framework_TestCase
      */
     public function givenToggleDescription_WhenGetDescription_ReturnsCorrectDescription()
     {
-        $this->assertEquals( self::DESC, ( new ResponseToggle( null, null, self::DESC ) )->getDescription() );
+        $this->assertEquals( self::DESC, ( new ResponseToggle( null, null, self::DESC, null ) )->getDescription() );
     }
 }

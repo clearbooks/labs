@@ -76,7 +76,7 @@ abstract class ToggleStub implements MarketableToggle
      */
     public function getGuideUrl()
     {
-        return null;
+        return 'http://' . get_called_class();
     }
 
     /**

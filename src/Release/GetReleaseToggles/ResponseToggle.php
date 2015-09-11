@@ -9,17 +9,19 @@ class ResponseToggle
     private $name;
     /** @var string */
     private $description;
+    private $url;
 
     /**
      * @param $id
      * @param string $name
      * @param $description
      */
-    public function __construct( $id, $name, $description )
+    public function __construct( $id, $name, $description, $url )
     {
         $this->name = $name;
         $this->id = $id;
         $this->description = $description;
+        $this->url = $url;
     }
 
     /**
@@ -44,5 +46,10 @@ class ResponseToggle
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
     }
 }

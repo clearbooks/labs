@@ -34,7 +34,10 @@ class GetReleaseTogglesTest extends \PHPUnit_Framework_TestCase
     {
         $brolly = new Brolly;
         $responseToggle = $this->executeGetReleaseToggles( new Gateway\BrollyReleaseToggleCollection, self::RELEASE_ID );
-        $this->assertEquals( [ new ResponseToggle( $brolly->getId(), $brolly->getName(), $brolly->getDescriptionOfToggle() ) ], $responseToggle );
+        $this->assertEquals( [ new ResponseToggle( $brolly->getId(),
+                                                   $brolly->getName(),
+                                                   $brolly->getDescriptionOfToggle(),
+                                                   $brolly->getGuideUrl() ) ], $responseToggle );
     }
 
     /**
