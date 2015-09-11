@@ -6,6 +6,7 @@ class ResponseToggleTest extends \PHPUnit_Framework_TestCase
     const NAME = 'name';
     const ID = 'id';
     const DESC = 'description';
+    const URL = 'http://example.com';
 
     /**
      * @test
@@ -29,5 +30,13 @@ class ResponseToggleTest extends \PHPUnit_Framework_TestCase
     public function givenToggleDescription_WhenGetDescription_ReturnsCorrectDescription()
     {
         $this->assertEquals( self::DESC, ( new ResponseToggle( null, null, self::DESC, null ) )->getDescription() );
+    }
+
+    /**
+     * @test
+     */
+    public function givenGuideUrl_WhenGetGuideUrl_ReturnsGuideUrl()
+    {
+        $this->assertEquals( self::URL, ( new ResponseToggle( null, null, self::DESC, self::URL ) )->getUrl() );
     }
 }
