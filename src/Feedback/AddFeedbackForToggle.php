@@ -33,9 +33,20 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
      * @param string $message
      * @return bool
      */
+    private function isGivenParametersSet( $toggleId, $mood, $message )
+    {
+        return empty( $toggleId ) || empty( $message ) || !is_bool( $mood ) || !isset( $mood );
+    }
+
+    /**
+     * @param string $toggleId
+     * @param bool $mood
+     * @param string $message
+     * @return bool
+     */
     public function execute( $toggleId, $mood, $message )
     {
-        if ( empty( $toggleId ) || empty( $message ) || !is_bool( $mood ) || !isset( $mood ) ) {
+        if ( $this->isGivenParametersSet( $toggleId, $mood, $message ) ) {
             return false;
         }
         $this->gateway->addFeedbackForToggle( $toggleId, $mood, $message );

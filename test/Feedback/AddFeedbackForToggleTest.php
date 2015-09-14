@@ -49,7 +49,7 @@ class AddFeedbackForToggleTest extends PHPUnit_Framework_TestCase
      */
     public function givenAllParametersProvided_ReturnTrue()
     {
-        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleGatewayDummy ) )->execute( "1", true,
+        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleGatewayDummy ) )->execute( "1", false,
             "this is the test!" );
         $this->assertTrue( $response );
     }
