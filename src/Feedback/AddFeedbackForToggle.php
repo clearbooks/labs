@@ -3,6 +3,7 @@ namespace Clearbooks\Labs\Feedback;
 
 use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggleGateway;
 use Clearbooks\Labs\Feedback\UseCase\AddFeedbackForToggle as IAddFeedbackForToggle;
+
 /**
  * Created by PhpStorm.
  * User: Volodymyr
@@ -20,7 +21,7 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
      * AddFeedbackForToggle constructor.
      * @param InsertFeedbackForToggleGateway $gateway
      */
-    public function __construct($gateway)
+    public function __construct( $gateway )
     {
         $this->gateway = $gateway;
     }
@@ -34,10 +35,10 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
      */
     public function execute( $toggleId, $mood, $message )
     {
-        if(empty($toggleId) || empty($mood) || empty($message)){
+        if ( empty( $toggleId ) || empty( $message ) || !is_bool( $mood ) || !isset( $mood ) ) {
             return false;
         }
-        $this->gateway->addFeedbackForToggle($toggleId, $mood, $message);
+        $this->gateway->addFeedbackForToggle( $toggleId, $mood, $message );
         return true;
     }
 }
