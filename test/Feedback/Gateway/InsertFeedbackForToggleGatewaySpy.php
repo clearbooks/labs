@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Feedback\Gateway;
 
 
-class InsertFeedbackForToggleSpy implements InsertFeedbackForToggle
+class InsertFeedbackForToggleGatewaySpy implements InsertFeedbackForToggleGateway
 {
     /**
      * @var string

@@ -1,7 +1,7 @@
 <?php
 namespace Clearbooks\Labs\Feedback\Gateway;
 
-use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggle;
+use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggleGateway;
 
 /**
  * Created by PhpStorm.
@@ -9,7 +9,7 @@ use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggle;
  * Date: 14/09/2015
  * Time: 12:18
  */
-class InsertFeedbackForToggleDummy implements InsertFeedbackForToggle
+class InsertFeedbackForToggleGatewayDummy implements InsertFeedbackForToggleGateway
 {
 
     /**

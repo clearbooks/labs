@@ -6,7 +6,7 @@ namespace Clearbooks\Labs\Feedback\Gateway;
  * Date: 14/09/2015
  * Time: 12:14
  */
-interface InsertFeedbackForToggle
+interface InsertFeedbackForToggleGateway
 {
     /**
      * @param string $toggleId

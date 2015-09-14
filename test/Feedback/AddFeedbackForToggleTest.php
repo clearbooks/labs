@@ -1,9 +1,9 @@
 <?php
 namespace Clearbooks\Labs\Feedback;
 
-use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggleSpy;
+use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggleGatewaySpy;
 use PHPUnit_Framework_TestCase;
-use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggleDummy;
+use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggleGatewayDummy;
 
 /**
  * Created by PhpStorm.
@@ -19,7 +19,7 @@ class AddFeedbackForToggleTest extends PHPUnit_Framework_TestCase
      */
     public function givenNoToggleIdProvided_ReturnFalse()
     {
-        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleDummy ) )->execute( null, true,
+        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleGatewayDummy ) )->execute( null, true,
             "this is the test!" );
         $this->assertFalse( $response );
     }
@@ -29,7 +29,7 @@ class AddFeedbackForToggleTest extends PHPUnit_Framework_TestCase
      */
     public function givenNoMoodRatingProvided_ReturnFalse()
     {
-        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleDummy ) )->execute( "1", null,
+        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleGatewayDummy ) )->execute( "1", null,
             "this is the test!" );
         $this->assertFalse( $response );
     }
@@ -39,7 +39,7 @@ class AddFeedbackForToggleTest extends PHPUnit_Framework_TestCase
      */
     public function givenNoMessageProvided_ReturnFalse()
     {
-        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleDummy ) )->execute( "1", true,
+        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleGatewayDummy ) )->execute( "1", true,
             null );
         $this->assertFalse( $response );
     }
@@ -49,7 +49,7 @@ class AddFeedbackForToggleTest extends PHPUnit_Framework_TestCase
      */
     public function givenAllParametersProvided_ReturnTrue()
     {
-        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleDummy ) )->execute( "1", true,
+        $response = ( new AddFeedbackForToggle( new InsertFeedbackForToggleGatewayDummy ) )->execute( "1", true,
             "this is the test!" );
         $this->assertTrue( $response );
     }
@@ -59,7 +59,7 @@ class AddFeedbackForToggleTest extends PHPUnit_Framework_TestCase
      */
     public function givenAllParametersProvided_duringInsertingOfFeedback_CorrectParametersAreProvided()
     {
-        $spy = new InsertFeedbackForToggleSpy;
+        $spy = new InsertFeedbackForToggleGatewaySpy;
         ( new AddFeedbackForToggle( $spy ) )->execute( "1", true,
             "this is the test!" );
         $expected = [ "1", true, "this is the test!" ];
