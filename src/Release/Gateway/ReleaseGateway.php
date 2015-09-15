@@ -29,5 +29,13 @@ interface ReleaseGateway
      * @return PublicRelease[]
      */
     public function getAllReleases();
+
+    /**
+     * @param string $releaseId
+     * @param string $releaseName
+     * @param string $releaseUrl
+     * @return bool
+     */
+    public function editRelease( $releaseId, $releaseName, $releaseUrl );
 }
 //EOF ReleaseGateway.php

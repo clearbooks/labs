@@ -31,9 +31,9 @@ class SpyReleaseGateway implements ReleaseGateway
     public function addRelease( $releaseName, $url )
     {
         $this->addReleaseCalled++;
-        $this->addReleaseParams[] = [ 'releaseName' => $releaseName, 'url' => $url ];
+        $this->addReleaseParams[] = [ 'id' => $this->addReleaseCalled, 'releaseName' => $releaseName, 'url' => $url ];
 
-        return 1;
+        return $this->addReleaseCalled;
     }
 
     /**
@@ -66,7 +66,26 @@ class SpyReleaseGateway implements ReleaseGateway
      */
     public function getAllReleases()
     {
-        return [];
+        return [ ];
+    }
+
+    /**
+     * @param string $releaseId
+     * @param string $releaseName
+     * @param string $releaseUrl
+     * @return bool
+     */
+    public function editRelease( $releaseId, $releaseName, $releaseUrl )
+    {
+        foreach ( $this->addReleaseParams as $release ) {
+            if ( $release[ 'id' ] === $releaseId ) {
+                $release[ 'releaseName' ] = $releaseName;
+                $release[ 'url' ] = $releaseUrl;
+                return true;
+            }
+        }
+        return false;
     }
 }
+
 //EOF SpyReleaseGateway.php

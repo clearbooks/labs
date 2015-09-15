@@ -53,4 +53,15 @@ class MockReleaseGateway implements ReleaseGateway
     {
         return $this->releases;
     }
+
+    /**
+     * @param string $releaseId
+     * @param string $releaseName
+     * @param string $releaseUrl
+     * @return bool
+     */
+    public function editRelease( $releaseId, $releaseName, $releaseUrl )
+    {
+        return false;
+    }
 }
