@@ -87,8 +87,11 @@ abstract class ToggleStub implements MarketableToggle
         return null;
     }
 
+    /**
+     * @return string
+     */
     public function getType()
     {
-        return null;
+        return "simple";
     }
 }
