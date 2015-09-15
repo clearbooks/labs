@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Toggle\Entity;
 
 
-interface MarketableToggle
+interface MarketableToggle extends TypeToggle
 {
     /**
      * @return string
