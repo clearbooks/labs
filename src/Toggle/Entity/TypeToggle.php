@@ -11,5 +11,8 @@ namespace Clearbooks\Labs\Toggle\Entity;
 
 interface TypeToggle
 {
+    /**
+     * @return string
+     */
     public function getType();
 }
