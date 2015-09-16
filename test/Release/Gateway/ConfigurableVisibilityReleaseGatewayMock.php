@@ -52,4 +52,15 @@ class ConfigurableVisibilityReleaseGatewayMock implements ReleaseGateway
     {
         return [];
     }
+
+    /**
+     * @param string $releaseId
+     * @param string $releaseName
+     * @param string $releaseUrl
+     * @return bool
+     */
+    public function editRelease( $releaseId, $releaseName, $releaseUrl )
+    {
+        return false;
+    }
 }
