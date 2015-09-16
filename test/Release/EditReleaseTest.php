@@ -45,7 +45,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
      */
     public function givenEmptyRequest_ResponseFailsAndReturnsAllInvalidParameterErrors()
     {
-        $this->assertFailingEditRelease( $this->editRelease->exacute( new EditRequestDummy ),
+        $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestDummy ),
             [ EditResponse::INVALID_ID_ERROR, EditResponse::INVALID_NAME_ERROR, EditResponse::INVALID_URL_ERROR ]
         );
 
@@ -56,7 +56,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
      */
     public function givenInvalidId_ResponseFailsAndReturnsInvalidIdError()
     {
-        $this->assertFailingEditRelease( $this->editRelease->exacute( new EditRequestMock( "", "test", "url" ) ),
+        $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestMock( "", "test", "url" ) ),
             [ EditResponse::INVALID_ID_ERROR ]
         );
 
@@ -67,7 +67,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
      */
     public function givenInvaliName_ResponseFailsAndReturnsInvalidNameError()
     {
-        $this->assertFailingEditRelease( $this->editRelease->exacute( new EditRequestMock( "1", null, "url" ) ),
+        $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestMock( "1", null, "url" ) ),
             [ EditResponse::INVALID_NAME_ERROR ]
         );
 
@@ -78,7 +78,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
      */
     public function givenInvaliUrl_ResponseFailsAndReturnsInvalUrlNameError()
     {
-        $this->assertFailingEditRelease( $this->editRelease->exacute( new EditRequestMock( "1", "test", false ) ),
+        $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestMock( "1", "test", false ) ),
             [ EditResponse::INVALID_URL_ERROR ]
         );
 
@@ -89,7 +89,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
      */
     public function givenNonExistentId_ResponseFailsAndReturnsIdNotFoundError()
     {
-        $this->assertFailingEditRelease( $this->editRelease->exacute( new EditRequestMock( "1", "test", "blah" ) ),
+        $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestMock( "1", "test", "blah" ) ),
             [ EditResponse::ID_NOT_FOUND ]
         );
 
@@ -101,7 +101,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
     public function givenValidParameters_ResponsePassesAndReturnsSuccessfulResponse()
     {
         $releaseId = $this->gateway->addRelease( "test", "blah" );
-        $response = $this->editRelease->exacute( new EditRequestMock( $releaseId, "test", "blah" ) );
+        $response = $this->editRelease->execute( new EditRequestMock( $releaseId, "test", "blah" ) );
         $this->assertTrue( $response->isSuccessful() );
     }
 }

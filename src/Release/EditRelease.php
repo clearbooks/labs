@@ -102,7 +102,7 @@ class EditRelease implements IEditRelease
      * @param EditRequest $request
      * @return EditResponse
      */
-    public function exacute( EditRequest $request )
+    public function execute( EditRequest $request )
     {
         $errors = $this->validateRequest( $request );
         $response = $this->getResponse( $errors );

@@ -18,5 +18,5 @@ interface EditRelease
      * @param EditRequest $request
      * @return EditResponse
      */
-    public function exacute(EditRequest $request);
+    public function execute(EditRequest $request);
 }
