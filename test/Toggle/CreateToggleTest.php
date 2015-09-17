@@ -25,16 +25,30 @@ class CreateToggleTest extends \PHPUnit_Framework_TestCase
      */
     private $createToggle;
 
-
-    private function assertFailingEditRelease( ToggleResponse $response, $errors )
+    /**
+     * @param ToggleResponse $response
+     * @param string[] $errors
+     */
+    private function assertFailingCreateToggle( ToggleResponse $response, $errors )
     {
-        $this->assertfalse( $response->isSuccessful() );
+        $this->assertFalse( $response->isSuccessful() );
         $this->assertEquals( $errors, $response->getValidationErrors() );
+    }
+
+    /**
+     * @param ToggleResponse $response
+     */
+    private function assertPassingCreateToggle( ToggleResponse $response )
+    {
+        $this->assertTrue( $response->isSuccessful() );
+        $this->assertEmpty( $response->getValidationErrors() );
+        $this->assertNotEmpty( $response->getToggleId() );
     }
 
     public function setUp()
     {
-        $this->gateway = new CreateToggleGatewaySpy();
+        $existentReleaseIds = [ 1, 2, 3 ];
+        $this->gateway = new CreateToggleGatewaySpy( $existentReleaseIds );
         $this->createToggle = new CreateToggle( $this->gateway );
     }
 
@@ -43,7 +57,10 @@ class CreateToggleTest extends \PHPUnit_Framework_TestCase
      */
     public function givenEmptyRequest_ResponseFailsAndReturnsAllInvalidParameterErrors()
     {
-        $this->assertFailingEditRelease( $this->createToggle->execute( new ToggleRequestMock( "", "", null, "" ) ),
+
+
+        $this->assertFailingCreateToggle( $this->createToggle
+            ->execute( new ToggleRequestMock( "", "", null, "" ) ),
             [ ToggleResponse::INVALID_NAME_ERROR, ToggleResponse::INVALID_RELEASE_ID_ERROR, ToggleResponse::INVALID_VISIBILITY_ERROR, ToggleResponse::INVALID_TYPE_ERROR ]
         );
     }
@@ -51,9 +68,10 @@ class CreateToggleTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function givenEmptyName_ResponseFailsAndReturnsInvalidNameErrors()
+    public function givenEmptyName_ResponseFailsAndReturnsInvalidNameError()
     {
-        $this->assertFailingEditRelease( $this->createToggle->execute( new ToggleRequestMock( null, "simple", false, "1" ) ),
+        $this->assertFailingCreateToggle( $this->createToggle
+            ->execute( new ToggleRequestMock( null, "group", false, "1" ) ),
             [ ToggleResponse::INVALID_NAME_ERROR ]
         );
     }
@@ -61,9 +79,10 @@ class CreateToggleTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function givenInvalidType_ResponseFailsAndReturnsInvalidTypeErrors()
+    public function givenInvalidType_ResponseFailsAndReturnsInvalidTypeError()
     {
-        $this->assertFailingEditRelease( $this->createToggle->execute( new ToggleRequestMock( "test", "", false, "1" ) ),
+        $this->assertFailingCreateToggle( $this->createToggle
+            ->execute( new ToggleRequestMock( "test", "this_is_not_one_of_the_toggle_types", false, "2" ) ),
             [ ToggleResponse::INVALID_TYPE_ERROR ]
         );
     }
@@ -71,9 +90,10 @@ class CreateToggleTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function givenInvalidVisibility_ResponseFailsAndReturnsInvalidVisibilityErrors()
+    public function givenInvalidVisibility_ResponseFailsAndReturnsInvalidVisibilityError()
     {
-        $this->assertFailingEditRelease( $this->createToggle->execute( new ToggleRequestMock( "test", "simple", null, "1" ) ),
+        $this->assertFailingCreateToggle( $this->createToggle
+            ->execute( new ToggleRequestMock( "test", "simple", "anything_but_bool_will_fail", "3" ) ),
             [ ToggleResponse::INVALID_VISIBILITY_ERROR ]
         );
     }
@@ -81,10 +101,32 @@ class CreateToggleTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function givenEmptyRelease_ResponseFailsAndReturnsInvalidReleaseErrors()
+    public function givenEmptyReleaseId_ResponseFailsAndReturnsInvalidReleaseError()
     {
-        $this->assertFailingEditRelease( $this->createToggle->execute( new ToggleRequestMock( "test", "simple", false, null ) ),
+        $this->assertFailingCreateToggle( $this->createToggle
+            ->execute( new ToggleRequestMock( "test", "simple", true, null ) ),
             [ ToggleResponse::INVALID_RELEASE_ID_ERROR ]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function givenCompleteRequest_butWithNotExistentReleaseId_ResponseFailsAndReturnsReleaseNotFoundError()
+    {
+        $this->assertFailingCreateToggle( $this->createToggle
+            ->execute( new ToggleRequestMock( "test", "simple", false, "4" ) ),
+            [ ToggleResponse::RELEASE_NOT_FOUND_ERROR ]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function givenCompleteRequest_andWithExistentReleaseId_returnsPassedResponseWithToggleId()
+    {
+        $this->assertPassingCreateToggle( $this->createToggle
+            ->execute( new ToggleRequestMock( "test", "simple", false, "1" ) )
         );
     }
 }

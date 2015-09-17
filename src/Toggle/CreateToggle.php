@@ -36,11 +36,10 @@ class CreateToggle implements ICreateToggle
      * @param $errors
      * @return array
      */
-    private function validateReleaseId( ToggleRequest $request, $errors )
+    private function validateToggleName( ToggleRequest $request, $errors )
     {
-        if ( empty( $request->getToggleReleaseId() ) ) {
-            $errors[] = ToggleResponse::INVALID_RELEASE_ID_ERROR;
-            return $errors;
+        if ( empty( $request->getToggleName() ) ) {
+            $errors[] = ToggleResponse::INVALID_NAME_ERROR;
         }
         return $errors;
     }
@@ -50,11 +49,10 @@ class CreateToggle implements ICreateToggle
      * @param $errors
      * @return array
      */
-    private function validateToggleName( ToggleRequest $request, $errors )
+    private function validateReleaseId( ToggleRequest $request, $errors )
     {
-        if ( empty( $request->getToggleName() ) ) {
-            $errors[] = ToggleResponse::INVALID_NAME_ERROR;
-            return $errors;
+        if ( empty( $request->getToggleReleaseId() ) ) {
+            $errors[] = ToggleResponse::INVALID_RELEASE_ID_ERROR;
         }
         return $errors;
     }
@@ -68,7 +66,6 @@ class CreateToggle implements ICreateToggle
     {
         if ( !is_bool( $request->isToggleVisible() ) ) {
             $errors[] = ToggleResponse::INVALID_VISIBILITY_ERROR;
-            return $errors;
         }
         return $errors;
     }
@@ -80,9 +77,8 @@ class CreateToggle implements ICreateToggle
      */
     private function validateToggleType( ToggleRequest $request, $errors )
     {
-        if ( empty( $request->getToggleType() ) ) {
+        if ( $request->getToggleType() !== "simple" && $request->getToggleType() !== "group" ) {
             $errors[] = ToggleResponse::INVALID_TYPE_ERROR;
-            return $errors;
         }
         return $errors;
     }
@@ -103,7 +99,6 @@ class CreateToggle implements ICreateToggle
 
     /**
      * @param string[] $errors
-     * @param $toggleId
      * @return ToggleResponseModel
      */
     private function getResponse( $errors )
@@ -122,6 +117,22 @@ class CreateToggle implements ICreateToggle
     {
         $errors = $this->validateRequest( $request );
         $response = $this->getResponse( $errors );
+
+        if ( !$response->isSuccessful() ) {
+            return $response;
+        }
+
+        $toggleId = $this->gateway->addToggle(
+            $request->getToggleReleaseId(), $request->getToggleName(),
+            $request->isToggleVisible(), $request->getToggleType()
+        );
+
+        if ( empty( $toggleId ) ) {
+            $response->setSuccess( false );
+            $response->setErrors( [ ToggleResponse::RELEASE_NOT_FOUND_ERROR ] );
+        }
+
+        $response->setToggleId( $toggleId );
         return $response;
     }
 }

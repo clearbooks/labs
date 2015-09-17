@@ -16,7 +16,7 @@ interface CreateToggleGateway
      * @param string $toggleName
      * @param bool $visibility
      * @param string $toggleType
-     * @return bool
+     * @return string
      */
     public function addToggle( $releaseId, $toggleName, $visibility, $toggleType );
 }
