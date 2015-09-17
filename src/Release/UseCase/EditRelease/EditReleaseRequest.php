@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Release\UseCase\EditRelease;
 
 
-interface EditRequest
+interface EditReleaseRequest
 {
     /**
      * @return string

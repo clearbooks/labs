@@ -8,13 +8,12 @@
 
 namespace Clearbooks\Labs\Toggle;
 
-use Clearbooks\Labs\Toggle\CreateToggle\ToggleResponseModel;
+use Clearbooks\Labs\Toggle\CreateToggle\CreateToggleResponseModel;
 use Clearbooks\Labs\Toggle\Gateway\CreateToggleGateway;
-use Clearbooks\Labs\Toggle\UseCase\CreateToggle as ICreateToggle;
-use Clearbooks\Labs\Toggle\UseCase\CreateToggle\ToggleRequest;
-use Clearbooks\Labs\Toggle\UseCase\CreateToggle\ToggleResponse;
+use Clearbooks\Labs\Toggle\UseCase\CreateToggle\CreateToggleRequest;
+use Clearbooks\Labs\Toggle\UseCase\CreateToggle\CreateToggleResponse;
 
-class CreateToggle implements ICreateToggle
+class CreateToggle implements UseCase\CreateToggle
 {
 
     /**
@@ -32,62 +31,62 @@ class CreateToggle implements ICreateToggle
     }
 
     /**
-     * @param ToggleRequest $request
+     * @param CreateToggleRequest $request
      * @param $errors
      * @return array
      */
-    private function validateToggleName( ToggleRequest $request, $errors )
+    private function validateToggleName( CreateToggleRequest $request, $errors )
     {
         if ( empty( $request->getToggleName() ) ) {
-            $errors[] = ToggleResponse::INVALID_NAME_ERROR;
+            $errors[] = CreateToggleResponse::INVALID_NAME_ERROR;
         }
         return $errors;
     }
 
     /**
-     * @param ToggleRequest $request
+     * @param CreateToggleRequest $request
      * @param $errors
      * @return array
      */
-    private function validateReleaseId( ToggleRequest $request, $errors )
+    private function validateReleaseId( CreateToggleRequest $request, $errors )
     {
         if ( empty( $request->getToggleReleaseId() ) ) {
-            $errors[] = ToggleResponse::INVALID_RELEASE_ID_ERROR;
+            $errors[] = CreateToggleResponse::INVALID_RELEASE_ID_ERROR;
         }
         return $errors;
     }
 
     /**
-     * @param ToggleRequest $request
+     * @param CreateToggleRequest $request
      * @param $errors
      * @return array
      */
-    private function validateToggleVisibility( ToggleRequest $request, $errors )
+    private function validateToggleVisibility( CreateToggleRequest $request, $errors )
     {
         if ( !is_bool( $request->isToggleVisible() ) ) {
-            $errors[] = ToggleResponse::INVALID_VISIBILITY_ERROR;
+            $errors[] = CreateToggleResponse::INVALID_VISIBILITY_ERROR;
         }
         return $errors;
     }
 
     /**
-     * @param ToggleRequest $request
+     * @param CreateToggleRequest $request
      * @param $errors
      * @return array
      */
-    private function validateToggleType( ToggleRequest $request, $errors )
+    private function validateToggleType( CreateToggleRequest $request, $errors )
     {
         if ( $request->getToggleType() !== "simple" && $request->getToggleType() !== "group" ) {
-            $errors[] = ToggleResponse::INVALID_TYPE_ERROR;
+            $errors[] = CreateToggleResponse::INVALID_TYPE_ERROR;
         }
         return $errors;
     }
 
     /**
-     * @param ToggleRequest $request
+     * @param CreateToggleRequest $request
      * @return string[]
      */
-    private function validateRequest( ToggleRequest $request )
+    private function validateRequest( CreateToggleRequest $request )
     {
         $errors = array();
         $errors = $this->validateToggleName( $request, $errors );
@@ -99,21 +98,21 @@ class CreateToggle implements ICreateToggle
 
     /**
      * @param string[] $errors
-     * @return ToggleResponseModel
+     * @return CreateToggleResponseModel
      */
     private function getResponse( $errors )
     {
-        $response = new ToggleResponseModel();
+        $response = new CreateToggleResponseModel();
         $response->setSuccess( empty( $errors ) );
         $response->setErrors( $errors );
         return $response;
     }
 
     /**
-     * @param ToggleRequest $request
-     * @return ToggleResponse
+     * @param CreateToggleRequest $request
+     * @return CreateToggleResponse
      */
-    public function execute( ToggleRequest $request )
+    public function execute( CreateToggleRequest $request )
     {
         $errors = $this->validateRequest( $request );
         $response = $this->getResponse( $errors );
@@ -129,7 +128,7 @@ class CreateToggle implements ICreateToggle
 
         if ( empty( $toggleId ) ) {
             $response->setSuccess( false );
-            $response->setErrors( [ ToggleResponse::RELEASE_NOT_FOUND_ERROR ] );
+            $response->setErrors( [ CreateToggleResponse::RELEASE_NOT_FOUND_ERROR ] );
         }
 
         $response->setToggleId( $toggleId );

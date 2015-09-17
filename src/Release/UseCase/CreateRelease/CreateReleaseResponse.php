@@ -6,21 +6,12 @@
 
 namespace Clearbooks\Labs\Release\UseCase\CreateRelease;
 
+use \Clearbooks\Labs\Response\UseCase\Response;
 
-interface Response
+interface CreateReleaseResponse extends Response
 {
     const INVALID_NAME_ERROR = 11;
     const INVALID_URL_ERROR = 12;
-
-    /**
-     * @return bool
-     */
-    public function isSuccessful();
-
-    /**
-     * @return string[]
-     */
-    public function getValidationErrors();
 
     /**
      * @return string

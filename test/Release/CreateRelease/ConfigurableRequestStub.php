@@ -7,9 +7,9 @@
 namespace Clearbooks\Labs\Release\CreateRelease;
 
 
-use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseRequest;
 
-class ConfigurableRequestStub implements Request
+class ConfigurableRequestStub implements CreateReleaseRequest
 {
     private $name;
     private $url;

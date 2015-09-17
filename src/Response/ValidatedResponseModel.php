@@ -1,17 +1,18 @@
 <?php
 /**
- * @author: Ryan Wood <ryanw@clearbooks.co.uk>
- * @created: 16/07/15
+ * Created by PhpStorm.
+ * User: Volodymyr
+ * Date: 17/09/2015
+ * Time: 12:50
  */
 
-namespace Clearbooks\Labs\Release\CreateRelease;
+namespace Clearbooks\Labs\Response;
 
 
-use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
+use Clearbooks\Labs\Response\UseCase\Response;
 
-class ResponseModel implements Response
+abstract class ValidatedResponseModel implements Response
 {
-
     /**
      * @var bool
      */
@@ -21,11 +22,6 @@ class ResponseModel implements Response
      * @var string[]
      */
     private $errors;
-
-    /**
-     * @var string
-     */
-    private $id;
 
     /**
      * @return bool
@@ -44,17 +40,9 @@ class ResponseModel implements Response
     }
 
     /**
-     * @return string
-     */
-    public function getReleaseId()
-    {
-        return $this->id;
-    }
-
-    /**
      * @param boolean $successful
      */
-    public function setSuccessful( $successful )
+    public function setSuccess( $successful )
     {
         $this->successful = $successful;
     }
@@ -66,13 +54,4 @@ class ResponseModel implements Response
     {
         $this->errors = $errors;
     }
-
-    /**
-     * @param string $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 }
-//EOF ResponseModel.php

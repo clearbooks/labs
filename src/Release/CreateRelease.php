@@ -3,9 +3,9 @@
 namespace Clearbooks\Labs\Release;
 
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
-use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
-use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
-use Clearbooks\Labs\Release\CreateRelease\ResponseModel;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseRequest;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseResponse;
+use Clearbooks\Labs\Release\CreateRelease\CreateReleaseResponseModel;
 
 /**
  * @author: Ryan Wood <ryanw@clearbooks.co.uk>
@@ -27,10 +27,46 @@ class CreateRelease implements UseCase\CreateRelease
     }
 
     /**
-     * @param Request $request
-     * @return Response
+     * @param array $errors
+     * @return CreateReleaseResponse $response
      */
-    public function execute( Request $request )
+    private function getResponse( $errors )
+    {
+        $response = new CreateReleaseResponseModel();
+
+        $response->setSuccess( empty( $errors ) );
+        $response->setErrors( $errors );
+
+        return $response;
+    }
+
+    /**
+     * @param CreateReleaseRequest $request
+     * @return array $errors
+     */
+    private function validateRequest( CreateReleaseRequest $request )
+    {
+        $errors = array();
+
+        $releaseName = $request->getReleaseName();
+        $url = $request->getReleaseInfoUrl();
+
+        if ( empty( $releaseName ) ) {
+            $errors[] = CreateReleaseResponse::INVALID_NAME_ERROR;
+        }
+
+        if ( empty( $url ) ) {
+            $errors[] = CreateReleaseResponse::INVALID_URL_ERROR;
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param CreateReleaseRequest $request
+     * @return CreateReleaseResponse
+     */
+    public function execute( CreateReleaseRequest $request )
     {
         $errors = $this->validateRequest( $request );
 
@@ -44,42 +80,6 @@ class CreateRelease implements UseCase\CreateRelease
             $request->getReleaseInfoUrl() ) );
 
         return $response;
-    }
-
-    /**
-     * @param array $errors
-     * @return ResponseModel $response
-     */
-    private function getResponse( $errors )
-    {
-        $response = new ResponseModel();
-
-        $response->setSuccessful( empty( $errors ) );
-        $response->setErrors( $errors );
-
-        return $response;
-    }
-
-    /**
-     * @param Request $request
-     * @return array $errors
-     */
-    private function validateRequest( Request $request )
-    {
-        $errors = array();
-
-        $releaseName = $request->getReleaseName();
-        $url = $request->getReleaseInfoUrl();
-
-        if ( empty( $releaseName ) ) {
-            $errors[] = Response::INVALID_NAME_ERROR;
-        }
-
-        if ( empty( $url ) ) {
-            $errors[] = Response::INVALID_URL_ERROR;
-        }
-
-        return $errors;
     }
 }
 //EOF CreateRelease.php

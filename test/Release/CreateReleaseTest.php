@@ -10,8 +10,8 @@ namespace Clearbooks\Labs\Release;
 use Clearbooks\Labs\Release\CreateRelease\ConfigurableRequestStub;
 use Clearbooks\Labs\Release\Gateway\SpyReleaseGateway;
 use Clearbooks\Labs\Release\CreateRelease\StaticRequestStub;
-use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
-use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseRequest;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseResponse;
 
 class CreateReleaseTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,7 +45,7 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
     public function givenEmptyRequest_ReturnsNotSuccessfulAndGetBothInvalidArgumentsError()
     {
         $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub() ),
-            array( Response::INVALID_NAME_ERROR, Response::INVALID_URL_ERROR ) );
+            array( CreateReleaseResponse::INVALID_NAME_ERROR, CreateReleaseResponse::INVALID_URL_ERROR ) );
     }
 
     /**
@@ -54,7 +54,7 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
     public function givenInvalidName_ReturnsNotSuccessfulAndGetInvalidNameError()
     {
         $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( null,
-            'some url' ) ), array( Response::INVALID_NAME_ERROR ) );
+            'some url' ) ), array( CreateReleaseResponse::INVALID_NAME_ERROR ) );
     }
 
     /**
@@ -63,7 +63,7 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
     public function givenInvalidUrl_ReturnsNotSuccessfulAndGetInvalidUrlError()
     {
         $this->assertCreateReleaseWasUnsuccessful( $this->createRelease( new ConfigurableRequestStub( 'Release One',
-            null ) ), array( Response::INVALID_URL_ERROR ) );
+            null ) ), array( CreateReleaseResponse::INVALID_URL_ERROR ) );
     }
 
     /**
@@ -82,16 +82,16 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( $request->getReleaseInfoUrl(), $release[ 'url' ] );
     }
 
-    private function createRelease( Request $request )
+    private function createRelease( CreateReleaseRequest $request )
     {
         return $this->createRelease->execute( $request );
     }
 
     /**
-     * @param Response $response
+     * @param CreateReleaseResponse $response
      * @param array $expectedErrors
      */
-    private function assertCreateReleaseWasUnsuccessful( Response $response, $expectedErrors = array() )
+    private function assertCreateReleaseWasUnsuccessful( CreateReleaseResponse $response, $expectedErrors = array() )
     {
         $this->assertFalse( $response->isSuccessful() );
         $this->assertEquals( $expectedErrors, $response->getValidationErrors() );

@@ -13,7 +13,7 @@ use Clearbooks\Labs\Release\EditRelease\EditRequestDummy;
 use Clearbooks\Labs\Release\EditRelease\EditRequestMock;
 use Clearbooks\Labs\Release\Gateway\SpyReleaseGateway;
 use Clearbooks\Labs\Release\EditRelease;
-use Clearbooks\Labs\Release\UseCase\EditRelease\EditResponse;
+use Clearbooks\Labs\Release\UseCase\EditRelease\EditReleaseResponse;
 use PHPUnit_Framework_TestCase;
 
 class EditReleaseTest extends PHPUnit_Framework_TestCase
@@ -28,7 +28,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
      */
     private $editRelease;
 
-    private function assertFailingEditRelease( EditResponse $response, $errors )
+    private function assertFailingEditRelease( EditReleaseResponse $response, $errors )
     {
         $this->assertfalse( $response->isSuccessful() );
         $this->assertEquals( $errors, $response->getValidationErrors() );
@@ -46,7 +46,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
     public function givenEmptyRequest_ResponseFailsAndReturnsAllInvalidParameterErrors()
     {
         $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestDummy ),
-            [ EditResponse::INVALID_ID_ERROR, EditResponse::INVALID_NAME_ERROR, EditResponse::INVALID_URL_ERROR ]
+            [ EditReleaseResponse::INVALID_ID_ERROR, EditReleaseResponse::INVALID_NAME_ERROR, EditReleaseResponse::INVALID_URL_ERROR ]
         );
 
     }
@@ -57,7 +57,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
     public function givenInvalidId_ResponseFailsAndReturnsInvalidIdError()
     {
         $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestMock( "", "test", "url" ) ),
-            [ EditResponse::INVALID_ID_ERROR ]
+            [ EditReleaseResponse::INVALID_ID_ERROR ]
         );
 
     }
@@ -68,7 +68,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
     public function givenInvaliName_ResponseFailsAndReturnsInvalidNameError()
     {
         $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestMock( "1", null, "url" ) ),
-            [ EditResponse::INVALID_NAME_ERROR ]
+            [ EditReleaseResponse::INVALID_NAME_ERROR ]
         );
 
     }
@@ -79,7 +79,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
     public function givenInvaliUrl_ResponseFailsAndReturnsInvalUrlNameError()
     {
         $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestMock( "1", "test", false ) ),
-            [ EditResponse::INVALID_URL_ERROR ]
+            [ EditReleaseResponse::INVALID_URL_ERROR ]
         );
 
     }
@@ -90,7 +90,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
     public function givenNonExistentId_ResponseFailsAndReturnsIdNotFoundError()
     {
         $this->assertFailingEditRelease( $this->editRelease->execute( new EditRequestMock( "1", "test", "blah" ) ),
-            [ EditResponse::ID_NOT_FOUND ]
+            [ EditReleaseResponse::ID_NOT_FOUND ]
         );
 
     }

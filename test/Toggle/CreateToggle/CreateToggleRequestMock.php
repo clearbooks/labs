@@ -9,9 +9,9 @@
 namespace Clearbooks\Labs\Toggle\CreateToggle;
 
 
-use Clearbooks\Labs\Toggle\UseCase\CreateToggle\ToggleRequest;
+use Clearbooks\Labs\Toggle\UseCase\CreateToggle\CreateToggleRequest;
 
-class ToggleRequestMock implements ToggleRequest
+class CreateToggleRequestMock implements CreateToggleRequest
 {
     /**
      * @var string
