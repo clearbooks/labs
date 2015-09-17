@@ -15,22 +15,22 @@ class CreateReleaseResponseModel extends ValidatedResponseModel implements Creat
     /**
      * @var string
      */
-    private $id;
+    private $releaseId;
 
     /**
      * @return string
      */
     public function getReleaseId()
     {
-        return $this->id;
+        return $this->releaseId;
     }
 
     /**
-     * @param string $id
+     * @param string $releaseId
      */
-    public function setId( $id )
+    public function setId( $releaseId )
     {
-        $this->id = $id;
+        $this->releaseId = $releaseId;
     }
 }
 //EOF ResponseModel.php
