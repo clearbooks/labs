@@ -9,14 +9,14 @@
 namespace Clearbooks\Labs\Toggle\UseCase;
 
 
-use Clearbooks\Labs\Toggle\UseCase\CreateToggle\ToggleRequest;
-use Clearbooks\Labs\Toggle\UseCase\CreateToggle\ToggleResponse;
+use Clearbooks\Labs\Toggle\UseCase\CreateToggle\CreateToggleRequest;
+use Clearbooks\Labs\Toggle\UseCase\CreateToggle\CreateToggleResponse;
 
 interface CreateToggle
 {
     /**
-     * @param ToggleRequest $request
-     * @return ToggleResponse
+     * @param CreateToggleRequest $request
+     * @return CreateToggleResponse
      */
-    public function execute( ToggleRequest $request );
+    public function execute( CreateToggleRequest $request );
 }

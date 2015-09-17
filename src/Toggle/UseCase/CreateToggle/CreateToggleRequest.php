@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Toggle\UseCase\CreateToggle;
 
 
-interface ToggleRequest
+interface CreateToggleRequest
 {
     /**
      * @return string
