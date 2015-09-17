@@ -9,13 +9,13 @@
 namespace Clearbooks\Labs\Release;
 
 
+use Clearbooks\Labs\Release\EditRelease\EditReleaseResponseModel;
 use Clearbooks\Labs\Release\EditRelease\EditResponseModel;
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
-use Clearbooks\Labs\Release\UseCase\EditRelease\EditRequest;
-use Clearbooks\Labs\Release\UseCase\EditRelease\EditResponse;
-use Clearbooks\Labs\Release\UseCase\EditRelease as IEditRelease;
+use Clearbooks\Labs\Release\UseCase\EditRelease\EditReleaseRequest;
+use Clearbooks\Labs\Release\UseCase\EditRelease\EditReleaseResponse;
 
-class EditRelease implements IEditRelease
+class EditRelease implements UseCase\EditRelease
 {
     /**
      * @var ReleaseGateway
@@ -32,52 +32,52 @@ class EditRelease implements IEditRelease
     }
 
     /**
-     * @param EditRequest $request
+     * @param EditReleaseRequest $request
      * @param $errors
      * @return array
      */
-    private function validateReleaseId( EditRequest $request, $errors )
+    private function validateReleaseId( EditReleaseRequest $request, $errors )
     {
         if ( empty( $request->getReleaseId() ) ) {
-            $errors[] = EditResponse::INVALID_ID_ERROR;
+            $errors[] = EditReleaseResponse::INVALID_ID_ERROR;
             return $errors;
         }
         return $errors;
     }
 
     /**
-     * @param EditRequest $request
+     * @param EditReleaseRequest $request
      * @param $errors
      * @return array
      */
-    private function validateReleaseName( EditRequest $request, $errors )
+    private function validateReleaseName( EditReleaseRequest $request, $errors )
     {
         if ( empty( $request->getReleaseName() ) ) {
-            $errors[] = EditResponse::INVALID_NAME_ERROR;
+            $errors[] = EditReleaseResponse::INVALID_NAME_ERROR;
             return $errors;
         }
         return $errors;
     }
 
     /**
-     * @param EditRequest $request
+     * @param EditReleaseRequest $request
      * @param $errors
      * @return array
      */
-    private function validateReleaseUrl( EditRequest $request, $errors )
+    private function validateReleaseUrl( EditReleaseRequest $request, $errors )
     {
         if ( empty( $request->getReleaseInfoUrl() ) ) {
-            $errors[] = EditResponse::INVALID_URL_ERROR;
+            $errors[] = EditReleaseResponse::INVALID_URL_ERROR;
             return $errors;
         }
         return $errors;
     }
 
     /**
-     * @param EditRequest $request
+     * @param EditReleaseRequest $request
      * @return string[]
      */
-    private function validateRequest( EditRequest $request )
+    private function validateRequest( EditReleaseRequest $request )
     {
         $errors = array();
         $errors = $this->validateReleaseId( $request, $errors );
@@ -88,21 +88,21 @@ class EditRelease implements IEditRelease
 
     /**
      * @param string[] $errors
-     * @return EditResponseModel
+     * @return EditReleaseResponse
      */
     private function getResponse( $errors )
     {
-        $response = new EditResponseModel();
+        $response = new EditReleaseResponseModel();
         $response->setSuccess( empty( $errors ) );
         $response->setErrors( $errors );
         return $response;
     }
 
     /**
-     * @param EditRequest $request
-     * @return EditResponse
+     * @param EditReleaseRequest $request
+     * @return EditReleaseResponse
      */
-    public function execute( EditRequest $request )
+    public function execute( EditReleaseRequest $request )
     {
         $errors = $this->validateRequest( $request );
         $response = $this->getResponse( $errors );
@@ -121,7 +121,7 @@ class EditRelease implements IEditRelease
         }
 
         $response->setSuccess( false );
-        $response->setErrors( [ EditResponse::ID_NOT_FOUND ] );
+        $response->setErrors( [ EditReleaseResponse::ID_NOT_FOUND ] );
         return $response;
     }
 }

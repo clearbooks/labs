@@ -7,7 +7,7 @@
 namespace Clearbooks\Labs\Release\UseCase\CreateRelease;
 
 
-interface Request
+interface CreateReleaseRequest
 {
     public function getReleaseName();
 

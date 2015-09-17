@@ -9,14 +9,14 @@
 namespace Clearbooks\Labs\Release\UseCase;
 
 
-use Clearbooks\Labs\Release\UseCase\EditRelease\EditRequest;
-use Clearbooks\Labs\Release\UseCase\EditRelease\EditResponse;
+use Clearbooks\Labs\Release\UseCase\EditRelease\EditReleaseRequest;
+use Clearbooks\Labs\Release\UseCase\EditRelease\EditReleaseResponse;
 
 interface EditRelease
 {
     /**
-     * @param EditRequest $request
-     * @return EditResponse
+     * @param EditReleaseRequest $request
+     * @return EditReleaseResponse
      */
-    public function execute(EditRequest $request);
+    public function execute( EditReleaseRequest $request );
 }

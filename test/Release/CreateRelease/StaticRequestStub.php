@@ -7,9 +7,9 @@
 namespace Clearbooks\Labs\Release\CreateRelease;
 
 
-use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseRequest;
 
-class StaticRequestStub implements Request
+class StaticRequestStub implements CreateReleaseRequest
 {
 
     const NAME = 'Barry Chuckle';

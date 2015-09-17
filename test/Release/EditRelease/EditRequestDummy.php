@@ -9,9 +9,9 @@
 namespace Clearbooks\Labs\Release\EditRelease;
 
 
-use Clearbooks\Labs\Release\UseCase\EditRelease\EditRequest;
+use Clearbooks\Labs\Release\UseCase\EditRelease\EditReleaseRequest;
 
-class EditRequestDummy implements EditRequest
+class EditRequestDummy implements EditReleaseRequest
 {
 
     /**

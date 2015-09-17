@@ -7,15 +7,15 @@
 namespace Clearbooks\Labs\Release\UseCase;
 
 
-use Clearbooks\Labs\Release\UseCase\CreateRelease\Request;
-use Clearbooks\Labs\Release\UseCase\CreateRelease\Response;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseRequest;
+use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseResponse;
 
 interface CreateRelease
 {
     /**
-     * @param Request $request
-     * @return Response
+     * @param CreateReleaseRequest $request
+     * @return CreateReleaseResponse
      */
-    public function execute( Request $request );
+    public function execute( CreateReleaseRequest $request );
 }
 //EOF CreateRelease.php
