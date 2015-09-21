@@ -30,13 +30,14 @@ class InsertFeedbackForToggleGatewaySpy implements InsertFeedbackForToggleGatewa
      * @param string $toggleId
      * @param bool $mood
      * @param string $message
-     * @return void
+     * @return bool
      */
     public function addFeedbackForToggle( $toggleId, $mood, $message )
     {
         $this->toggleId = $toggleId;
         $this->mood = $mood;
         $this->message = $message;
+        return $this->toggleId === "1";
     }
 
     /**

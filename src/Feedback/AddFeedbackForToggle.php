@@ -21,7 +21,7 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
      * AddFeedbackForToggle constructor.
      * @param InsertFeedbackForToggleGateway $gateway
      */
-    public function __construct( $gateway )
+    public function __construct( InsertFeedbackForToggleGateway $gateway )
     {
         $this->gateway = $gateway;
     }
@@ -33,9 +33,9 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
      * @param string $message
      * @return bool
      */
-    private function isGivenParametersSet( $toggleId, $mood, $message )
+    private function isGivenParametersEmpty( $toggleId, $mood, $message )
     {
-        return empty( $toggleId ) || empty( $message ) || !is_bool( $mood ) || !isset( $mood );
+        return empty( $toggleId ) || empty( $message ) || !is_bool( $mood );
     }
 
     /**
@@ -46,10 +46,9 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
      */
     public function execute( $toggleId, $mood, $message )
     {
-        if ( $this->isGivenParametersSet( $toggleId, $mood, $message ) ) {
+        if ( $this->isGivenParametersEmpty( $toggleId, $mood, $message ) ) {
             return false;
         }
-        $this->gateway->addFeedbackForToggle( $toggleId, $mood, $message );
-        return true;
+        return $this->gateway->addFeedbackForToggle( $toggleId, $mood, $message );
     }
 }
