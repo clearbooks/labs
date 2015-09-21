@@ -12,7 +12,7 @@ interface InsertFeedbackForToggleGateway
      * @param string $toggleId
      * @param bool $mood
      * @param string $message
-     * @return void
+     * @return bool
      */
-    public function addFeedbackForToggle($toggleId, $mood, $message);
+    public function addFeedbackForToggle( $toggleId, $mood, $message );
 }

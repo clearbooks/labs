@@ -49,7 +49,6 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
         if ( $this->isGivenParametersEmpty( $toggleId, $mood, $message ) ) {
             return false;
         }
-        $this->gateway->addFeedbackForToggle( $toggleId, $mood, $message );
-        return true;
+        return $this->gateway->addFeedbackForToggle( $toggleId, $mood, $message );
     }
 }
