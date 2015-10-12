@@ -14,6 +14,7 @@ abstract class ToggleStub implements MarketableToggle
     protected $name;
     protected $desc;
     protected $id;
+    protected $toggleTitle;
 
     /**
      * @return string
@@ -93,5 +94,10 @@ abstract class ToggleStub implements MarketableToggle
     public function getType()
     {
         return "simple";
+    }
+
+    public function getMarketingToggleTitle()
+    {
+        return $this->toggleTitle;
     }
 }

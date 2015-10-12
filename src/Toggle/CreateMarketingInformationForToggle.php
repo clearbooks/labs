@@ -41,7 +41,8 @@ class CreateMarketingInformationForToggle implements UseCase\CreateMarketingInfo
             'description_of_implementation_reason' => $request->getDescriptionOfReasonForImplementation(),
             'description_of_location' => $request->getDescriptionOfLocation(),
             'guide_url' => $request->getLinkToGuide(),
-            'app_notification_copy_text' => $request->getAppNotificationText()
+            'app_notification_copy_text' => $request->getAppNotificationText(),
+            'toggle_title' => $request->getMarketingToggleTitle()
         ];
 
         $this->gateway->setMarketingInformationForToggle( $toggleId, $marketingInformation );
