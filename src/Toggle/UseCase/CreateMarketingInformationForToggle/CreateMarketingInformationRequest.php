@@ -50,5 +50,8 @@ interface CreateMarketingInformationRequest
      */
     public function getAppNotificationText();
 
-
+    /**
+     * @return string
+     */
+    public function getMarketingToggleTitle();
 }

@@ -47,6 +47,11 @@ class CreateMarketingInformationRequest implements CreateMarketingInformationReq
     private $appNotificationText;
 
     /**
+     * @var string
+     */
+    private $marketingToggleTitle;
+
+    /**
      * CreateMarketingInformationRequest constructor.
      * @param string $toggleId
      * @param string $imageLink
@@ -56,12 +61,13 @@ class CreateMarketingInformationRequest implements CreateMarketingInformationReq
      * @param string $descriptionOfLocation
      * @param string $linkToGuide
      * @param string $appNotificationText
+     * @param string $marketingToggleTitle
      */
     public function __construct( $toggleId, $imageLink = "", $descriptionOfToggle = "",
                                  $descriptionOfFunctionality = "",
                                  $descriptionOfReasonForImplementation = "", $descriptionOfLocation = "",
                                  $linkToGuide = "",
-                                 $appNotificationText = "" )
+                                 $appNotificationText = "", $marketingToggleTitle = "" )
     {
         $this->toggleId = $toggleId;
         $this->imageLink = $imageLink;
@@ -71,6 +77,7 @@ class CreateMarketingInformationRequest implements CreateMarketingInformationReq
         $this->descriptionOfLocation = $descriptionOfLocation;
         $this->linkToGuide = $linkToGuide;
         $this->appNotificationText = $appNotificationText;
+        $this->marketingToggleTitle = $marketingToggleTitle;
     }
 
     /**
@@ -137,5 +144,8 @@ class CreateMarketingInformationRequest implements CreateMarketingInformationReq
         return $this->appNotificationText;
     }
 
-
+    public function getMarketingToggleTitle()
+    {
+        return $this->marketingToggleTitle;
+    }
 }

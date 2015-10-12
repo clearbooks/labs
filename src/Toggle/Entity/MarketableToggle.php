@@ -55,4 +55,9 @@ interface MarketableToggle extends TypeToggle
      * @return string
      */
     public function getAppNotificationCopyText();
+
+    /**
+     * @return string
+     */
+    public function getMarketingToggleTitle();
 }
