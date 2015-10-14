@@ -16,7 +16,9 @@ class InsertFeedbackForToggleGatewayDummy implements InsertFeedbackForToggleGate
      * @param string $toggleId
      * @param bool $mood
      * @param string $message
+     * @param string $userId
+     * @param string $groupId
      * @return bool
      */
-    public function addFeedbackForToggle( $toggleId, $mood, $message ){return true;}
+    public function addFeedbackForToggle( $toggleId, $mood, $message, $userId, $groupId ){return true;}
 }

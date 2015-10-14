@@ -15,7 +15,9 @@ interface AddFeedbackForToggle
      * @param string $toggleId
      * @param bool $mood
      * @param string $message
+     * @param $userId
+     * @param $groupId
      * @return bool
      */
-    public function execute($toggleId, $mood, $message);
+    public function execute($toggleId, $mood, $message, $userId, $groupId);
 }
