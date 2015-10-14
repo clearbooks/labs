@@ -37,7 +37,7 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
      */
     private function isGivenParametersEmpty( $toggleId, $mood, $message, $userId, $groupId )
     {
-        return $this->messageContentsEmpty($toggleId, $mood, $message) || !$this->userAndGroupIDEmpty($userId, $groupId);
+        return $this->messageContentsEmpty($toggleId, $mood, $message) || $this->userAndGroupIDEmpty($userId, $groupId);
     }
 
     /**
