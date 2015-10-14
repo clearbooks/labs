@@ -37,7 +37,7 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
      */
     private function isGivenParametersEmpty( $toggleId, $mood, $message, $userId, $groupId )
     {
-        return empty( $toggleId ) || empty( $message ) || !is_bool( $mood ) || empty($userId) || empty($groupId);
+        return $this->messageContentsEmpty($toggleId, $mood, $message) || !$this->userAndGroupIDEmpty($userId, $groupId);
     }
 
     /**
@@ -54,5 +54,26 @@ class AddFeedbackForToggle implements IAddFeedbackForToggle
             return false;
         }
         return $this->gateway->addFeedbackForToggle( $toggleId, $mood, $message, $userId, $groupId );
+    }
+
+    /**
+     * @param $userId
+     * @param $groupId
+     * @return bool
+     */
+    private function userAndGroupIDEmpty($userId, $groupId)
+    {
+        return empty($userId) || empty($groupId);
+    }
+
+    /**
+     * @param $toggleId
+     * @param $mood
+     * @param $message
+     * @return bool
+     */
+    private function messageContentsEmpty($toggleId, $mood, $message)
+    {
+        return empty($toggleId) || empty($message) || !is_bool($mood);
     }
 }
