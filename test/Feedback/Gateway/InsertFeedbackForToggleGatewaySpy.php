@@ -27,16 +27,30 @@ class InsertFeedbackForToggleGatewaySpy implements InsertFeedbackForToggleGatewa
     private $message = "";
 
     /**
+     * @var string
+     */
+    private $userId;
+
+    /**
+     * @var string
+     */
+    private $groupId;
+
+    /**
      * @param string $toggleId
      * @param bool $mood
      * @param string $message
+     * @param $userId
+     * @param $groupId
      * @return bool
      */
-    public function addFeedbackForToggle( $toggleId, $mood, $message )
+    public function addFeedbackForToggle( $toggleId, $mood, $message, $userId, $groupId )
     {
         $this->toggleId = $toggleId;
         $this->mood = $mood;
         $this->message = $message;
+        $this->userId = $userId;
+        $this->groupId = $groupId;
         return $this->toggleId === "1";
     }
 
@@ -62,5 +76,21 @@ class InsertFeedbackForToggleGatewaySpy implements InsertFeedbackForToggleGatewa
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGroupId()
+    {
+        return $this->groupId;
     }
 }
