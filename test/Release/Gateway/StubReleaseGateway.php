@@ -51,4 +51,12 @@ class StubReleaseGateway implements ReleaseGateway
     {
         return false;
     }
+
+    /**
+     * @return Release[]
+     */
+    public function getAllFutureVisibleReleases()
+    {
+        return [];
+    }
 }
