@@ -86,6 +86,14 @@ class SpyReleaseGateway implements ReleaseGateway
         }
         return false;
     }
+
+    /**
+     * @return Release[]
+     */
+    public function getAllFutureVisibleReleases()
+    {
+        return [];
+    }
 }
 
 //EOF SpyReleaseGateway.php

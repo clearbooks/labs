@@ -64,4 +64,12 @@ class MockReleaseGateway implements ReleaseGateway
     {
         return false;
     }
+
+    /**
+     * @return Release[]
+     */
+    public function getAllFutureVisibleReleases()
+    {
+        return $this->releases;
+    }
 }

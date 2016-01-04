@@ -37,5 +37,10 @@ interface ReleaseGateway
      * @return bool
      */
     public function editRelease( $releaseId, $releaseName, $releaseUrl );
+
+    /**
+     * @return Release[]
+     */
+    public function getAllFutureVisibleReleases();
 }
 //EOF ReleaseGateway.php

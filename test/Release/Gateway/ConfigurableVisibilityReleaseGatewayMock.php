@@ -63,4 +63,12 @@ class ConfigurableVisibilityReleaseGatewayMock implements ReleaseGateway
     {
         return false;
     }
+
+    /**
+     * @return Release[]
+     */
+    public function getAllFutureVisibleReleases()
+    {
+        return [];
+    }
 }

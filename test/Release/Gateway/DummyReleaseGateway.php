@@ -51,4 +51,12 @@ class DummyReleaseGateway implements ReleaseGateway
     {
         return false;
     }
+
+    /**
+     * @return Release[]
+     */
+    public function getAllFutureVisibleReleases()
+    {
+        return [];
+    }
 }
