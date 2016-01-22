@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Feedback\Entity;
 
 
-class MeowToggleFeedback implements ToggleFeedback
+class MeowToggleFeedback implements IToggleFeedback
 {
 
     const NAME = "Meow";

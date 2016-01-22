@@ -9,12 +9,12 @@
 namespace Clearbooks\Labs\Feedback\UseCase;
 
 
-use Clearbooks\Labs\Feedback\Entity\ToggleFeedback;
+use Clearbooks\Labs\Feedback\Entity\IToggleFeedback;
 
 interface GetAllFeedbackForToggles
 {
     /**
-     * @return ToggleFeedback[]
+     * @return IToggleFeedback[]
      */
     public function execute();
 }

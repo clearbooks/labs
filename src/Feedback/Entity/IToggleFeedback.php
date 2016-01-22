@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Feedback\Entity;
 
 
-interface ToggleFeedback
+interface IToggleFeedback
 {
 
     /**

@@ -9,7 +9,7 @@
 namespace Clearbooks\Labs\Feedback;
 
 
-use Clearbooks\Labs\Feedback\Entity\ToggleFeedback;
+use Clearbooks\Labs\Feedback\Entity\IToggleFeedback;
 use Clearbooks\Labs\Feedback\Gateway\GetFeedbackForTogglesGateway;
 
 class GetAllFeedbackForToggles implements UseCase\GetAllFeedbackForToggles
@@ -29,7 +29,7 @@ class GetAllFeedbackForToggles implements UseCase\GetAllFeedbackForToggles
     }
 
     /**
-     * @return ToggleFeedback[]
+     * @return IToggleFeedback[]
      */
     public function execute()
     {
