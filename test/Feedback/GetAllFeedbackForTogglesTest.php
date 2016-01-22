@@ -32,9 +32,9 @@ class GetAllFeedbackForTogglesTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function givenGatewayWithNoFeedback_whenGettingAllFeedback_returnCorrectToggleFeedbackArray()
+    public function givenGateway_whenGettingAllFeedback_returnValuesFromGateway()
     {
-
+        $this->assertEquals(GetAllFeedbackForTogglesStub::FEEDBACK, $this->getAllFeedback->execute());
     }
 
 
