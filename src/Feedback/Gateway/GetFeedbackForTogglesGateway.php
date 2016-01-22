@@ -9,9 +9,13 @@
 namespace Clearbooks\Labs\Feedback\Gateway;
 
 
+use Clearbooks\Labs\Feedback\Entity\ToggleFeedback;
+
 interface GetFeedbackForTogglesGateway
 {
-
+    /**
+     * @return ToggleFeedback[]
+     */
     public function getFeedbackForToggles();
 
 }

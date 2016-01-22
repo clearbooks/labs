@@ -9,6 +9,7 @@
 namespace Clearbooks\Labs\Feedback;
 
 
+use Clearbooks\Labs\Feedback\Entity\ToggleFeedback;
 use Clearbooks\Labs\Feedback\Gateway\GetFeedbackForTogglesGateway;
 
 class GetAllFeedbackForToggles implements UseCase\GetAllFeedbackForToggles
@@ -27,6 +28,9 @@ class GetAllFeedbackForToggles implements UseCase\GetAllFeedbackForToggles
         $this->gateway = $gateway;
     }
 
+    /**
+     * @return ToggleFeedback[]
+     */
     public function execute()
     {
         return $this->gateway->getFeedbackForToggles();

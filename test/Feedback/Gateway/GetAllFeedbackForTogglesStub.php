@@ -26,6 +26,9 @@ class GetAllFeedbackForTogglesStub implements GetFeedbackForTogglesGateway
         $this->expectedToggles = $toggleFeedback;
     }
 
+    /**
+     * @return ToggleFeedback[]
+     */
     public function getFeedbackForToggles()
     {
         return $this->expectedToggles;
