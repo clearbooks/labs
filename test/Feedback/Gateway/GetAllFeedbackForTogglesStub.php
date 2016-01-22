@@ -9,13 +9,25 @@
 namespace Clearbooks\Labs\Feedback\Gateway;
 
 
+use Clearbooks\Labs\Feedback\Entity\ToggleFeedback;
+
 class GetAllFeedbackForTogglesStub implements GetFeedbackForTogglesGateway
 {
 
-    const FEEDBACK = "meow";
+    /** @var ToggleFeedback[] */
+    private $expectedToggles;
+
+    /**
+     * GetAllFeedbackForTogglesStub constructor.
+     * @param ToggleFeedback[] $toggleFeedback
+     */
+    public function __construct($toggleFeedback)
+    {
+        $this->expectedToggles = $toggleFeedback;
+    }
 
     public function getFeedbackForToggles()
     {
-        return self::FEEDBACK;
+        return $this->expectedToggles;
     }
 }
