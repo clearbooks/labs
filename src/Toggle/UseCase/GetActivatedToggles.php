@@ -7,16 +7,14 @@
  */
 namespace Clearbooks\Labs\Toggle\UseCase;
 
-use Clearbooks\Labs\Client\Toggle\Entity\Group;
-use Clearbooks\Labs\Client\Toggle\Entity\User;
 use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
+use Clearbooks\Labs\Toggle\Object\GetActivatedTogglesRequest;
 
 interface GetActivatedToggles
 {
     /**
-     * @param User $user
-     * @param Group $group
+     * @param GetActivatedTogglesRequest $request
      * @return MarketableToggle[]
      */
-    public function execute( User $user, Group $group );
+    public function execute( GetActivatedTogglesRequest $request );
 }

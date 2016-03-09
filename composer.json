@@ -17,7 +17,7 @@
     }
   },
   "require": {
-    "clearbooks/labs-php-client": "1.0.0"
+    "clearbooks/labs-php-client": "1.3.0"
   },
   "require-dev": {
     "phpunit/phpunit": "4.7.*",
