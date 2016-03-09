@@ -1,25 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Volodymyr
- * Date: 09/09/2015
- * Time: 15:44
- */
-
-namespace Clearbooks\Labs\Toggle;
+namespace Clearbooks\Labs\Toggle\Object;
 
 use Clearbooks\Labs\Client\Toggle\Entity\Group;
+use Clearbooks\Labs\Client\Toggle\Entity\Segment;
 use Clearbooks\Labs\Client\Toggle\Entity\User;
-use Clearbooks\Labs\Client\Toggle\UseCase\ToggleChecker;
-use Clearbooks\Labs\Segment\Entity\Segment;
 
-class ToggleCheckerSpy implements ToggleChecker
+class GetActivatedTogglesRequest
 {
-    /**
-     * @var string
-     */
-    private $toggleName;
-
     /**
      * @var User
      */
@@ -36,31 +23,19 @@ class ToggleCheckerSpy implements ToggleChecker
     private $segments;
 
     /**
-     * @param string $toggleName
      * @param User $user
      * @param Group $group
      * @param Segment[] $segments
-     * @return bool is it active
      */
-    public function isToggleActive( $toggleName, User $user, Group $group, array $segments )
+    public function __construct( User $user, Group $group, array $segments )
     {
-        $this->toggleName = $toggleName;
         $this->user = $user;
         $this->group = $group;
         $this->segments = $segments;
-        return true;
     }
 
     /**
-     * @return mixed
-     */
-    public function getToggleName()
-    {
-        return $this->toggleName;
-    }
-
-    /**
-     * @return mixed
+     * @return User
      */
     public function getUser()
     {
@@ -68,7 +43,7 @@ class ToggleCheckerSpy implements ToggleChecker
     }
 
     /**
-     * @return mixed
+     * @return Group
      */
     public function getGroup()
     {
@@ -76,7 +51,7 @@ class ToggleCheckerSpy implements ToggleChecker
     }
 
     /**
-     * @return Segment[]
+     * @return \Clearbooks\Labs\Client\Toggle\Entity\Segment[]
      */
     public function getSegments()
     {

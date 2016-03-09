@@ -8,13 +8,10 @@
 
 namespace Clearbooks\Labs\Toggle;
 
-
-use Clearbooks\Labs\Client\Toggle\Entity\Group;
-use Clearbooks\Labs\Client\Toggle\Entity\User;
 use Clearbooks\Labs\Client\Toggle\UseCase\ToggleChecker;
-use Clearbooks\Labs\Toggle\Entity\ActivatableToggle;
 use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
 use Clearbooks\Labs\Toggle\Gateway\GetAllTogglesGateway;
+use Clearbooks\Labs\Toggle\Object\GetActivatedTogglesRequest;
 
 class GetActivatedToggles implements UseCase\GetActivatedToggles
 {
@@ -22,6 +19,7 @@ class GetActivatedToggles implements UseCase\GetActivatedToggles
      * @var GetAllTogglesGateway
      */
     private $gateway;
+
     /**
      * @var ToggleChecker
      */
@@ -39,16 +37,15 @@ class GetActivatedToggles implements UseCase\GetActivatedToggles
     }
 
     /**
-     * @param User $user
-     * @param Group $group
+     * @param GetActivatedTogglesRequest $request
      * @return MarketableToggle[]
      */
-    public function execute( User $user, Group $group )
+    public function execute( GetActivatedTogglesRequest $request )
     {
         $activatedToggles = [ ];
         $toggles = $this->gateway->getAllToggles();
         foreach ( $toggles as $toggle ) {
-            if ( $this->toggleChecker->isToggleActive( $toggle->getName(), $user, $group ) ) {
+            if ( $this->toggleChecker->isToggleActive( $toggle->getName(), $request->getUser(), $request->getGroup(), $request->getSegments() ) ) {
                 $activatedToggles[] = $toggle;
             }
         }
