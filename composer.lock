@@ -4,16 +4,16 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aaa73b02f7494cdca4601994bd48ef83",
-    "content-hash": "f19611bac69d04c92991fe2d97cf3c2b",
+    "hash": "51c36bbbe11ca4932c20261147d8a61d",
+    "content-hash": "f73efdb7d64f67b846168604e6aba99c",
     "packages": [
         {
             "name": "clearbooks/labs-php-client",
-            "version": "dev-DEV-7306-can-default-toggle-status-be-overruled",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clearbooks/labs-php-client.git",
-                "reference": "09cb9cb0278dc6fd431aa24d599e91636d14fba1"
+                "reference": "3828e72027a7bffd7bc59a5d2f791b833e22dbc3"
             },
             "require-dev": {
                 "codeclimate/php-test-reporter": "dev-master",
@@ -38,7 +38,7 @@
                 }
             ],
             "description": "Sensible releases",
-            "time": "2016-03-09 16:50:59"
+            "time": "2016-03-10 14:24:41"
         }
     ],
     "packages-dev": [
@@ -1519,7 +1519,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "clearbooks/labs-php-client": 20,
         "codeclimate/php-test-reporter": 20
     },
     "prefer-stable": false,
