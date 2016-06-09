@@ -9,11 +9,11 @@
     "packages": [
         {
             "name": "clearbooks/labs-php-client",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clearbooks/labs-php-client.git",
-                "reference": "98c84eb7cacdafa5a4efed3a8df46aa2069edf22"
+                "reference": "889f685a12bb413f0a2dda592e7c991a877ba73f"
             },
             "require-dev": {
                 "behat/behat": "^3.1",
@@ -39,7 +39,7 @@
                 }
             ],
             "description": "Sensible releases",
-            "time": "2016-06-08 09:49:02"
+            "time": "2016-06-09 11:13:18"
         }
     ],
     "packages-dev": [
@@ -53,7 +53,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/9ec2098c9e9839840176c46d9cdab3a57c26ca1c",
+                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/85b5de950678a25f3e85adb6bc26de7f7f231d18",
                 "reference": "85b5de950678a25f3e85adb6bc26de7f7f231d18",
                 "shasum": ""
             },
