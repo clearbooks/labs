@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c58a5cb4faf04921ed8bd0a3eb900bbb",
-    "content-hash": "0c2538673feb6c293d9dd01fa8cacd81",
+    "hash": "a7c093a768ecc5098e04ecd393fad1a8",
+    "content-hash": "d9d542f332a0de224b634998d9613d25",
     "packages": [
         {
             "name": "clearbooks/labs-php-client",
