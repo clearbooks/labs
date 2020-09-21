@@ -2,7 +2,7 @@
 namespace Clearbooks\Labs\Feedback;
 
 use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggleGatewaySpy;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggleGatewayDummy;
 
 /**
@@ -11,7 +11,7 @@ use Clearbooks\Labs\Feedback\Gateway\InsertFeedbackForToggleGatewayDummy;
  * Date: 14/09/2015
  * Time: 11:27
  */
-class AddFeedbackForToggleTest extends PHPUnit_Framework_TestCase
+class AddFeedbackForToggleTest extends TestCase
 {
 
     /**

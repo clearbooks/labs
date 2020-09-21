@@ -6,10 +6,10 @@ use Clearbooks\Labs\Segment\Gateway\SegmentProvider;
 use Clearbooks\Labs\Segment\Gateway\OneSegmentSegmentProviderStub;
 use Clearbooks\Labs\Segment\Gateway\TwoSegmentSegmentProviderStub;
 use Clearbooks\Labs\Segment\UseCase\GetAllSegments\ResponseSegment;
+use PHPUnit\Framework\TestCase;
 
-class GetAllSegmentsTest extends \PHPUnit_Framework_TestCase
+class GetAllSegmentsTest extends TestCase
 {
-
     /**
      * @param $segmentName
      * @param $segmentProvider
@@ -96,5 +96,4 @@ class GetAllSegmentsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( 'seg-1', $segments[0]->getId() );
         $this->assertEquals( 'seg-2', $segments[1]->getId() );
     }
-
 }

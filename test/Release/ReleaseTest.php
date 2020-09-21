@@ -6,10 +6,10 @@
 
 namespace Clearbooks\Labs\Release;
 
-
 use DateTime;
+use PHPUnit\Framework\TestCase;
 
-class ReleaseTest extends \PHPUnit_Framework_TestCase
+class ReleaseTest extends TestCase
 {
     /**
      * @var Release $release
@@ -21,7 +21,7 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
     const RELEASE_URL = 'url';
     const RELEASE_IS_VISIBLE = true;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -77,5 +77,4 @@ class ReleaseTest extends \PHPUnit_Framework_TestCase
         return DateTime::createFromFormat( 'd/m/Y', '10/07/2015' );
     }
 }
-
 //EOF ReleaseTest.php

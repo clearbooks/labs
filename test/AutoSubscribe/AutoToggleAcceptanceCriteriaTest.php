@@ -8,9 +8,9 @@ use Clearbooks\Labs\Event\ToggleShowEventStub;
 use Clearbooks\Labs\Event\ToggleShowEventExecutor;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
 use Clearbooks\Labs\Event\UseCase\TriggerToggleShow;
-use Clearbooks\Labs\User\ToggleStatusModifier;
+use PHPUnit\Framework\TestCase;
 
-class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_TestCase
+class AutoToggleAcceptanceCriteriaTest extends TestCase
 {
     const FEATURE_TOGGLE_NAME = 'Feature 1';
     /** @var ToggleStatusModifierSpy */
@@ -24,7 +24,7 @@ class AutoToggleActivationAcceptanceCriteriaTest extends \PHPUnit_Framework_Test
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->subscribedProvider = new AutoSubscriberProviderStub([new UserStub(1),new UserStub(2)]);

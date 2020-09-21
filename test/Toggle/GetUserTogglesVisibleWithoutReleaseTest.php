@@ -6,8 +6,9 @@ use Clearbooks\Labs\Toggle\Entity\MarketableToggle;
 use Clearbooks\Labs\Toggle\Entity\Parasol;
 use Clearbooks\Labs\Toggle\Gateway\GetTogglesVisibleWithoutReleaseGatewayStub;
 use Clearbooks\Labs\Toggle\Object\GetTogglesVisibleWithoutReleaseResponse;
+use PHPUnit\Framework\TestCase;
 
-class GetUserTogglesVisibleWithoutReleaseTest extends \PHPUnit_Framework_TestCase
+class GetUserTogglesVisibleWithoutReleaseTest extends TestCase
 {
     /**
      * @var GetTogglesVisibleWithoutReleaseGatewayStub
@@ -19,7 +20,7 @@ class GetUserTogglesVisibleWithoutReleaseTest extends \PHPUnit_Framework_TestCas
      */
     private $getUserTogglesVisibleWithoutRelease;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->getTogglesVisibleWithoutReleaseGatewayStub = new GetTogglesVisibleWithoutReleaseGatewayStub();

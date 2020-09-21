@@ -2,8 +2,9 @@
 namespace Clearbooks\Labs\Segment;
 
 use Clearbooks\Labs\Segment\UseCase\GetSegment\Response;
+use PHPUnit\Framework\TestCase;
 
-class GetSegmentTest extends \PHPUnit_Framework_TestCase
+class GetSegmentTest extends TestCase
 {
 
     /**

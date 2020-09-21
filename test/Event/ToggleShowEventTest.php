@@ -4,10 +4,10 @@ namespace Clearbooks\Labs\Event;
 use Clearbooks\Labs\Event\UseCase\ToggleShowEvent;
 use Clearbooks\Labs\Event\UseCase\ToggleShowSubscriber;
 use Clearbooks\Labs\Event\UseCase\TriggerToggleShow;
+use PHPUnit\Framework\TestCase;
 
-class ToggleShowEventTest extends \PHPUnit_Framework_TestCase
+class ToggleShowEventTest extends TestCase
 {
-
     public function testGetToggleName()
     {
         /** @var ToggleShowEvent $event */

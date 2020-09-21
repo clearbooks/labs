@@ -1,7 +1,9 @@
 <?php
 namespace Clearbooks\Labs\Release\GetReleaseToggles;
 
-class ResponseToggleTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ResponseToggleTest extends TestCase
 {
     const NAME = 'name';
     const ID = 'id';

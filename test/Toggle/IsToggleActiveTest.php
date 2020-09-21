@@ -1,11 +1,13 @@
 <?php
 namespace Clearbooks\Labs\Toggle;
+
 use Clearbooks\Labs\Toggle\Gateway\ActivatableToggleGatewayStub;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class IsToggleActiveTest
  */
-class IsToggleActiveTest extends \PHPUnit_Framework_TestCase
+class IsToggleActiveTest extends TestCase
 {
     /**
      * @var IsToggleActive
@@ -18,7 +20,7 @@ class IsToggleActiveTest extends \PHPUnit_Framework_TestCase
 
     const NON_EXISTENT_FEATURE = 'Feature 3';
 
-    public function setUp()
+    public function setUp(): void
     {
         $availabilities = [
             self::ACTIVE_FEATURE => true,

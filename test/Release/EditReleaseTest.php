@@ -8,15 +8,13 @@
 
 namespace Clearbooks\Labs\Release;
 
-
 use Clearbooks\Labs\Release\EditRelease\EditRequestDummy;
 use Clearbooks\Labs\Release\EditRelease\EditRequestMock;
 use Clearbooks\Labs\Release\Gateway\SpyReleaseGateway;
-use Clearbooks\Labs\Release\EditRelease;
 use Clearbooks\Labs\Release\UseCase\EditRelease\EditReleaseResponse;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class EditReleaseTest extends PHPUnit_Framework_TestCase
+class EditReleaseTest extends TestCase
 {
     /**
      * @var SpyReleaseGateway
@@ -34,7 +32,7 @@ class EditReleaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals( $errors, $response->getValidationErrors() );
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->gateway = new SpyReleaseGateway();
         $this->editRelease = new EditRelease( $this->gateway );
