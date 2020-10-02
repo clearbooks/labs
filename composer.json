@@ -17,7 +17,7 @@
     }
   },
   "require": {
-    "clearbooks/labs-php-client": "dev-ADHOC-7858-php-7.4"
+    "clearbooks/labs-php-client": "^2.0.0"
   },
   "require-dev": {
     "codeclimate/php-test-reporter": "dev-master",

@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "050be233d5b392fd7742c4d019a10a00",
+    "content-hash": "3ed7f87fd6804f4824a5a0b2d8e0410b",
     "packages": [
         {
             "name": "clearbooks/labs-php-client",
-            "version": "dev-ADHOC-7858-php-7.4",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clearbooks/labs-php-client.git",
-                "reference": "fd1aece72f1d39ff80afbcce3f8cdfef905bce38"
+                "reference": "65b6b4af7f3823ab33447e53c201b09be7cc3640"
             },
             "require": {
                 "php": ">=7.2"
@@ -41,7 +41,7 @@
                 }
             ],
             "description": "Sensible releases",
-            "time": "2020-09-21T15:30:51+00:00"
+            "time": "2020-10-02T08:32:44+00:00"
         }
     ],
     "packages-dev": [
@@ -2195,7 +2195,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "clearbooks/labs-php-client": 20,
         "codeclimate/php-test-reporter": 20
     },
     "prefer-stable": false,
