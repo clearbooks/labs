@@ -10,8 +10,9 @@ use Clearbooks\Labs\Toggle\Entity\Parasol;
 use Clearbooks\Labs\Toggle\Gateway\GetAllTogglesGatewayStub;
 use Clearbooks\Labs\Toggle\Object\GetAllToggleStatusRequest;
 use Clearbooks\Labs\Toggle\Object\ToggleStatusHolder;
+use PHPUnit\Framework\TestCase;
 
-class GetAllToggleStatusTest extends \PHPUnit_Framework_TestCase
+class GetAllToggleStatusTest extends TestCase
 {
     /**
      * @var GetAllTogglesGatewayStub
@@ -53,7 +54,7 @@ class GetAllToggleStatusTest extends \PHPUnit_Framework_TestCase
      */
     private $getAllToggleStatusRequest;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

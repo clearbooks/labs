@@ -7,6 +7,7 @@
  */
 
 namespace Clearbooks\Labs\Toggle;
+
 use Clearbooks\Labs\Client\Toggle\Entity\Group;
 use Clearbooks\Labs\Client\Toggle\Entity\GroupStub;
 use Clearbooks\Labs\Client\Toggle\Entity\Segment;
@@ -18,8 +19,9 @@ use Clearbooks\Labs\Toggle\Entity\Parasol;
 use Clearbooks\Labs\Toggle\Gateway\GetAllTogglesGatewayDummy;
 use Clearbooks\Labs\Toggle\Gateway\GetAllTogglesGatewayStub;
 use Clearbooks\Labs\Toggle\Object\GetActivatedTogglesRequest;
+use PHPUnit\Framework\TestCase;
 
-class GetActivatedTogglesTest extends \PHPUnit_Framework_TestCase
+class GetActivatedTogglesTest extends TestCase
 {
     /**
      * @var User
@@ -41,7 +43,7 @@ class GetActivatedTogglesTest extends \PHPUnit_Framework_TestCase
      */
     private $testRequest;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->user = new UserStub("1");
@@ -95,7 +97,7 @@ class GetActivatedTogglesTest extends \PHPUnit_Framework_TestCase
     public function givenOneActiveToggle_getActivatedToggles_PassesCorrectInformationToToggleChecker()
     {
         $brolly = new Brolly;
-        $spy = new ToggleCheckerSpy($brolly);
+        $spy = new ToggleCheckerSpy();
 
         ( new GetActivatedToggles( new GetAllTogglesGatewayStub( [ $brolly ] ), $spy ) )->execute( $this->testRequest );
 

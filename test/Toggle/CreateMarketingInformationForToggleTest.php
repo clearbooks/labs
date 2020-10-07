@@ -8,18 +8,18 @@
 
 namespace Clearbooks\Labs\Toggle;
 
-
 use Clearbooks\Labs\Toggle\Gateway\MarketableToggleGatewaySpy;
 use Clearbooks\Labs\Toggle\CreateMarketingInformationForToggle\CreateMarketingInformationRequest;
+use PHPUnit\Framework\TestCase;
 
-class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCase
+class CreateMarketingInformationForToggleTest extends TestCase
 {
     /**
      * @var MarketableToggleGatewaySpy
      */
     private $marketableToggleGateway;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->marketableToggleGateway = new MarketableToggleGatewaySpy();
     }
@@ -99,5 +99,4 @@ class CreateMarketingInformationForToggleTest extends \PHPUnit_Framework_TestCas
 
         return $this->marketableToggleGateway->getMarketingInfo();
     }
-
 }

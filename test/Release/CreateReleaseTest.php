@@ -6,14 +6,14 @@
 
 namespace Clearbooks\Labs\Release;
 
-
 use Clearbooks\Labs\Release\CreateRelease\ConfigurableRequestStub;
 use Clearbooks\Labs\Release\Gateway\SpyReleaseGateway;
 use Clearbooks\Labs\Release\CreateRelease\StaticRequestStub;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseRequest;
 use Clearbooks\Labs\Release\UseCase\CreateRelease\CreateReleaseResponse;
+use PHPUnit\Framework\TestCase;
 
-class CreateReleaseTest extends \PHPUnit_Framework_TestCase
+class CreateReleaseTest extends TestCase
 {
 
     /**
@@ -30,7 +30,7 @@ class CreateReleaseTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

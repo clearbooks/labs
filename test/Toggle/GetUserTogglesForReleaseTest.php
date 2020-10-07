@@ -11,10 +11,10 @@ namespace Clearbooks\Labs\Toggle;
 use Clearbooks\Labs\Release\Gateway\ConfigurableVisibilityReleaseGatewayMock;
 use Clearbooks\Labs\Toggle\Entity\UserToggleStub;
 use Clearbooks\Labs\Toggle\Gateway\UserToggleGatewayStub;
+use PHPUnit\Framework\TestCase;
 
-class GetUserTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
+class GetUserTogglesForReleaseTest extends TestCase
 {
-
     /**
      * @test
      */

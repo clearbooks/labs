@@ -3,8 +3,9 @@ namespace Clearbooks\Labs\Release;
 
 use Clearbooks\Labs\Release\GetReleaseToggles\ResponseToggle;
 use Clearbooks\Labs\Toggle\Entity\Brolly;
+use PHPUnit\Framework\TestCase;
 
-class GetReleaseTogglesTest extends \PHPUnit_Framework_TestCase
+class GetReleaseTogglesTest extends TestCase
 {
     const RELEASE_ID = 'some_release_identifier';
 
@@ -49,5 +50,4 @@ class GetReleaseTogglesTest extends \PHPUnit_Framework_TestCase
         $this->executeGetReleaseToggles( $releaseToggleCollection, self::RELEASE_ID );
         $this->assertEquals( self::RELEASE_ID, $releaseToggleCollection->releaseId );
     }
-
 }

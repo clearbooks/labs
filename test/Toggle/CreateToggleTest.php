@@ -12,8 +12,9 @@ use Clearbooks\Labs\Toggle\CreateToggle\CreateToggleRequestMock;
 use Clearbooks\Labs\Toggle\Gateway\CreateToggleGateway;
 use Clearbooks\Labs\Toggle\Gateway\CreateToggleGatewaySpy;
 use Clearbooks\Labs\Toggle\UseCase\CreateToggle\CreateToggleResponse;
+use PHPUnit\Framework\TestCase;
 
-class CreateToggleTest extends \PHPUnit_Framework_TestCase
+class CreateToggleTest extends TestCase
 {
     /**
      * @var CreateToggleGateway
@@ -45,8 +46,9 @@ class CreateToggleTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty( $response->getToggleId() );
     }
 
-    public function setUp()
+    public function setUp(): void
     {
+        parent::setUp();
         $existentReleaseIds = [ 1, 2, 3 ];
         $this->gateway = new CreateToggleGatewaySpy( $existentReleaseIds );
         $this->createToggle = new CreateToggle( $this->gateway );
@@ -57,8 +59,6 @@ class CreateToggleTest extends \PHPUnit_Framework_TestCase
      */
     public function givenEmptyRequest_ResponseFailsAndReturnsAllInvalidParameterErrors()
     {
-
-
         $this->assertFailingCreateToggle( $this->createToggle
             ->execute( new CreateToggleRequestMock( "", "", null, "" ) ), [
                 CreateToggleResponse::INVALID_NAME_ERROR, CreateToggleResponse::INVALID_RELEASE_ID_ERROR,

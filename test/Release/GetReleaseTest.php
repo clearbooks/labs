@@ -8,19 +8,14 @@
 
 namespace Clearbooks\Labs\Release;
 
-
 use Clearbooks\Labs\Release\Gateway\DummyReleaseGateway;
 use Clearbooks\Labs\Release\Gateway\MockReleaseGateway;
 use Clearbooks\Labs\Release\Gateway\ReleaseGateway;
 use Clearbooks\Labs\Release\Gateway\StubReleaseGateway;
+use PHPUnit\Framework\TestCase;
 
-class GetReleaseTest extends \PHPUnit_Framework_TestCase
+class GetReleaseTest extends TestCase
 {
-
-    public function setUp()
-    {
-    }
-
     /**
      * @test
      */

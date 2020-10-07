@@ -4,8 +4,9 @@ namespace Clearbooks\Labs\AutoSubscribe;
 use Clearbooks\Labs\AutoSubscribe\Gateway\AutoSubscriptionProviderUpdateMock;
 use Clearbooks\Labs\AutoSubscribe\Object\UserStub;
 use Clearbooks\Labs\AutoSubscribe\UseCase\AutoSubscriber;
+use PHPUnit\Framework\TestCase;
 
-class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
+class UserAutoSubscriberTest extends TestCase
 {
     /** @var AutoSubscriptionProviderUpdateMock */
     private $subscribedProvider;
@@ -20,7 +21,7 @@ class UserAutoSubscriberTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->subscribedProvider = new AutoSubscriptionProviderUpdateMock(true);

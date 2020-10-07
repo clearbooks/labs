@@ -3,8 +3,9 @@ namespace Clearbooks\Labs\User;
 
 use Clearbooks\Labs\User\ToggleStatusModifier\Request;
 use Clearbooks\Labs\User\UseCase\ToggleStatusModifier\Response;
+use PHPUnit\Framework\TestCase;
 
-class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
+class ToggleStatusModifierTest extends TestCase
 {
     /**
      * @var ToggleStatusModifier
@@ -21,7 +22,7 @@ class ToggleStatusModifierTest extends \PHPUnit_Framework_TestCase
      */
     private $permissionService;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

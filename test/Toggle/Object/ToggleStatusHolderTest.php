@@ -1,7 +1,9 @@
 <?php
 namespace Clearbooks\Labs\Toggle\Object;
 
-class ToggleStatusHolderTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ToggleStatusHolderTest extends TestCase
 {
     /**
      * @test

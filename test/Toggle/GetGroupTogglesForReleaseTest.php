@@ -9,10 +9,10 @@ namespace Clearbooks\Labs\Toggle;
 use Clearbooks\Labs\Release\Gateway\ConfigurableVisibilityReleaseGatewayMock;
 use Clearbooks\Labs\Toggle\Entity\GroupToggleStub;
 use Clearbooks\Labs\Toggle\Gateway\StubGroupToggleGateway;
+use PHPUnit\Framework\TestCase;
 
-class GetGroupTogglesForReleaseTest extends \PHPUnit_Framework_TestCase
+class GetGroupTogglesForReleaseTest extends TestCase
 {
-
     const RELEASE_ID = 1;
 
     /**

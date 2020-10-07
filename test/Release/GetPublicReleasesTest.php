@@ -8,13 +8,14 @@
 
 namespace Clearbooks\Labs\Release;
 
-
 use Clearbooks\Labs\Release\Gateway\MockPublicReleaseGateway;
+use Clearbooks\Labs\Release\Gateway\MockReleaseGateway;
+use Clearbooks\Labs\Release\UseCase\GetPublicRelease\PublicRelease;
 use DateTime;
+use PHPUnit\Framework\TestCase;
 
-class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
+class GetPublicReleasesTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -50,7 +51,7 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param MockReleaseGateway /StubReleaseGateway $gateway
-     * @return \PublicRelease|int
+     * @return PublicRelease[]
      */
     private function getPublicRelease( $gateway )
     {
@@ -75,5 +76,4 @@ class GetPublicReleaseTest extends \PHPUnit_Framework_TestCase
 
         return ( new DateTime() )->modify( '+1 day' );
     }
-
 }

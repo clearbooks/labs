@@ -8,13 +8,13 @@
 
 namespace Clearbooks\Labs\Feedback;
 
-
 use Clearbooks\Labs\Feedback\Entity\MeowToggleFeedback;
 use Clearbooks\Labs\Feedback\Entity\IToggleFeedback;
 use Clearbooks\Labs\Feedback\Gateway\GetAllFeedbackForTogglesStub;
 use Clearbooks\Labs\Feedback\UseCase\GetAllFeedbackForToggles;
+use PHPUnit\Framework\TestCase;
 
-class GetAllFeedbackForTogglesTest extends \PHPUnit_Framework_TestCase
+class GetAllFeedbackForTogglesTest extends TestCase
 {
 
     /** @var GetAllFeedbackForToggles */
@@ -26,7 +26,7 @@ class GetAllFeedbackForTogglesTest extends \PHPUnit_Framework_TestCase
     /** @var IToggleFeedback[] */
     private $expectedToggles;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -42,6 +42,4 @@ class GetAllFeedbackForTogglesTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($this->expectedToggles, $this->getAllFeedback->execute());
     }
-
-
 }
