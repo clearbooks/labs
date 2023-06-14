@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79e8deb268864efba84fd71f03a6d69a",
+    "content-hash": "4f970de6c1638c3cb4dc29290ba57f64",
     "packages": [
         {
             "name": "clearbooks/labs-php-client",
-            "version": "dev-php82-compatibility",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clearbooks/labs-php-client.git",
-                "reference": "8cacc9cda8c0e2ae0b5582c2d52a91e40e3ca9db"
+                "reference": "39ddf95a5d6941001df19a4cac3f420109122fcb"
             },
             "require": {
                 "php": ">=7.4"
@@ -41,7 +41,7 @@
                 }
             ],
             "description": "Sensible releases",
-            "time": "2023-06-13T16:13:53+00:00"
+            "time": "2023-06-14T15:50:32+00:00"
         }
     ],
     "packages-dev": [
@@ -3822,9 +3822,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "clearbooks/labs-php-client": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

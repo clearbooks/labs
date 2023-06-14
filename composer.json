@@ -18,7 +18,7 @@
   },
   "require": {
     "php": ">=7.4",
-    "clearbooks/labs-php-client": "dev-php82-compatibility"
+    "clearbooks/labs-php-client": "^2.1.0"
   },
   "repositories": [
     {
