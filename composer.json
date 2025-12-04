@@ -17,7 +17,7 @@
     }
   },
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.3",
     "clearbooks/labs-php-client": "^2.1.0"
   },
   "repositories": [
